@@ -5,7 +5,6 @@ initCMEM(RemTime,Datei) ->
 	{RemTime,[]}.
 
 updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
-
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
 
@@ -33,7 +32,7 @@ getClientNNr_([{SavedID,WNNr,WorkStamp}|[]],RemTime) ->
 	Flag = checkTime(RemTime,WorkStamp),
 	case Flag of
 		true ->
-			WNNr;
+			WNNr+1;
 		false ->
 			1
 	end;
