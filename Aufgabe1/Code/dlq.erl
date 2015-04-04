@@ -8,18 +8,20 @@ expectedNr({_,List}) ->
 	expectedNr_(List).
 
 push2DLQ(NewEntry, {Size,List}, Datei) when length(List) < Size ->
-	{Size, List++[NewEntry]};
+	{Size, List ++ makeEntry(NewEntry)};
 push2DLQ(NewEntry, {Size,[_|ListTail]}, Datei) ->
-	{Size, ListTail ++ [NewEntry]}.
+	{Size, ListTail ++ makeEntry(NewEntry)}.
 
 deliverMSG(MSGNr, ClientPID, Queue, Datei) ->
-	lol.
+	null.
 
 %%%%%%%% Hilfsmethoden, nicht in der Dokumentation beschrieben
 
 expectedNr_([]) ->
 	1;
-expectedNr_([[NNr, _, _, _]|[]]) ->
-	NNr+1;
-expectedNr_([_|T]) ->
-	expectedNr_(T).
+expectedNr_(List) ->
+	[[NNr, _, _, _]|_] = lists:reverse(List),
+	NNr+1.
+
+makeEntry([NNr, Msg, TSclientout, TShbqin])
+	[[NNr, Msg++werkzeug:timeMilliSecond(), TSclientout, TShbqin, erlang:now()]].
