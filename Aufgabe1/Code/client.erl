@@ -12,7 +12,6 @@ start() ->
 
 readConfig() ->
 	{ok, ConfigListe} = file:consult("client.cfg"),
-	io:fwrite("~p~n",["ConfigListe"]),
 	{ok,Clients} = werkzeug:get_config_value(clients,ConfigListe),
 	{ok,Lifetime} = werkzeug:get_config_value(lifetime,ConfigListe),
 	{ok,Servername} = werkzeug:get_config_value(servername,ConfigListe),
@@ -31,11 +30,11 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 					loop(Lifetime, Servername, Servernode,changeSendInterval(Sendeintervall),Datei,5,SendMsg)
 			end;
 		1 ->
-			Number = 2,%%askForMSGID(Servername,Servernode),
+			Number = askForMSGID(Servername,Servernode),
 			werkzeug:logging(Datei,constructErrMsg(Number) ++ "\n"),
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 		_ ->
-			Number = 1,%%askForMSGID(Servername,Servernode),
+			Number = askForMSGID(Servername,Servernode),
 			timer:sleep(trunc(Sendeintervall*1000)),
 			sendMSG(Servername, Servernode,Datei,Number),
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum-1,SendMsg++[Number])
@@ -71,7 +70,7 @@ askForMSGID(Servername, Servernode) ->
 getMSG(Servername, Servernode,Datei)->
 	{Servername,Servernode} ! {erlang:self(),getmessages},
 	receive 
-		{reply,[NNr,Msg,TSclientout,TShbqin,TSdlqin,TSdlqout],Terminated}  ->
+		{reply,[_,Msg,_,_,_,_],Terminated}  ->
 			werkzeug:logging(Datei,Msg ++ "C In: " ++ werkzeug:timeMilliSecond()++ "\n"),
 			Terminated
 	end.

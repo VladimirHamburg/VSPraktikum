@@ -5,6 +5,7 @@ initCMEM(RemTime,Datei) ->
 	{RemTime,[]}.
 
 updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
+
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
 
@@ -12,7 +13,7 @@ getClientNNr({RemTime,ClientList},ClientID) ->
 	WList=[{SavedID,NNr,TimeStamp} || {SavedID,NNr,TimeStamp} <- ClientList, SavedID == ClientID],
 	getClientNNr_(WList,RemTime).
 
-delExpiredCl({RemTime,ClientList},Clientlifetime) ->
+delExpiredCl({RemTime,ClientList},_) ->
 	{RemTime,[{ClientID,NNr,TimeStamp} || {ClientID,NNr,TimeStamp} <- ClientList, checkTime(RemTime,TimeStamp)]}.
 
 %%%%%%%%%%%%Hielfsmethoden, nicht in der Dokumentation beschrieben
@@ -28,7 +29,7 @@ checkTime(RemTime,TimeStamp) ->
 
 getClientNNr_([],_) ->
 	1;
-getClientNNr_([{SavedID,WNNr,WorkStamp}|[]],RemTime) ->
+getClientNNr_([{_,WNNr,WorkStamp}|[]],RemTime) ->
 	Flag = checkTime(RemTime,WorkStamp),
 	case Flag of
 		true ->
@@ -36,5 +37,5 @@ getClientNNr_([{SavedID,WNNr,WorkStamp}|[]],RemTime) ->
 		false ->
 			1
 	end;
-getClientNNr_([H|T],_) ->
+getClientNNr_([_|_],_) ->
 	error_gclnnr.
