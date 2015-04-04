@@ -6,17 +6,17 @@ start()->
 loop()->
  not_imp.
 
- initHBQandDLQ(ServerPID)->
+initHBQandDLQ(ServerPID)->
  not_imp.
 
- pushHBQ(ServerPID, OldHBQ, [NNr, Msg,TSclientout]) ->
+pushHBQ(ServerPID, OldHBQ, [NNr, Msg,TSclientout]) ->
  not_imp.
 
- deliverMSG(ServerPID, DLQ, NNr, ToClient)->
+deliverMSG(ServerPID, DLQ, NNr, ToClient)->
  not_imp.
 
- dellHBQ(ServerPID)->
- not_imp.
+dellHBQ(ServerPID)->
+ ServerPID ! {reply, ok}.
 
- pushSeries(HBQ, DLQ)->
+pushSeries(HBQ, DLQ)->
  not_imp.
