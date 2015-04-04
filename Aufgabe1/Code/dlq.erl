@@ -20,7 +20,7 @@ deliverMSG(MSGNr, ClientPID, Queue, Datei) ->
 expectedNr_([]) ->
 	1;
 expectedNr_(List) ->
-	[[NNr, _, _, _]|_] = lists:reverse(List),
+	[[NNr|_]|_] = lists:reverse(List),
 	NNr+1.
 
 makeEntry([NNr, Msg, TSclientout, TShbqin])->
