@@ -4,11 +4,38 @@
 initCMEM(RemTime,Datei) ->
 	{RemTime,[]}.
 
-updateClient({RemTime,CLientList},ClientID,NNr,Datei) ->
-	not_impl.
+updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
 
-getClientNNr(CMEM,CLientID) ->
-	not_impl.
+	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
-delExpiredCl(CMEM,Clientlifetime) ->
-	not_impl.
+
+getClientNNr({RemTime,ClientList},ClientID) ->
+	WList=[{SavedID,NNr,TimeStamp} || {SavedID,NNr,TimeStamp} <- ClientList, SavedID == ClientID],
+	getClientNNr_(WList,RemTime).
+
+delExpiredCl({RemTime,ClientList},Clientlifetime) ->
+	{RemTime,[{ClientID,NNr,TimeStamp} || {ClientID,NNr,TimeStamp} <- ClientList, checkTime(RemTime,TimeStamp)]}.
+
+%%%%%%
+updateClient_([],ClientID,NNr) ->
+	[{ClientID,NNr,erlang:now()}];
+updateClient_([{SavedID,_,_}|T],ClientID,NNr) when SavedID == ClientID ->
+	[{SavedID,NNr,erlang:now()}] ++ T;
+updateClient_([{SavedID,WNNr,TStamp}|T],ClientID,NNr) ->
+	[{SavedID,WNNr,TStamp}] ++ updateClient_(T,ClientID,NNr).	
+	
+checkTime(RemTime,TimeStamp) ->
+	(werkzeug:now2UTC(erlang:now()) - werkzeug:now2UTC(TimeStamp)) < RemTime*1000.
+
+getClientNNr_([],_) ->
+	1;
+getClientNNr_([{SavedID,WNNr,WorkStamp}|[]],RemTime) ->
+	Flag = checkTime(RemTime,WorkStamp),
+	case Flag of
+		true ->
+			WNNr;
+		false ->
+			1
+	end;
+getClientNNr_([H|T],_) ->
+	error_gclnnr.
