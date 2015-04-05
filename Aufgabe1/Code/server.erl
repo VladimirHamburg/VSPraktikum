@@ -83,7 +83,7 @@ registerServer(ServerName) ->
 	register(ServerName, self()).
 
 initHBQ(HBQname, HBQnode) ->
-	{HBQname,HBQnode} ! {self(), request, initHBQ},
+	{HBQname,HBQnode} ! {self(), {request, initHBQ}},
 	receive 
 		{reply, ok} -> 
 			ok;
@@ -92,7 +92,7 @@ initHBQ(HBQname, HBQnode) ->
 	end.
 
 terminateHBQ(HBQname, HBQnode) ->
-	{HBQname,HBQnode} ! {self(), request, dellHBQ},
+	{HBQname,HBQnode} ! {self(), {request, dellHBQ}},
 	receive 
 		{reply, ok} -> 
 			ok;

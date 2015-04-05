@@ -2,24 +2,29 @@
 -export ([start/0]).
 
 start()->
-	{ok, ConfigListe} = file:consult("client.cfg"),
+	{ok, ConfigListe} = file:consult("server.cfg"),
 	{ok,HBQname} = werkzeug:get_config_value(hbqname,ConfigListe),
 	{ok,DLQlimit} = werkzeug:get_config_value(dlqlimit,ConfigListe),
 	register(HBQname,self()),
+	io:fwrite("~p~n", ["HBG bereit."]),
  receive
  	{ServerPID, {request,initHBQ}} ->
+ 		io:fwrite("~p~n",["Startbefehl vom Server erhalten."]),
  		loop(initHBQandDLQ(ServerPID,DLQlimit))
  end.
 
 loop(Queue)->
  receive
  	{ServerPID, {request,pushHBQ,[NNr,Msg,TSclientout]}} ->
+ 		io:fwrite("~p~n",["Neu Nachricht erhalten."]),
  		loop(pushHBQ(ServerPID,Queue,[NNr,Msg,TSclientout]));
  	{ServerPID, {request,deliverMSG,NNr,ToClient}} ->
+ 		io:fwrite("~p~n",["Nachricht senden!"]),
  		{_,DLQ} = Queue,
  		deliverMSG(ServerPID, DLQ, NNr, ToClient),
  		loop(Queue);
  	{ServerPID, {request,dellHBQ}} ->
+ 		io:fwrite("~p~n",["HBQ STOP!"]),
  		dellHBQ(ServerPID)	
  end.
 

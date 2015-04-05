@@ -3,7 +3,7 @@
 
 start() ->
  {Clients,Lifetime,Servername,Servernode,Sendeintervall} = readConfig(),
- start_clients(Clients,Lifetime,Servername,Servernode,Sendeintervall,"logClient").
+ start_clients(Clients,Lifetime,Servername,Servernode,Sendeintervall,"logClient.txt").
  %%ClientPid = spawn(fun() -> loop(Lifetime,Servername,Servernode,Sendeintervall,"logClient",5,[]) end),
  %%timer:kill_after(Lifetime*1000,ClientPid),
  %%{Clients,Lifetime,Servername,Servernode,Sendeintervall,ClientPid}.
@@ -25,8 +25,10 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 			Flag = getMSG(Servername, Servernode,Datei),
 			case Flag of
 				false ->
+					io:fwrite("~p~n",["Client bleibt Leser!"]),
 					loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 				true ->
+					io:fwrite("~p~n",["Client wird Redakteur!"]),
 					loop(Lifetime, Servername, Servernode,changeSendInterval(Sendeintervall),Datei,5,SendMsg)
 			end;
 		1 ->
@@ -35,6 +37,7 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 		_ ->
 			Number = askForMSGID(Servername,Servernode),
+			io:fwrite("~p~n",[Number]),
 			timer:sleep(trunc(Sendeintervall*1000)),
 			sendMSG(Servername, Servernode,Datei,Number),
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum-1,SendMsg++[Number])
@@ -64,13 +67,16 @@ askForMSGID(Servername, Servernode) ->
 	{Servername,Servernode} ! {erlang:self(),getmsgid},
 	receive 
 		{nid,Number} ->
+			io:fwrite("~p~n",["NNr erhalten."]),
 			Number
 	end.
 
 getMSG(Servername, Servernode,Datei)->
 	{Servername,Servernode} ! {erlang:self(),getmessages},
+	io:fwrite("~p~n",["Erwarte Nachricht!"]),
 	receive 
 		{reply,[_,Msg,_,_,_,_],Terminated}  ->
+			io:fwrite("~p~n",["Nachricht bekommen!"]),
 			werkzeug:logging(Datei,Msg ++ "C In: " ++ werkzeug:timeMilliSecond()++ "\n"),
 			Terminated
 	end.
@@ -83,10 +89,10 @@ start_clients(Clients,Lifetime,Servername,Servernode,Sendeintervall,Datei) ->
 	start_clients(Clients-1,Lifetime,Servername,Servernode,Sendeintervall,Datei).
 
 constructMsg(Number) ->
-	werkzeug:to_String(erlang:node()) ++ "3" ++ "09:  " ++ werkzeug:to_String(Number) ++ "te_Nachricht. C Out: " ++ werkzeug:timeMilliSecond().
+	werkzeug:to_String(erlang:self()) ++ werkzeug:to_String(erlang:node()) ++ "3" ++ "09:  " ++ werkzeug:to_String(Number) ++ "te_Nachricht. C Out: " ++ werkzeug:timeMilliSecond().
 
 constructErrMsg(Number) ->
-	werkzeug:to_String(erlang:node()) ++ "3" ++ "09:  " ++ werkzeug:to_String(Number) ++ "te_Nachricht vergessen zu senden".
+	werkzeug:to_String(erlang:self()) ++ werkzeug:to_String(erlang:node()) ++ "3" ++ "09:  " ++ werkzeug:to_String(Number) ++ "te_Nachricht vergessen zu senden".
 
 checkIntervall(Intervall) ->
 	Flag = Intervall < 2.0,
