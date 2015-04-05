@@ -4,7 +4,7 @@
 start() ->
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit} = readConfig(),
 	registerServer(ServerName),
-	CMEM = initCMEM(RemTime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
+	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
 	case initHBQ(HBQname, HBQnode) of
 		ok -> loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop));
 		false -> {error, "Received bad response from initHBQ"}
@@ -13,26 +13,39 @@ start() ->
 readConfig() ->
 	ServerConfigFile = "server.cfg",
 	Config = file:consult(ServerConfigFile),
-	{ok, Latency} = get_config_value(latency, Config),
-	{ok, Clientlifetime} = get_config_value(clientlifetime,Config),
-	{ok, ServerName} = get_config_value(servername,Config),
-	{ok, HBQname} = get_config_value(hbqname,Config),
-	{ok, HBQnode} = get_config_value(hbqnode,Config),
-	{ok, DLQlimit} = get_config_value(dlqlimit,Config),
+	{ok, Latency} = werkzeug:get_config_value(latency, Config),
+	{ok, Clientlifetime} = werkzeug:get_config_value(clientlifetime,Config),
+	{ok, ServerName} = werkzeug:get_config_value(servername,Config),
+	{ok, HBQname} = werkzeug:get_config_value(hbqname,Config),
+	{ok, HBQnode} = werkzeug:get_config_value(hbqnode,Config),
+	{ok, DLQlimit} = werkzeug:get_config_value(dlqlimit,Config),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit}.
 
 loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer) ->
 	cmem:delExpiredCl(CMEM, Clientlifetime),
-	receive 
-		{ClientPID, getmessages} -> sendMessages(ClientPID, CMEM);
-		{dropmessage, [INNr, Msg, TSclientout]} -> dropmessage(HBQname, HBQnode, INNr, Msg, TSclientout);
-		{ClientPID, getmsgid} -> sendMSGID(ClientPID);
-		stop -> terminateHBQ(HBQname, HBQnode),
+	Terminate = receive 
+		{ClientPID, getmessages} -> 
+			sendMessages(ClientPID, CMEM, HBQname, HBQnode),
+			Terminate = false;
+		{dropmessage, [INNr, Msg, TSclientout]} -> 
+			dropmessage(HBQname, HBQnode, INNr, Msg, TSclientout),
+			Terminate = false;
+		{ClientPID, getmsgid} -> 
+			sendMSGID(ClientPID, CMEM),
+			Terminate = false;
+		stop -> 
+			terminateHBQ(HBQname, HBQnode), 
+			Terminate = true
 	end,
-	werkzeug:reset_timer(Timer, Latency, stop)
-	loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer).
 
-sendMessages(ToClient, CMEM) ->
+	case Terminate of
+		true -> ok;
+		_ -> 
+			werkzeug:reset_timer(Timer, Latency, stop),
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer)
+	end.
+
+sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
 	receive 
@@ -45,9 +58,9 @@ sendMessages(ToClient, CMEM) ->
 	
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
-	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}.
+	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
-		{reply, ok} -> ,
+		{reply, ok} ->
 			ok;
 		_ -> 
 			{error, "Received bad response from HBQ pushHBQ"}
@@ -55,14 +68,15 @@ dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 
 sendMSGID(ClientPID, CMEM) ->
 	NNr = cmem:getClientNNr(CMEM, ClientPID),
-	ClientPID ! {nid, NNr}.
+	ClientPID ! {nid, NNr},
+	ok.
 
 %%%%%%%%%%%%%%%%% Interne, nicht von dem Entwurf erfasste Hilfsmethoden
 
-initCMEM(Clientlifetime, CMEMLogFile)
+initCMEM(Clientlifetime, CMEMLogFile) ->
 	cmem:initCMEM(Clientlifetime, CMEMLogFile).
 
-registerServer(ServerName)
+registerServer(ServerName) ->
 	register(ServerName, self()).
 
 initHBQ(HBQname, HBQnode) ->
