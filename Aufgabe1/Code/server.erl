@@ -2,17 +2,20 @@
 -export ([start/0]).
 
 start() ->
+	io:fwrite("Server starting up...\n"),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit} = readConfig(),
 	registerServer(ServerName),
 	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
 	case initHBQ(HBQname, HBQnode) of
-		ok -> loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop));
+		ok ->
+			io:fwrite("Server startup complete!\n"),
+			loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop));
 		false -> {error, "Received bad response from initHBQ"}
 	end.
 
 readConfig() ->
 	ServerConfigFile = "server.cfg",
-	Config = file:consult(ServerConfigFile),
+	{ok, Config} = file:consult(ServerConfigFile),
 	{ok, Latency} = werkzeug:get_config_value(latency, Config),
 	{ok, Clientlifetime} = werkzeug:get_config_value(clientlifetime,Config),
 	{ok, ServerName} = werkzeug:get_config_value(servername,Config),
