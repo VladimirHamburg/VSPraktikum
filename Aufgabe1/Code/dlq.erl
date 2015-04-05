@@ -13,7 +13,7 @@ push2DLQ(NewEntry, {Size,[_|ListTail]}, Datei) ->
 	{Size, ListTail ++ makeEntry(NewEntry)}.
 
 deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
-	io:fwrite("~p~n", ["DLQ sollsenden!"]),
+	io:fwrite("~p~n", [List]),
 	case MSGNr > 0 of
 		true ->
 			case MSGNr < expectedNr_(List) of
@@ -44,9 +44,8 @@ makeEntry([NNr, Msg, TSclientout, TShbqin]) ->
 
 
 deliverMSG_(MSGNr, ClientPID, [_|[]], BuList, Datei) -> %% Nicht gefunden? Erneut suchen mit größerer nummer
-	%%io:fwrite("~p~n", ["Versendet immer noch!"]),
 	deliverMSG_(MSGNr+1, ClientPID, BuList, BuList, Datei);
-deliverMSG_(MSGNr, ClientPID, [[NNr, Msg, TSclientout, TShbqin, TSdlqin]|_], BuList, Datei) when MSGNr == NNr -> 
+deliverMSG_(MSGNr, ClientPID, [[NNr, Msg, TSclientout, TShbqin, TSdlqin]|_], BuList, Datei) when MSGNr == NNr ->
 	ClientPID ! {reply,[NNr, Msg, TSclientout, TShbqin, TSdlqin, erlang:now()], MSGNr < expectedNr_(BuList)-1};
 deliverMSG_(MSGNr, ClientPID, [_|Tail], BuList, Datei) ->
 	deliverMSG_(MSGNr, ClientPID, Tail, BuList, Datei).

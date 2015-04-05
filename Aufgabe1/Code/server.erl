@@ -9,7 +9,7 @@ start() ->
 	case initHBQ(HBQname, HBQnode) of
 		ok ->
 			io:fwrite("Server startup complete!\n"),
-			loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop));
+			loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop),1);
 		false -> {error, "Received bad response from initHBQ"}
 	end.
 
@@ -24,29 +24,23 @@ readConfig() ->
 	{ok, DLQlimit} = werkzeug:get_config_value(dlqlimit,Config),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit}.
 
-loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer) ->
+loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr) ->
 	cmem:delExpiredCl(CMEM, Clientlifetime),
-	Terminate = receive 
+	werkzeug:reset_timer(Timer, Latency, stop),
+	receive 
 		{ClientPID, getmessages} -> 
 			sendMessages(ClientPID, CMEM, HBQname, HBQnode),
-			Terminate = false;
-		{dropmessage, [INNr, Msg, TSclientout]} -> 
-			dropmessage(HBQname, HBQnode, INNr, Msg, TSclientout),
-			Terminate = false;
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
+		{dropmessage, [WINNr, Msg, TSclientout]} -> 
+			dropmessage(HBQname, HBQnode, WINNr, Msg, TSclientout),
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
 		{ClientPID, getmsgid} -> 
-			sendMSGID(ClientPID, CMEM),
-			Terminate = false;
+			NewINNr = sendMSGID(ClientPID, CMEM,INNr),
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,NewINNr);
 		stop -> 
-			terminateHBQ(HBQname, HBQnode), 
-			Terminate = true
-	end,
-
-	case Terminate of
-		true -> ok;
-		_ -> 
-			werkzeug:reset_timer(Timer, Latency, stop),
-			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer)
-	end.
+			terminateHBQ(HBQname, HBQnode)
+	end. 
+			
 
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
@@ -69,10 +63,9 @@ dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 			{error, "Received bad response from HBQ pushHBQ"}
 	end.
 
-sendMSGID(ClientPID, CMEM) ->
-	NNr = cmem:getClientNNr(CMEM, ClientPID),
-	ClientPID ! {nid, NNr},
-	ok.
+sendMSGID(ClientPID, _, INNr) ->
+	ClientPID ! {nid, INNr},
+	INNr+1.
 
 %%%%%%%%%%%%%%%%% Interne, nicht von dem Entwurf erfasste Hilfsmethoden
 
