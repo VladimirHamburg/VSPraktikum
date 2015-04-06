@@ -2,16 +2,16 @@
 -export ([start/0]).
 
 start() ->
-	io:fwrite("Server starting up...\n"),
+	log("Server starting up..."),
+	log("reading config ..."),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit} = readConfig(),
-	io:fwrite("... config read ...\n"),
+	log("registering server as " ++ werkzeug:to_String(ServerName) ++ "..."),	
 	registerServer(ServerName),
-	io:fwrite("... server " ++ werkzeug:to_String(ServerName) ++ " registered ...\n"),
-	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
-	io:fwrite("... cmem initialized ...\n"),
+	log("initialize CMEM..."),
+	CMEM = initCMEM(Clientlifetime, "cmem.log"),
 	case initHBQ(HBQname, HBQnode) of
 		ok ->
-			io:fwrite("Server startup complete!\n"),
+			log("Server startup complete!"),
 			loop(Latency, 
 				Clientlifetime, 
 				ServerName, 
@@ -21,7 +21,7 @@ start() ->
 				CMEM, 
 				werkzeug:reset_timer(null, Latency, stop),
 				1);
-		false -> {error, "Received bad response from initHBQ"}
+		fail -> logErrorRet("Received bad response from initHBQ")
 	end.
 
 readConfig() ->
@@ -48,10 +48,10 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 		{ClientPID, getmsgid} -> 
 			NewINNr = sendMSGID(ClientPID, CMEM,INNr),
 			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,NewINNr);
-		stop -> 
+		stop ->
+			log("server timeout. Shutting down..."),
 			terminateHBQ(HBQname, HBQnode)
 	end. 
-			
 
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
@@ -61,9 +61,8 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
 			ok;
 		_ -> 
-			{error, "Received bad response from HBQ deliverMSG"}
+			logErrorRet("Received bad response from HBQ deliverMSG")
 	end.
-	
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
@@ -71,7 +70,7 @@ dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 		{reply, ok} ->
 			ok;
 		_ -> 
-			{error, "Received bad response from HBQ pushHBQ"}
+			logErrorRet("Received bad response from HBQ pushHBQ")
 	end.
 
 sendMSGID(ClientPID, _, INNr) ->
@@ -87,9 +86,9 @@ registerServer(ServerName) ->
 	register(ServerName, self()).
 
 initHBQ(HBQname, HBQnode) ->
-	io:fwrite("... send init to " ++ werkzeug:to_String(HBQname) ++ "@" ++ werkzeug:to_String(HBQnode) ++  "\n"),
+	log("send init to " ++ werkzeug:to_String(HBQname) ++ "@" ++ werkzeug:to_String(HBQnode)),
 	{HBQname,HBQnode} ! {self(), {request, initHBQ}},
-	io:fwrite("wait for HBQ to respond... \n"),
+	log("wait for HBQ to respond..."),
 	receive 
 		{reply, ok} -> 
 			ok;
@@ -98,10 +97,19 @@ initHBQ(HBQname, HBQnode) ->
 	end.
 
 terminateHBQ(HBQname, HBQnode) ->
+	log("send terminate to " ++ werkzeug:to_String(HBQname) ++ "@" ++ werkzeug:to_String(HBQnode)),
 	{HBQname,HBQnode} ! {self(), {request, dellHBQ}},
+	log("wait for HBQ to respond..."),
 	receive 
 		{reply, ok} -> 
 			ok;
 		_ -> 
-			fail
+			logErrorRet("Received bad response from dellHBQ")
 	end.
+
+log(Msg) ->
+	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Msg++"\n").
+
+logErrorRet(Reason) ->
+	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Reason++"\n"),
+	{error, Reason}.
