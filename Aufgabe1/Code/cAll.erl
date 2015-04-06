@@ -1,5 +1,5 @@
--module (compileAll).
--export ([cAll/0]).
+-module (cAll).
+-export ([c/0]).
 
 c() ->
 	{_, ListOfFiles} = file:list_dir("./"),
