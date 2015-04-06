@@ -5,12 +5,13 @@ initCMEM(RemTime,Datei) ->
 	{RemTime,[]}.
 
 updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
-
+	io:fwrite(werkzeug:to_String(NNr) ++ "Hallo \n"),
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
 
 getClientNNr({RemTime,ClientList},ClientID) ->
 	WList=[{SavedID,NNr,TimeStamp} || {SavedID,NNr,TimeStamp} <- ClientList, SavedID == ClientID],
+	io:fwrite(werkzeug:to_String(WList) ++ "\n"),
 	getClientNNr_(WList,RemTime).
 
 delExpiredCl({RemTime,ClientList},_) ->

@@ -10,7 +10,7 @@ start() ->
 	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
 	io:fwrite("... cmem initialized ...\n"),
 	case initHBQ(HBQname, HBQnode) of
-		ok ->
+		ok1 ->
 			io:fwrite("Server startup complete!\n"),
 			loop(Latency, 
 				Clientlifetime, 
@@ -40,8 +40,8 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 	werkzeug:reset_timer(Timer, Latency, stop),
 	receive 
 		{ClientPID, getmessages} -> 
-			sendMessages(ClientPID, CMEM, HBQname, HBQnode),
-			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
+			NewCMEM = sendMessages(ClientPID, CMEM, HBQname, HBQnode),
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, NewCMEM, Timer,INNr);
 		{dropmessage, [WINNr, Msg, TSclientout]} -> 
 			dropmessage(HBQname, HBQnode, WINNr, Msg, TSclientout),
 			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
@@ -58,9 +58,10 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
 	receive 
 		{reply, SendNNr} -> 
-			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
-			ok;
-		_ -> 
+			io:fwrite("~p~n",[[SendNNr,"SERV"]]),
+			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log");
+		Test ->
+			io:fwrite("~p~n",[Test]), 
 			{error, "Received bad response from HBQ deliverMSG"}
 	end.
 	
@@ -68,7 +69,7 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
-		{reply, ok} ->
+		{reply, ok13} ->
 			ok;
 		_ -> 
 			{error, "Received bad response from HBQ pushHBQ"}
@@ -91,8 +92,8 @@ initHBQ(HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, initHBQ}},
 	io:fwrite("wait for HBQ to respond... \n"),
 	receive 
-		{reply, ok} -> 
-			ok;
+		{reply, ok12} -> 
+			ok1;
 		_ -> 
 			fail
 	end.
@@ -101,7 +102,7 @@ terminateHBQ(HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, dellHBQ}},
 	receive 
 		{reply, ok} -> 
-			ok;
+			ok2;
 		_ -> 
 			fail
 	end.
