@@ -27,7 +27,7 @@ loop(Queue)->
 
 initHBQandDLQ(ServerPID,Size)->
  HBQandDLQ = {[],dlq:initDLQ(Size,"DLQLog")},
- ServerPID ! {reply, ok12},
+ ServerPID ! {reply, ok},
  HBQandDLQ.
 
 pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
@@ -39,13 +39,12 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  		NewHBQ = pushToHBQ(HBQ,[NNr, Msg,TSclientout]),
  		pushSeries(NewHBQ,DLQ)
  	end,
- ServerPID ! {reply, ok13},
+ ServerPID ! {reply, ok},
  {NewNBQ,NewDLQ}.
 
 
 deliverMSG(ServerPID, DLQ, NNr, ToClient)->
  SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,"DLQLog"),
- io:fwrite("~p~n",[["HBQ",SendNNr]]),
  ServerPID ! {reply,SendNNr}.
 
 dellHBQ(ServerPID)->

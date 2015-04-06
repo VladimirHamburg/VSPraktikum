@@ -56,12 +56,10 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
-	receive 
+	receive
 		{reply, SendNNr} -> 
-			io:fwrite("~p~n",[[SendNNr,"SERV"]]),
 			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log");
-		Test ->
-			io:fwrite("~p~n",[Test]), 
+		_ ->
 			{error, "Received bad response from HBQ deliverMSG"}
 	end.
 	
@@ -69,7 +67,7 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
-		{reply, ok13} ->
+		{reply, ok} ->
 			ok;
 		_ -> 
 			{error, "Received bad response from HBQ pushHBQ"}
