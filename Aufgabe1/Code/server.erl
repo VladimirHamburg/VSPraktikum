@@ -4,12 +4,23 @@
 start() ->
 	io:fwrite("Server starting up...\n"),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit} = readConfig(),
+	io:fwrite("... config read ...\n"),
 	registerServer(ServerName),
+	io:fwrite("... server " ++ werkzeug:to_String(ServerName) ++ " registered ...\n"),
 	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
+	io:fwrite("... cmem initialized ...\n"),
 	case initHBQ(HBQname, HBQnode) of
 		ok ->
 			io:fwrite("Server startup complete!\n"),
-			loop(Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit, CMEM, werkzeug:reset_timer(null, Latency, stop),1);
+			loop(Latency, 
+				Clientlifetime, 
+				ServerName, 
+				HBQname, 
+				HBQnode, 
+				DLQlimit, 
+				CMEM, 
+				werkzeug:reset_timer(null, Latency, stop),
+				1);
 		false -> {error, "Received bad response from initHBQ"}
 	end.
 
@@ -76,7 +87,9 @@ registerServer(ServerName) ->
 	register(ServerName, self()).
 
 initHBQ(HBQname, HBQnode) ->
+	io:fwrite("... send init to " ++ werkzeug:to_String(HBQname) ++ "@" ++ werkzeug:to_String(HBQnode) ++  "\n"),
 	{HBQname,HBQnode} ! {self(), {request, initHBQ}},
+	io:fwrite("wait for HBQ to respond... \n"),
 	receive 
 		{reply, ok} -> 
 			ok;
