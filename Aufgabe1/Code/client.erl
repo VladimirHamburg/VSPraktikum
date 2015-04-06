@@ -2,6 +2,9 @@
 -export ([start/0]).
 -define (GRUPPE, "3").
 -define (TEAM, "09").
+%%ENTWURF: Definition: Startet einen neuen Client-Prozess der Nachrichten an den (laufenden) Server senden
+%%kann und Nachrichten abrufen kann.
+%%UMSETZUNG: Die Methode start() mehrere Clients(der client.cfg zu entnehmen). Die Einstellung in client.cfg wäre bei anderer Realisierung unnötig. 
 start() ->
 	werkzeug:logging("CLIENT.log","GESTARTET \n"),
  {Clients,Lifetime,Servername,Servernode,Sendeintervall} = readConfig(),
@@ -11,7 +14,9 @@ start() ->
  %%{Clients,Lifetime,Servername,Servernode,Sendeintervall,ClientPid}.
 
 
-
+%%ENTWURF: Definition: Vor dem Start des Client-Prozesses muss die Konfigurationsdatei (siehe Vorlage) des
+%%Clients ausgelesen werden.
+%%UMSETZUNG: Entspricht dem Entwurf.
 readConfig() ->
 	{ok, ConfigListe} = file:consult("client.cfg"),
 	{ok,Clients} = werkzeug:get_config_value(clients,ConfigListe),
@@ -21,6 +26,12 @@ readConfig() ->
 	{ok,Sendeintervall} = werkzeug:get_config_value(sendeintervall,ConfigListe),
 	{Clients,Lifetime,Servername,Servernode,Sendeintervall}.
 
+%%ENTWURF: In der Hauptschleife werden die Nachrichten in bestimmten Zeitabständen an den
+%%Server versendet.
+%%UMSETZUNG: Entspricht dem Entwurf. Die Methode wurd um drei Variablen (Datei,MsgNum,SendMsg) erweitert.
+%%  Datei -> Fürs logging
+%%  MsgNum -> Wird von 5 bis 0 runtergezählt und dann wieder von 5 bis 0. Dadurch wird bestimmt wie viele Nachrichten versendet wurden. Auch die Rolle wird dadurch bestimmt.
+%%  SendMsg -> Liste der gesendeter eigener Nachrichten. 
 loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 	case MsgNum of
 		0 ->
@@ -42,12 +53,17 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum-1,SendMsg++[Number])
 	end.
 
+%%ENTWURF: Definition: Hier wird dem Server die Nachricht {dropmessage, [INNr, Msg, TSclientout]} gesendet.
+%%Auf eine Antwort des Server wird nicht gewartet.
+%%UMSETZUNG: Entspricht dem Entwurf.
 sendMSG(Servername, Servernode,Datei,Number) ->
 	{Servername,Servernode} ! {dropmessage,[Number,Msg = constructMsg(Number),erlang:now()]},
 	werkzeug:logging(Datei,Msg ++" gesendet."++ "\n").
 
 
-
+%%ENTWURF:Definition: Auf Grundlage des alten Sendeintervalls (Parameter Sendintervall) wird dieses um ca.
+%%50% zufällig vergrößert oder verkleinert. 
+%%UMSETZUNG: Entspricht dem Entwurf. Variable Datei wurde für logging hinzugefügt.
 changeSendInterval(Sendeintervall,Datei)->
 	Flag = random:uniform(2),
 	New2Sendeintervall = case Flag of
@@ -62,7 +78,9 @@ changeSendInterval(Sendeintervall,Datei)->
 	New2Sendeintervall.
 
 
-
+%%ENTWURF: Definition: Dem Server wird folgende Nachricht übermittelt: {self(), getmsgid}. Im Anschluss wartet
+%%er auf folgende Antwort des Server: {nid, Number}.
+%%UMSETZUNG: Entspricht dem Entwurf.
 askForMSGID(Servername, Servernode) ->
 	{Servername,Servernode} ! {erlang:self(),getmsgid},
 	receive 
@@ -70,7 +88,12 @@ askForMSGID(Servername, Servernode) ->
 			io:fwrite(werkzeug:to_String(Number) ++ "bekommen \n"),
 			Number
 	end.
-
+%%ENTWURF: Dem Server wird folgende Nachricht übermittelt: {self(), getmessages}. Er wartet auf die
+%%Antwort des Servers (DLQ) mit folgendem Format: {reply,[NNr, Msg, TSclientout, TShbqin, TSdlqin,
+%%TSdlqout], Terminated}.
+%%UMSETZUNG: Entspricht dem Entwurf. Die Methode wurde um Variablen Datei und SendMsg erweitert.
+%%  Datei -> Fürs logging
+%%  SendMsg -> Liste der gesendeten Nachrichten. Damit diese markiert werden könnten. 
 getMSG(Servername, Servernode,Datei,SendMsg)->
 	{Servername,Servernode} ! {erlang:self(),getmessages},
 	receive 
