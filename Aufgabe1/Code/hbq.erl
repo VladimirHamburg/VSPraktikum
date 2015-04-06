@@ -16,10 +16,8 @@ start()->
 loop(Queue)->
  receive
  	{ServerPID, {request,pushHBQ,[NNr,Msg,TSclientout]}} ->
- 		io:fwrite("~p~n",["Neu Nachricht erhalten."]),
  		loop(pushHBQ(ServerPID,Queue,[NNr,Msg,TSclientout]));
  	{ServerPID, {request,deliverMSG,NNr,ToClient}} ->
- 		io:fwrite("~p~n",["Nachricht senden!"]),
  		{_,DLQ} = Queue,
  		deliverMSG(ServerPID, DLQ, NNr, ToClient),
  		loop(Queue);
@@ -47,7 +45,6 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
 
 
 deliverMSG(ServerPID, DLQ, NNr, ToClient)->
- io:fwrite("~p~n",[NNr]),
  SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,"DLQLog"),
  ServerPID ! {reply,SendNNr}.
 
