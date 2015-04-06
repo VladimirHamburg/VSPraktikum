@@ -43,7 +43,7 @@ makeEntry([NNr, Msg, TSclientout, TShbqin]) ->
 
 
 
-deliverMSG_(MSGNr, ClientPID, [_|[]], BuList, Datei) -> %% Nicht gefunden? Erneut suchen mit größerer nummer
+deliverMSG_(MSGNr, ClientPID, [], BuList, Datei) -> %% Nicht gefunden? Erneut suchen mit größerer nummer
 	deliverMSG_(MSGNr+1, ClientPID, BuList, BuList, Datei);
 deliverMSG_(MSGNr, ClientPID, [[NNr, Msg, TSclientout, TShbqin, TSdlqin]|_], BuList, Datei) when MSGNr == NNr ->
 	ClientPID ! {reply,[NNr, Msg, TSclientout, TShbqin, TSdlqin, erlang:now()], MSGNr < expectedNr_(BuList)-1};
