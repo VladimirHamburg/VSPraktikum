@@ -40,8 +40,8 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 	werkzeug:reset_timer(Timer, Latency, stop),
 	receive 
 		{ClientPID, getmessages} -> 
-			sendMessages(ClientPID, CMEM, HBQname, HBQnode),
-			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
+			NewCMEM = sendMessages(ClientPID, CMEM, HBQname, HBQnode),
+			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, NewCMEM, Timer,INNr);
 		{dropmessage, [WINNr, Msg, TSclientout]} -> 
 			dropmessage(HBQname, HBQnode, WINNr, Msg, TSclientout),
 			loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr);
@@ -56,12 +56,18 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
-	receive 
+	receive
 		{reply, SendNNr} -> 
+<<<<<<< HEAD
 			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
 			ok;
 		_ -> 
 			logErrorRet("Received bad response from HBQ deliverMSG")
+=======
+			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log");
+		_ ->
+			{error, "Received bad response from HBQ deliverMSG"}
+>>>>>>> master
 	end.
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->

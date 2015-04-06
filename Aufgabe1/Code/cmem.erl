@@ -5,7 +5,7 @@ initCMEM(RemTime,Datei) ->
 	{RemTime,[]}.
 
 updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
-
+	io:fwrite(werkzeug:to_String(NNr) ++ "Hallo \n"),
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
 
