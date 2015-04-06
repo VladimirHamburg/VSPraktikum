@@ -3,7 +3,7 @@
 -define (GRUPPE, "3").
 -define (TEAM, "09").
 start() ->
-	werkzeug:logging("CLIENT.log","GESTARTET"),
+	werkzeug:logging("CLIENT.log","GESTARTET \n"),
  {Clients,Lifetime,Servername,Servernode,Sendeintervall} = readConfig(),
  start_clients(Clients,Lifetime,Servername,Servernode,Sendeintervall,"client",1).
  %%ClientPid = spawn(fun() -> loop(Lifetime,Servername,Servernode,Sendeintervall,"logClient",5,[]) end),

@@ -10,7 +10,7 @@ start() ->
 	CMEM = initCMEM(Clientlifetime, "cmem.log"), %% TODO: Init-Reihenfolge ok?
 	io:fwrite("... cmem initialized ...\n"),
 	case initHBQ(HBQname, HBQnode) of
-		ok1 ->
+		ok ->
 			io:fwrite("Server startup complete!\n"),
 			loop(Latency, 
 				Clientlifetime, 
@@ -90,8 +90,8 @@ initHBQ(HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, initHBQ}},
 	io:fwrite("wait for HBQ to respond... \n"),
 	receive 
-		{reply, ok12} -> 
-			ok1;
+		{reply, ok} -> 
+			ok;
 		_ -> 
 			fail
 	end.
@@ -100,7 +100,7 @@ terminateHBQ(HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, dellHBQ}},
 	receive 
 		{reply, ok} -> 
-			ok2;
+			ok;
 		_ -> 
 			fail
 	end.

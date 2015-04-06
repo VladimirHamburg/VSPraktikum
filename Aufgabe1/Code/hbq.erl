@@ -37,7 +37,8 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  		{HBQ,dlq:push2DLQ([NNr, Msg,TSclientout,erlang:now()],DLQ,"DLQLog")};
  	false ->
  		NewHBQ = pushToHBQ(HBQ,[NNr, Msg,TSclientout]),
- 		pushSeries(NewHBQ,DLQ)
+ 		[[LNNr,_,_,_]|_] = NewHBQ,
+ 		pushSeries(NewHBQ,DLQ,dlq:expectedNr(DLQ),LNNr)
  	end,
  ServerPID ! {reply, ok},
  {NewNBQ,NewDLQ}.
@@ -50,13 +51,19 @@ deliverMSG(ServerPID, DLQ, NNr, ToClient)->
 dellHBQ(ServerPID)->
  ServerPID ! {reply, ok}.
 
-pushSeries(HBQ, {Size,DLQList}) when length(HBQ) > Size*(2/3) ->
-	[[NNr,_,_,_]|_] = HBQ,
+pushSeries(HBQ, {Size,DLQList},ExNNr,NNr) when (ExNNr+1) == NNr ->
 	InList = pushSeries_findall(HBQ,NNr,[]),
 	{_,NewHBQ} = lists:split(length(InList),HBQ),
 	NewDLQ = pushSeries_DLQ(InList,{Size,DLQList}),
 	{NewHBQ,NewDLQ};
-pushSeries(HBQ, DLQ) ->
+pushSeries(HBQ, {Size,DLQList},ExNNr,NNr) when length(HBQ) > Size*(2/3) ->
+	InList = pushSeries_findall(HBQ,NNr,[]),
+	{_,NewHBQ} = lists:split(length(InList),HBQ),
+	[[LNNr,_,_,_]|_] = InList,
+	ErrMsg = [ExNNr,"Fehlernachricht für Nachrichtennummern " ++ werkzeug:to_String(ExNNr) ++ " bis " ++ werkzeug:to_String(LNNr-1),erlang:now(),erlang:now()],
+	NewDLQ = pushSeries_DLQ([ErrMsg] ++ InList,{Size,DLQList}),
+	{NewHBQ,NewDLQ};
+pushSeries(HBQ, DLQ,ExNNr,NNr) ->
 	{HBQ,DLQ}.
 
 %%%%%%%%%%%%Hielfsmethoden, nicht in der Dokumentation beschrieben.
