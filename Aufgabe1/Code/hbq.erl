@@ -2,24 +2,29 @@
 -export ([start/0]).
 
 start()->
-	{ok, ConfigListe} = file:consult("client.cfg"),
+	{ok, ConfigListe} = file:consult("server.cfg"),
 	{ok,HBQname} = werkzeug:get_config_value(hbqname,ConfigListe),
 	{ok,DLQlimit} = werkzeug:get_config_value(dlqlimit,ConfigListe),
 	register(HBQname,self()),
+	io:fwrite("~p~n", ["HBQ bereit."]),
  receive
  	{ServerPID, {request,initHBQ}} ->
+ 		io:fwrite("~p~n",["Startbefehl vom Server erhalten."]),
  		loop(initHBQandDLQ(ServerPID,DLQlimit))
  end.
 
 loop(Queue)->
  receive
  	{ServerPID, {request,pushHBQ,[NNr,Msg,TSclientout]}} ->
+ 		io:fwrite("~p~n",["Neu Nachricht erhalten."]),
  		loop(pushHBQ(ServerPID,Queue,[NNr,Msg,TSclientout]));
  	{ServerPID, {request,deliverMSG,NNr,ToClient}} ->
+ 		io:fwrite("~p~n",["Nachricht senden!"]),
  		{_,DLQ} = Queue,
  		deliverMSG(ServerPID, DLQ, NNr, ToClient),
  		loop(Queue);
  	{ServerPID, {request,dellHBQ}} ->
+ 		io:fwrite("~p~n",["HBQ STOP!"]),
  		dellHBQ(ServerPID)	
  end.
 
@@ -42,6 +47,7 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
 
 
 deliverMSG(ServerPID, DLQ, NNr, ToClient)->
+ io:fwrite("~p~n",[NNr]),
  SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,"DLQLog"),
  ServerPID ! {reply,SendNNr}.
 
@@ -51,7 +57,7 @@ dellHBQ(ServerPID)->
 pushSeries(HBQ, {Size,DLQList}) when length(HBQ) > Size*(2/3) ->
 	[[NNr,_,_,_]|_] = HBQ,
 	InList = pushSeries_findall(HBQ,NNr,[]),
-	NewHBQ = lists:split(length(InList),HBQ),
+	{_,NewHBQ} = lists:split(length(InList),HBQ),
 	NewDLQ = pushSeries_DLQ(InList,{Size,DLQList}),
 	{NewHBQ,NewDLQ};
 pushSeries(HBQ, DLQ) ->
