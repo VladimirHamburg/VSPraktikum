@@ -7,7 +7,7 @@ c() ->
 	compileAll__(Work,true).
 
 compileAll_(String) ->
-	(".erl" == string:right(String,4)) and (String /= "compileAll.erl").
+	(".erl" == string:right(String,4)) and (String /= "cAll.erl").
 
 compileAll__([], Bool) ->
 	Bool;
