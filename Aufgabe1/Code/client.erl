@@ -25,10 +25,8 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 			Flag = getMSG(Servername, Servernode,Datei),
 			case Flag of
 				false ->
-					io:fwrite("~p~n",["Client bleibt Leser!"]),
 					loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 				true ->
-					io:fwrite("~p~n",["Client wird Redakteur!"]),
 					loop(Lifetime, Servername, Servernode,changeSendInterval(Sendeintervall),Datei,5,SendMsg)
 			end;
 		1 ->
@@ -37,7 +35,6 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 		_ ->
 			Number = askForMSGID(Servername,Servernode),
-			io:fwrite("~p~n",[Number]),
 			timer:sleep(trunc(Sendeintervall*1000)),
 			sendMSG(Servername, Servernode,Datei,Number),
 			loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum-1,SendMsg++[Number])
@@ -45,7 +42,7 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 
 sendMSG(Servername, Servernode,Datei,Number) ->
 	{Servername,Servernode} ! {dropmessage,[Number,Msg = constructMsg(Number),erlang:now()]},
-	werkzeug:logging(Datei,Msg ++" gesndet."++ "\n").
+	werkzeug:logging(Datei,Msg ++" gesendet."++ "\n").
 
 
 
@@ -67,16 +64,13 @@ askForMSGID(Servername, Servernode) ->
 	{Servername,Servernode} ! {erlang:self(),getmsgid},
 	receive 
 		{nid,Number} ->
-			io:fwrite("~p~n",["NNr erhalten."]),
 			Number
 	end.
 
 getMSG(Servername, Servernode,Datei)->
 	{Servername,Servernode} ! {erlang:self(),getmessages},
-	io:fwrite("~p~n",["Erwarte Nachricht!"]),
 	receive 
 		{reply,[_,Msg,_,_,_,_],Terminated}  ->
-			io:fwrite("~p~n",["Nachricht bekommen!"]),
 			werkzeug:logging(Datei,Msg ++ "C In: " ++ werkzeug:timeMilliSecond()++ "\n"),
 			Terminated
 	end.

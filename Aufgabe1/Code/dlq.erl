@@ -13,7 +13,6 @@ push2DLQ(NewEntry, {Size,[_|ListTail]}, Datei) ->
 	{Size, ListTail ++ makeEntry(NewEntry)}.
 
 deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
-	io:fwrite("~p~n", [List]),
 	case MSGNr > 0 of
 		true ->
 			case MSGNr < expectedNr_(List) of
