@@ -1,4 +1,4 @@
-{clients, 2000}.
+{clients, 5}.
 {lifetime, 400}.
 {servername, server309}.
 {servernode, 'server@YOUR_PC_NAME_HERE.localdomain'}.
