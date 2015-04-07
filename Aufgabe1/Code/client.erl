@@ -2,6 +2,7 @@
 -export ([start/0]).
 -define (GRUPPE, "3").
 -define (TEAM, "09").
+-define (TEAMGRUPPE, "309").
 %%ENTWURF: Definition: Startet einen neuen Client-Prozess der Nachrichten an den (laufenden) Server senden
 %%kann und Nachrichten abrufen kann.
 %%UMSETZUNG: Die Methode start() mehrere Clients(der client.cfg zu entnehmen). Die Einstellung in client.cfg wäre bei anderer Realisierung unnötig. 
@@ -110,7 +111,7 @@ getMSG(Servername, Servernode,{Datei,CNr},SendMsg)->
 start_clients(0,_,_,_,_,_,_) ->
 	ok;
 start_clients(Clients,Lifetime,Servername,Servernode,Sendeintervall,Datei,Nr) ->
-	ClientPid = spawn(fun() -> loop(Lifetime,Servername,Servernode,Sendeintervall,{Datei++werkzeug:to_String(?GRUPPE ++ ?TEAM)++werkzeug:to_String(erlang:node())++".log",Nr},5,[]) end),
+	ClientPid = spawn(fun() -> loop(Lifetime,Servername,Servernode,Sendeintervall,{Datei++?TEAMGRUPPE++werkzeug:to_String(erlang:node())++".log",Nr},5,[]) end),
 	timer:kill_after(Lifetime*1000,ClientPid),
 	start_clients(Clients-1,Lifetime,Servername,Servernode,Sendeintervall,Datei,Nr+1).
 

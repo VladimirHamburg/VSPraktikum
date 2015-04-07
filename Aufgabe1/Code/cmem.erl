@@ -1,17 +1,26 @@
 -module (cmem).
 -export ([initCMEM/2,updateClient/4,getClientNNr/2,delExpiredCl/2]).
 
+%%ENTWURF:Definition: Initialisiert die CMEM für den Server.
+%%UMSETZUNG:Entspricht dem Entwurf.
 initCMEM(RemTime,_) ->
 	{RemTime,[]}.
 
+%%ENTWURF:Definition: Speichert/Aktualisiert im CMEM die ClientID mit der NNr.
+%%UMSETZUNG:Entspricht dem Entwurf.
 updateClient({RemTime,ClientList},ClientID,NNr,_) ->
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
-
+%%ENTWURF:Definition: Liefert dem Server die nächste Nachrichtennummer die an die ClientID geschickt
+%%werden soll.
+%%UMSETZUNG:Entspricht dem Entwurf.
 getClientNNr({RemTime,ClientList},ClientID) ->
 	WList=[{SavedID,NNr,TimeStamp} || {SavedID,NNr,TimeStamp} <- ClientList, SavedID == ClientID],
 	getClientNNr_(WList,RemTime).
 
+%%ENTWURF:Definition: In dieser Methode werden die Clients gelöscht, welche die Clientlifetime überschritten
+%%haben
+%%UMSETZUNG:Entspricht dem Entwurf.
 delExpiredCl({RemTime,ClientList},_) ->
 	{RemTime,[{ClientID,NNr,TimeStamp} || {ClientID,NNr,TimeStamp} <- ClientList, checkTime(RemTime,TimeStamp)]}.
 

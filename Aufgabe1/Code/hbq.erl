@@ -2,7 +2,9 @@
 -export ([start/0]).
 
 -define (LOG, werkzeug:to_String(erlang:node()) ++ ".log").
-
+%%ENTWURF:Definition: Startet einen neuen HBQ-Prozess, der die HBQ verwaltet und alleinigen Zugriff auf die
+%%DLQ besitzt
+%%UMSETZUNG:Entspricht dem Entwurf.
 start()->
 	{ok, ConfigListe} = file:consult("server.cfg"),
 	{ok,HBQname} = werkzeug:get_config_value(hbqname,ConfigListe),
@@ -15,6 +17,11 @@ start()->
  		loop(initHBQandDLQ(ServerPID,DLQlimit))
  end.
 
+%%ENTWURF:Definition: Die Hauptschleife der HBQ wartet auf Anfragen bzgl. des Servers. Direkt nach der
+%%Erstellung des HBQ-Prozesses, bekommt dieser die Anfrage: {ServerPID, {request,initHBQ}} vom
+%%Server
+%%UMSETZUNG:Entspricht dem Entwurf. Variable Queue wurde hinzugefügt um die Holdbackqueue und Deliveryqueue abzuspeichern.
+%%
 loop(Queue)->
  receive
  	{ServerPID, {request,pushHBQ,[NNr,Msg,TSclientout]}} ->
@@ -28,11 +35,16 @@ loop(Queue)->
  		dellHBQ(ServerPID)	
  end.
 
+%%ENTWURF:Definition: Initialisiert die HBQ und DLQ.
+%%UMSETZUNG:Entspricht dem Entwurf.
 initHBQandDLQ(ServerPID,Size)->
  HBQandDLQ = {[],dlq:initDLQ(Size,?LOG)},
  ServerPID ! {reply, ok},
  HBQandDLQ.
 
+%%ENTWURF:Definition: Fügt die Msg (Textzeile) mit Nummer (NNr) und dem Sende-Zeitstempel (TSclientout) in
+%%die alte HBQ ein. 
+%%UMSETZUNG:Entspricht dem Entwurf. 
 pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  Flag = dlq:expectedNr(DLQ) == NNr,
  werkzeug:logging(?LOG, werkzeug:to_String(NNr) ++ "te Nachricht angekommen. Erwartet wird: "++ werkzeug:to_String(dlq:expectedNr(DLQ)) ++" \n"),
@@ -56,14 +68,21 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  ServerPID ! {reply, ok},
  {NewNBQ,NewDLQ}.
 
-
+%%ENTWURF:Definition: Beauftragt die DLQ die Nachricht mit geforderter NNr an den Client (ToClient) zu
+%%senden.
+%%UMSETZUNG:Entspricht dem Entwurf. 
 deliverMSG(ServerPID, DLQ, NNr, ToClient)->
  SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,?LOG),
  ServerPID ! {reply,SendNNr}.
 
+%%ENTWURF:Definition: Terminiert den HBQ-Prozess und schickt dem Server die Nachricht {reply, ok}
+%%UMSETZUNG:Entspricht dem Entwurf.
 dellHBQ(ServerPID)->
  ServerPID ! {reply, ok}.
 
+%%ENTWURF: Prüft auf Nachrichten / Nachrichtenfolgen, die ohne eine Lücke zu bilden in die DLQ
+%%eingefügt werden können.
+%%UMSETZUNG:Entspricht dem Entwurf. Variablen ExNNr und NNr eingeführt um Prüfung zu erleichtern.
 pushSeries(HBQ, {Size,DLQList},ExNNr,NNr) when ExNNr == NNr ->
 	werkzeug:logging(?LOG, "Nachrichten aus HBQ können ohne Lücke in DLQ gespeichert werden \n"),
 	InList = pushSeries_findall(HBQ,NNr,[]),
