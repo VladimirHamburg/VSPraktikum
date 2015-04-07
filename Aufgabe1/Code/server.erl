@@ -93,7 +93,7 @@ terminateHBQ(HBQname, HBQnode) ->
 	log("wait for HBQ to respond..."),
 	receive 
 		{reply, ok} -> 
-			ok
+			log("HBQ shutdown received. GOODBYE!")
 	end.
 
 log(Msg) ->
