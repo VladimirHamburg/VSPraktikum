@@ -56,21 +56,36 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
+	case sendMessages_(ToClient, CMEM) of
+		nok ->
+			sendMessages_(ToClient, CMEM);
+		NewCMEM ->
+			NewCMEM
+	end.
+	%%receive
+		%%{reply, SendNNr} -> 
+			%%cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
+			%%ok
+		%%_ -> 
+			%%logErrorRet("Received bad response from HBQ deliverMSG")
+	%%end.
+sendMessages_(ToClient, CMEM) ->
 	receive
+		{reply, ok} -> 
+			nok;
 		{reply, SendNNr} -> 
-			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
-			ok;
-		_ -> 
-			logErrorRet("Received bad response from HBQ deliverMSG")
+			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log")
+		%%_ -> 
+			%%logErrorRet("Received bad response from HBQ deliverMSG")
 	end.
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
 		{reply, ok} ->
-			ok;
-		_ -> 
-			logErrorRet("Received bad response from HBQ pushHBQ")
+			ok
+		%%_ -> 
+			%%logErrorRet("Received bad response from HBQ pushHBQ")
 	end.
 
 sendMSGID(ClientPID, _, INNr) ->

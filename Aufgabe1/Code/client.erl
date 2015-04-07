@@ -40,6 +40,7 @@ loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,MsgNum,SendMsg) ->
 				false ->
 					loop(Lifetime, Servername, Servernode,Sendeintervall,Datei,0,SendMsg);
 				true ->
+					werkzeug:logging(Datei,"Keine neue Nachrichten! \n"),
 					loop(Lifetime, Servername, Servernode,changeSendInterval(Sendeintervall,Datei),Datei,5,SendMsg)
 			end;
 		1 ->

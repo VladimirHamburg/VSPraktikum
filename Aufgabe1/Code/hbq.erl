@@ -54,6 +54,8 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  		end
  	end,
  ServerPID ! {reply, ok},
+ {_,DLQIn} = NewDLQ,
+ werkzeug:logging("DLQSTATUS.log", "DLQ Größe: "++ werkzeug:to_String(length(DLQIn)) ++ "DLQ Inhalt: "++ werkzeug:to_String(DLQIn) ++"  \n"),
  {NewNBQ,NewDLQ}.
 
 
