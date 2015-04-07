@@ -29,7 +29,7 @@ loop(Queue)->
  end.
 
 initHBQandDLQ(ServerPID,Size)->
- HBQandDLQ = {[],dlq:initDLQ(Size,"DLQLog")},
+ HBQandDLQ = {[],dlq:initDLQ(Size,?LOG)},
  ServerPID ! {reply, ok},
  HBQandDLQ.
 
@@ -39,7 +39,7 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
  {NewNBQ,NewDLQ} = case Flag of
  	true ->
  		werkzeug:logging(?LOG, werkzeug:to_String(NNr) ++ " direkt in DLQ gespeichert. \n"), 
- 		{HBQ,dlq:push2DLQ([NNr, Msg,TSclientout,erlang:now()],DLQ,"DLQLog")};
+ 		{HBQ,dlq:push2DLQ([NNr, Msg,TSclientout,erlang:now()],DLQ,?LOG)};
  	false ->
  		Flag2 = dlq:expectedNr(DLQ) > NNr,
  		case Flag2 of
@@ -58,7 +58,7 @@ pushHBQ(ServerPID, {HBQ,DLQ}, [NNr, Msg,TSclientout]) ->
 
 
 deliverMSG(ServerPID, DLQ, NNr, ToClient)->
- SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,"DLQLog"),
+ SendNNr = dlq:deliverMSG(NNr,ToClient,DLQ,?LOG),
  ServerPID ! {reply,SendNNr}.
 
 dellHBQ(ServerPID)->
@@ -79,7 +79,7 @@ pushSeries(HBQ, {Size,DLQList},ExNNr,NNr) when length(HBQ) > Size*(2/3) ->
 	NewDLQ = pushSeries_DLQ([ErrMsg] ++ InList,{Size,DLQList}),
 	werkzeug:logging(?LOG, NewErrMsg ++"\n"),
 	{NewHBQ,NewDLQ};
-pushSeries(HBQ, DLQ,ExNNr,NNr) ->
+pushSeries(HBQ, DLQ,_,_) ->
 	{HBQ,DLQ}.
 
 %%%%%%%%%%%%Hielfsmethoden, nicht in der Dokumentation beschrieben.
@@ -98,5 +98,5 @@ pushSeries_DLQ([],DLQ) ->
 	DLQ;
 pushSeries_DLQ([H|T],DLQ) ->
 	[NNr,Msg,TSclientout,TShbqin] = H,
-	NewDLQ = dlq:push2DLQ([NNr, Msg,TSclientout,TShbqin],DLQ,"DLQLog"),
+	NewDLQ = dlq:push2DLQ([NNr, Msg,TSclientout,TShbqin],DLQ,?LOG),
 	pushSeries_DLQ(T,NewDLQ).

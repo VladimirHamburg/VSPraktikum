@@ -1,11 +1,10 @@
 -module (cmem).
 -export ([initCMEM/2,updateClient/4,getClientNNr/2,delExpiredCl/2]).
 
-initCMEM(RemTime,Datei) ->
+initCMEM(RemTime,_) ->
 	{RemTime,[]}.
 
-updateClient({RemTime,ClientList},ClientID,NNr,Datei) ->
-	io:fwrite(werkzeug:to_String(NNr) ++ "Hallo \n"),
+updateClient({RemTime,ClientList},ClientID,NNr,_) ->
 	{RemTime,updateClient_(ClientList,ClientID,NNr)}.
 
 
