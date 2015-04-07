@@ -56,8 +56,7 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
 	receive
 		{reply, SendNNr} -> 
-			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
-			ok
+			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log")
 	end.
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->

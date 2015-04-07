@@ -19,7 +19,7 @@ deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
 				true -> 
 					deliverMSG_(MSGNr, ClientPID, List, List, Datei);
 				false ->
-					{error, "MSGNr is greater than highest NNr!"}
+					ClientPID ! {reply,[MSGNr, "Nicht leere Dummy Nachricht", erlang:now(), erlang:now(), erlang:now(), erlang:now()], true},
 			end;
 		false ->
 			{error, "MSGNr can't be lower than 1!"}
@@ -43,7 +43,7 @@ makeEntry([NNr, Msg, TSclientout, TShbqin]) ->
 deliverMSG_(MSGNr, ClientPID, [], BuList, Datei) -> %% Nicht gefunden? Erneut suchen mit größerer nummer
 	deliverMSG_(MSGNr+1, ClientPID, BuList, BuList, Datei);
 deliverMSG_(MSGNr, ClientPID, [[NNr, Msg, TSclientout, TShbqin, TSdlqin]|_], BuList, Datei) when MSGNr == NNr ->
-	ClientPID ! {reply,[NNr, Msg, TSclientout, TShbqin, TSdlqin, erlang:now()], MSGNr < expectedNr_(BuList)-1},
+	ClientPID ! {reply,[NNr, Msg, TSclientout, TShbqin, TSdlqin, erlang:now()], MSGNr > expectedNr_(BuList)-1},
 	MSGNr;
 deliverMSG_(MSGNr, ClientPID, [_|Tail], BuList, Datei) ->
 	deliverMSG_(MSGNr, ClientPID, Tail, BuList, Datei).
