@@ -25,7 +25,7 @@ deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
 				true -> 
 					deliverMSG_(MSGNr, ClientPID, List, List, Datei);
 				false ->
-					log("DLQ sends "++werkzeug:to_String(MSGNr-1), Datei),
+					log("DLQ sends "++werkzeug:to_String(MSGNr-1) ++ "(dummy)", Datei),
 					ClientPID ! {reply,[MSGNr-1, "Nicht leere Dummy Nachricht", erlang:now(), erlang:now(), erlang:now(), erlang:now()], true},
 					MSGNr-1
 			end;
