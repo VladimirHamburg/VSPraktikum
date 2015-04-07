@@ -9,20 +9,18 @@ start() ->
 	registerServer(ServerName),
 	log("initialize CMEM..."),
 	CMEM = initCMEM(Clientlifetime, "cmem.log"),
-	case initHBQ(HBQname, HBQnode) of
-		ok ->
-			log("Server startup complete!"),
-			loop(Latency, 
-				Clientlifetime, 
-				ServerName, 
-				HBQname, 
-				HBQnode, 
-				DLQlimit, 
-				CMEM, 
-				werkzeug:reset_timer(null, Latency, stop),
-				1);
-		fail -> logErrorRet("Received bad response from initHBQ")
-	end.
+	initHBQ(HBQname, HBQnode),
+	log("Server startup complete!"),
+	loop(Latency, 
+		Clientlifetime, 
+		ServerName, 
+		HBQname, 
+		HBQnode, 
+		DLQlimit, 
+		CMEM, 
+		werkzeug:reset_timer(null, Latency, stop),
+		1).
+		
 
 readConfig() ->
 	ServerConfigFile = "server.cfg",
@@ -59,18 +57,14 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	receive
 		{reply, SendNNr} -> 
 			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log"),
-			ok;
-		_ -> 
-			logErrorRet("Received bad response from HBQ deliverMSG")
+			ok
 	end.
 
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
 		{reply, ok} ->
-			ok;
-		_ -> 
-			logErrorRet("Received bad response from HBQ pushHBQ")
+			ok
 	end.
 
 sendMSGID(ClientPID, _, INNr) ->
@@ -91,9 +85,7 @@ initHBQ(HBQname, HBQnode) ->
 	log("wait for HBQ to respond..."),
 	receive 
 		{reply, ok} -> 
-			ok;
-		_ -> 
-			fail
+			ok
 	end.
 
 terminateHBQ(HBQname, HBQnode) ->
@@ -102,9 +94,7 @@ terminateHBQ(HBQname, HBQnode) ->
 	log("wait for HBQ to respond..."),
 	receive 
 		{reply, ok} -> 
-			ok;
-		_ -> 
-			logErrorRet("Received bad response from dellHBQ")
+			ok
 	end.
 
 log(Msg) ->
