@@ -98,7 +98,3 @@ terminateHBQ(HBQname, HBQnode) ->
 
 log(Msg) ->
 	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Msg++"\n").
-
-logErrorRet(Reason) ->
-	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Reason++"\n"),
-	{error, Reason}.
