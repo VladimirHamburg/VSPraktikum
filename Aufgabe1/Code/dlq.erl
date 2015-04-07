@@ -19,7 +19,8 @@ deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
 				true -> 
 					deliverMSG_(MSGNr, ClientPID, List, List, Datei);
 				false ->
-					ClientPID ! {reply,[MSGNr, "Nicht leere Dummy Nachricht", erlang:now(), erlang:now(), erlang:now(), erlang:now()], true}
+					ClientPID ! {reply,[MSGNr-1, "Nicht leere Dummy Nachricht", erlang:now(), erlang:now(), erlang:now(), erlang:now()], true},
+					MSGNr-1
 			end;
 		false ->
 			{error, "MSGNr can't be lower than 1!"}
