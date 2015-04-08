@@ -1,13 +1,20 @@
 -module (dlq).
 -export ([initDLQ/2,expectedNr/1,push2DLQ/3,deliverMSG/4]).
 
+%%ENTWURF: Vom HBQ-Prozess aufgerufene Methode die eine neue leere DLQ-ADT zurückliefert.
+%%UMSETZUNG:Entspricht dem Entwurf.
 initDLQ(Size, Datei) ->
 	log("DLQ initialized", Datei),
 	{Size, []}.
 
+%%ENTWURF: Als nächstes zu speichernde Nachrichtennummer wird an HBQ-Prozess zurückgegeben.
+%%UMSETZUNG:Entspricht dem Entwurf.
 expectedNr({_,List}) ->
 	expectedNr_(List).
 
+%%ENTWURF:  Die von dem HBQ-Prozess kommende Nachricht im Format: 
+%%          [NNr, Msg, TSclientout,TShbqin] wird in die DLQ eingefügt
+%%UMSETZUNG: Wie Entwurf, nur das bei voller Liste der HEAD gelöscht wird
 push2DLQ(NewEntry, {Size,List}, Datei) when length(List) < Size ->
 	[MSGNr|_] = NewEntry,
 	log("DLQ adds "++werkzeug:to_String(MSGNr), Datei),
@@ -17,6 +24,8 @@ push2DLQ(NewEntry, {Size,[_|ListTail]}, Datei) ->
 	log("DLQ shifts "++werkzeug:to_String(MSGNr), Datei),
 	{Size, ListTail ++ makeEntry(NewEntry)}.
 
+%%ENTWURF:  Sendet die Nachricht mit der angegebenen Nummer an ClientPID
+%%UMSETZUNG: Wie in Entwurf, jedoch fehlte dort die Dummmy Nachricht
 deliverMSG(MSGNr, ClientPID, {_, List}, Datei) ->
 	log("DLQ should send "++werkzeug:to_String(MSGNr), Datei),
 	case MSGNr > 0 of

@@ -1,6 +1,9 @@
 -module (server).
 -export ([start/0]).
 
+%%ENTWURF: Startet einen neuen Server-Prozess, damit dieser im Verlauf 
+%%          Nachrichten erhalten kann
+%%UMSETZUNG: Wie in Entwurf
 start() ->
 	log("Server starting up..."),
 	log("reading config ..."),
@@ -21,7 +24,8 @@ start() ->
 		werkzeug:reset_timer(null, Latency, stop),
 		1).
 		
-
+%%ENTWURF: Liest die Server config aus
+%%UMSETZUNG: Wie in Entwurf
 readConfig() ->
 	ServerConfigFile = "server.cfg",
 	{ok, Config} = file:consult(ServerConfigFile),
@@ -33,6 +37,9 @@ readConfig() ->
 	{ok, DLQlimit} = werkzeug:get_config_value(dlqlimit,Config),
 	{Latency, Clientlifetime, ServerName, HBQname, HBQnode, DLQlimit}.
 
+%%ENTWURF: Server wartet auf Anfragen seitens des Clients
+%%UMSETZUNG: Wie in Entwurf, jedoch fehlt dort die Übergabe von Timer und 
+%%           die Übergabe der Laufvariable für MSGID
 loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Timer,INNr) ->
 	cmem:delExpiredCl(CMEM, Clientlifetime),
 	werkzeug:reset_timer(Timer, Latency, stop),
@@ -51,6 +58,8 @@ loop(Latency, Clientlifetime, Servername, HBQname, HBQnode, DLQlimit, CMEM, Time
 			terminateHBQ(HBQname, HBQnode)
 	end. 
 
+%% ENTWURF: Veranlasst den HBQ zum senden einer Nachrichtennummer an einen Client
+%% UMSETZUNG: Wie in Entwurf 
 sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 	NNr = cmem:getClientNNr(CMEM, ToClient),
 	{HBQname,HBQnode} ! {self(), {request, deliverMSG, NNr,ToClient}},
@@ -59,6 +68,8 @@ sendMessages(ToClient, CMEM, HBQname, HBQnode) ->
 			cmem:updateClient(CMEM, ToClient, SendNNr, "cmem.log")
 	end.
 
+%% ENTWURF: Veranlasst den HBQ eine Nachricht zu speichern
+%% UMSETZUNG: Wie in Entwurf
 dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 	{HBQname,HBQnode} ! {self(), {request, pushHBQ, [NNr,Msg,TSclientout]}},
 	receive 
@@ -66,6 +77,9 @@ dropmessage(HBQname, HBQnode, NNr, Msg, TSclientout) ->
 			ok
 	end.
 
+%% ENTWURF: Vergibt eine neu MSGID
+%% UMSETZUNG: Entwurf will eine nummer aus CMEM vergeben, dies ist falsch
+%%            Es wird die Zählvariable INNr versendet und incrementiert
 sendMSGID(ClientPID, _, INNr) ->
 	ClientPID ! {nid, INNr},
 	INNr+1.
