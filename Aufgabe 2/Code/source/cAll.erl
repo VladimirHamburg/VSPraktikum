@@ -1,0 +1,22 @@
+-module (cAll).
+-export ([c/0]).
+
+
+c() ->
+	c:cd("../source"),
+	{_, ListOfFiles} = file:list_dir("./"),
+	Work = [X|| X <- ListOfFiles, compileAll_(X)],
+	compileAll__(Work,true).
+
+compileAll_(String) ->
+	(".erl" == string:right(String,4)) and (String /= "cAll.erl").
+
+compileAll__([], Bool) ->
+	Bool;
+compileAll__([H|T], Bool) ->
+	case compile:file(H, {outdir,'../bin'}) of
+		{ok,_} ->
+			compileAll__(T, Bool and true);
+		_ ->
+			compileAll__(T, Bool and false)
+	end.
