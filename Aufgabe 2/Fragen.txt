@@ -1,0 +1,1 @@
+1. Wenn der Koodinator einem Pi zum ersten mal eine Mi zuweißt, informiert der Pi den Koodinator über sein neues Mi? 
