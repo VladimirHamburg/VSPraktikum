@@ -1,0 +1,8 @@
+Koordinator.erl:
+	loopInitialize():
+		Definition
+				Der Kram mit Mi verteilen fehlt noch! 
+			 Der Kram mit Ring aufbauen fehlt noch! (shuffle und versenden)
+			 Zitat aus Aufgabe: "Erst danach geht er in den Zustand bereit"
+		Return: 
+			Eigendlich void!
