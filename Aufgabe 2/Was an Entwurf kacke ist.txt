@@ -4,5 +4,6 @@ Koordinator.erl:
 				Der Kram mit Mi verteilen fehlt noch! 
 			 Der Kram mit Ring aufbauen fehlt noch! (shuffle und versenden)
 			 Zitat aus Aufgabe: "Erst danach geht er in den Zustand bereit"
+			 Kill fehlt hier noch
 		Return: 
 			Eigendlich void!

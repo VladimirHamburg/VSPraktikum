@@ -27,9 +27,9 @@ loopInitialize(KConfig,GGTs) ->
 				Starter ! { steeringval, ArbeitsZeit, TermZeit, Quote, GGTProzessNummer },
 				loopInitialize(KConfig, GGTs);
 		{hello, ClientName} ->
-			loopInitialize(KConfig, [] ++ ClientName);
+			loopInitialize(KConfig, [] ++ [{ClientName, 0}]);
 		toggle ->
-			loopInitialize(toggleKorrigieren(KConfig), GGTs);
+			loopInitialize(toggleSet(KConfig), GGTs);
 		step ->
 			log("step received. Initialisation ended. Building ring..."),
 			buildRing(KConfig, GGTs),
@@ -43,16 +43,40 @@ loopInitialize(KConfig,GGTs) ->
 			end;
 		_ ->
 			log("unknown message. ignored."),
-			loopInitialize(KConfig, GGTs);
+			loopInitialize(KConfig, GGTs)
 	end.
 
 
 loopReady(KConfig,GGTs) ->
-	nope.
+	receive
+		{briefmi,{ClientName,CMi,CZeit}} ->
+			updateGGTMiHere,
+			loopReady(KConfig,GGTs);	
+		reset ->
+			sendKillToAllGGTsHere,
+			true;
+		prompt ->
+			getAllMisAndShowHere,
+			loopReady(KConfig,GGTs);
+		nudge ->
+			pingAllGGTsAndShowHere
+			loopReady(KConfig,GGTs);
+		toggle ->
+			loopReady(toggleSet(KConfig), GGTs);
+		{calc,WggT} ->
+			startNewCalcHere,
+			loopReady(KConfig,GGTs);
+		kill ->
+			sendKillToAllGGTsHere,
+			false;
+		_ ->
+			log("unknown message. ignored."),
+			loopReady(KConfig, GGTs)
+	end.
 
 %% Hilfsfunktionen die vom Entwurf nicht abgedeckt wurden
 
-toggleKorrigieren(KConfig) ->
+toggleSet(KConfig) ->
 	{ArbeitsZeit, TermZeit, GGTProzessNummer, NameServiceNode, NameServiceName, KoordinatorName, Quote, Korrigieren} = KConfig,
 	case Korrigieren of
 		0 ->
@@ -75,11 +99,28 @@ toggleKorrigieren(KConfig) ->
 						0})
 	end.
 
-buildRing(KConfig, GGTs) ->
-	werkzeug:shuffle(GGTs).
-	%% TODO: SEND HERE?!
+buildRing(GGTs) ->
+	werkzeug:shuffle(GGTs),
+	setNeighbors(GGTs, 0).
 
+setNeighbors(GGTs, 0) ->
+	LeftN = nth0(last(GGTs)), GGTs),
+	RightN = nth0(1, GGTs),
+	{GGT,_} = nth0(0, GGTs),
+	GGT ! {setneighbors,LeftN,RightN},
+	setNeighbors(GGTs, 1).
 
+setNeighbors(GGTs, Pos) ->
+	LeftN = nth0(Pos-1, GGTs),
+	RightN = nth0(Pos rem length(GGTs), GGTs),
+	{GGT,_} = nth0(Pos, GGTs),
+	GGT ! {setneighbors,LeftN,RightN},
+	case length(GGTs)-1 == Pos of
+		true ->
+			ok;
+		false ->
+			setNeighbors(GGTs, Pos+1)
+	end.
 
 log(Msg) ->
 	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Msg++"\n").
