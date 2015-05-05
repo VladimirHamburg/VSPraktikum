@@ -45,18 +45,27 @@ loopInitialize(KConfig,GGTs) ->
 		{hello, ClientName} ->
 			loopInitialize(KConfig, [] ++ [{ClientName, 0, 0}]);
 		toggle ->
+			log("toggle received..."),
 			loopInitialize(toggleSet(KConfig), GGTs);
 		step ->
-			log("step received. Initialisation ended. Building ring..."),
-			buildRing(GGTs),
-			log("Ring set up. Ready!"),
-			DoRepeat = loopReady(KConfig, GGTs),
-			case DoRepeat of 
-				true ->
-					loopInitialize(KConfig, []);
+			case length(GGTs) < 2 of
+				true -> 
+					log("step received. not enough workers. Command ignored."),
+					loopInitialize(KConfig, GGTs);
 				false ->
-					log("shutdown...")
+					log("step received. Initialisation ended. Building ring..."),
+					buildRing(GGTs),
+					log("Ring set up. Ready!"),
+					DoRepeat = loopReady(KConfig, GGTs),
+					case DoRepeat of 
+						true ->
+							loopInitialize(KConfig, []);
+						false ->
+							log("shutdown...")
+					end
 			end;
+		kill ->
+			log("kill received. bye!");
 		_ ->
 			log("unknown message. ignored."),
 			loopInitialize(KConfig, GGTs)
