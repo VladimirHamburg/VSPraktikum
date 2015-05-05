@@ -1,3 +1,7 @@
 Nameservice Startzeit: 02.05 21:32:49,274| mit PID <0.40.0> registriert mit Namen nameservice.
 reset um 02.05 21:49:58,513| von <7244.38.0>.
 Nameservice Startzeit: 04.05 23:19:11,194| mit PID <0.41.0> registriert mit Namen nameservice.
+Nameservice Startzeit: 05.05 10:24:21,790| mit PID <0.42.0> registriert mit Namen nameservice.
+lookup um 05.05 10:25:03,585| von <7276.51.0>:not_found:chef.
+lookup um 05.05 10:26:41,508| von <7276.51.0>:not_found:chef.
+lookup um 05.05 10:27:20,555| von <7276.38.0>:not_found:chef.
