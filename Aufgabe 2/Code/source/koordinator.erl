@@ -5,6 +5,9 @@ start() ->
 	log("Koordinator starting up..."),
 	log("reading config ..."),
 	KConfig = readConfig(),
+	{_, _, _, _, _, KoordinatorName, _, _},
+	register(KoordinatorName, self()),
+
 	loopInitialize(KConfig,[]).
 
 readConfig() ->
@@ -27,7 +30,7 @@ loopInitialize(KConfig,GGTs) ->
 				Starter ! { steeringval, ArbeitsZeit, TermZeit, Quote, GGTProzessNummer },
 				loopInitialize(KConfig, GGTs);
 		{hello, ClientName} ->
-			loopInitialize(KConfig, [] ++ [{ClientName, 0}]);
+			loopInitialize(KConfig, [] ++ [{ClientName, 0, 0}]);
 		toggle ->
 			loopInitialize(toggleSet(KConfig), GGTs);
 		step ->
@@ -50,25 +53,29 @@ loopInitialize(KConfig,GGTs) ->
 loopReady(KConfig,GGTs) ->
 	receive
 		{briefmi,{ClientName,CMi,CZeit}} ->
-			updateGGTMiHere,
-			loopReady(KConfig,GGTs);	
+			GGTsNeu = updateGGT(GGTs, ClientName, CMi, CZeit),
+			loopReady(KConfig,GGTsNeu);	
 		reset ->
-			sendKillToAllGGTsHere,
+			sendKill(GGTs),
 			true;
 		prompt ->
-			getAllMisAndShowHere,
+			getAllMis(GGTs),
 			loopReady(KConfig,GGTs);
 		nudge ->
-			pingAllGGTsAndShowHere
+			pingGGTs(GGTs)
 			loopReady(KConfig,GGTs);
 		toggle ->
 			loopReady(toggleSet(KConfig), GGTs);
 		{calc,WggT} ->
-			startNewCalcHere,
+			Mis = werkzeug:bestimme_mis(WggT, length(GGTs)),
+			setAllMis(GGTs, Mis),
+			dispatch20Percent(WggT, GGTs, Mis),
 			loopReady(KConfig,GGTs);
 		kill ->
-			sendKillToAllGGTsHere,
+			sendKill(GGTs),
 			false;
+		{pongGGT, GGTname} ->
+			log("Received pong from " ++ GGTname);
 		_ ->
 			log("unknown message. ignored."),
 			loopReady(KConfig, GGTs)
@@ -103,17 +110,47 @@ buildRing(GGTs) ->
 	werkzeug:shuffle(GGTs),
 	setNeighbors(GGTs, 0).
 
+updateGGT([],_,_,_) ->
+	[].
+updateGGT([GGT|Tail],GGTName, CMi, CZeit) ->
+	case GGT == GGTName of
+		true ->
+			[{GGTName, CMi, CZeit}] ++ updateGGT(Tail);
+		false ->
+			[GGT] ++ updateGGT(Tail);
+	end.
+
+setAllMis([], _) ->
+	ok.
+setAllMis([{GGT,_,_}|GGTsTail], [MiNeu|MisTail]) ->
+	GGT ! {setpm, MiNeu},
+	setAllMis(GGTsTail, MisTail).
+
+dispatch20Percent(WggT, GGTs) ->
+	werkzeug:shuffle(GGTs),	
+	GGTCount = max(int_ceil(length(GGTs) * 0.2), 2),
+	SelectedGGTs = lists:sublist(GGTs, 1, GGTCount),
+	SelectedMis = werkzeug:bestimme_mis(WggT, length(SelectedGGTs))
+	dispatchGGT(SelectedGGTs, SelectedMis).
+
+dispatchGGT(_,[]) ->
+	ok.
+dispatchGGT([{GGT,_,_}|GGTsTail], [MiNeu|MisTail]) ->
+	GGT ! {sendy, MiNeu},
+	dispatchGGT(GGTsTail, MisTail).
+
+
 setNeighbors(GGTs, 0) ->
 	LeftN = nth0(last(GGTs)), GGTs),
 	RightN = nth0(1, GGTs),
-	{GGT,_} = nth0(0, GGTs),
+	{GGT,_,_} = nth0(0, GGTs),
 	GGT ! {setneighbors,LeftN,RightN},
 	setNeighbors(GGTs, 1).
 
 setNeighbors(GGTs, Pos) ->
 	LeftN = nth0(Pos-1, GGTs),
 	RightN = nth0(Pos rem length(GGTs), GGTs),
-	{GGT,_} = nth0(Pos, GGTs),
+	{GGT,_,_} = nth0(Pos, GGTs),
 	GGT ! {setneighbors,LeftN,RightN},
 	case length(GGTs)-1 == Pos of
 		true ->
@@ -122,5 +159,40 @@ setNeighbors(GGTs, Pos) ->
 			setNeighbors(GGTs, Pos+1)
 	end.
 
+sendKill([]) ->
+	ok.
+sendKill([{GGT,_,_}|Tail]) ->
+	GGT ! kill,
+	sendKill(Tail).
+
+pingGGTs([]) ->
+	ok.
+pingGGTs([{GGT,_,_}|Tail]) ->
+	GGT ! {self(), pingGGT},
+	pingGGTs(Tail).
+
+getAllMis([]) ->
+	ok.
+getAllMis([{GGT,_,_}|Tail]) ->
+	GGT ! {self(),tellmi},
+	getAllMis(Tail).
+
+registerByNS(Nameservice,ID) ->
+	Nameservice ! {self(), {rebind, ID, node()}},
+	receive
+		ok ->
+			ok;
+		kill ->
+			kill(Nameservice,ID)
+	end.
+
+int_ceil(X) ->
+    T = trunc(X),
+    case (X - T) of
+        Neg when Neg < 0 -> T;
+        Pos when Pos > 0 -> T + 1;
+        _ -> T
+    end.	
+
 log(Msg) ->
-	werkzeug:logging(werkzeug:to_String(erlang:node())++".log", Msg++"\n").
+	werkzeug:logging(werkzeug:to_String(node())++".log", Msg++"\n").
