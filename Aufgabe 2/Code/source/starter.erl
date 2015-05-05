@@ -40,7 +40,7 @@ askForCoord(Nameservice,Coordinator) ->
 startGGTs(_,_,_,_,_,_,_,0) ->
 	ok;
 startGGTs(NameserviceName,Coordinator,{PrGr,Team,IDggT,StarterID},WorkTime,Quota,TermTime,ID, GGTProzessnummer) ->
-	erlang:spawn(ggt, start, [NameserviceName,Coordinator,{PrGr,Team,ID,StarterID},WorkTime,Quota,TermTime,ID]),
+	erlang:spawn(ggT, start, [NameserviceName,Coordinator,{PrGr,Team,ID,StarterID},WorkTime,Quota,TermTime,ID]),
 	startGGTs(NameserviceName,Coordinator,{PrGr,Team,IDggT+1,StarterID},WorkTime,Quota,TermTime,erlang:list_to_atom(lists:concat([PrGr,Team,IDggT+1,StarterID])), GGTProzessnummer-1).
 
 log(Message) ->
