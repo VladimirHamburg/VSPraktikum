@@ -72,6 +72,7 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 			From ! {mi,Mi},
 			loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 		{From,pingGGT} ->
+			log(ID, "Ping received... sending pong!"),
 			From ! {pongGGT, ID},
 			loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 		vote ->
