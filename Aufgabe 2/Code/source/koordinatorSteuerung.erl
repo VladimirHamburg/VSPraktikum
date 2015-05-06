@@ -17,9 +17,10 @@ run(Koordinator) ->
 		exit ->
 			ok;
 		calc ->
-			{ok, InputVar} = io:get_line("var:"),
+			InputVar = io:get_line("var:"),
 			[InputVarClean|_] = string:tokens(InputVar, "\n"),
-			Koordinator ! {calc, erlang:list_to_integer(InputVarClean)};
+			Koordinator ! {calc, erlang:list_to_integer(InputVarClean)},
+			run(Koordinator);
 		_ ->
 			Koordinator ! Atom,
 			run(Koordinator)

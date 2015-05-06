@@ -39,11 +39,13 @@ readConfig() ->
 loopInitialize(KConfig,GGTs) ->
 	{ArbeitsZeit, TermZeit, GGTProzessNummer, _, _, _, Quote, _} = KConfig,
 	receive 
-		{Starter, getsteeringval} -> 				
+		{Starter, getsteeringval} ->
+				log("Send config to starter"), 				
 				Starter ! { steeringval, ArbeitsZeit, TermZeit, Quote, GGTProzessNummer },
 				loopInitialize(KConfig, GGTs);
 		{hello, ClientName} ->
-			loopInitialize(KConfig, [] ++ [{ClientName, 0, 0}]);
+			log("Added new worker..."),
+			loopInitialize(KConfig, GGTs ++ [{ClientName, 0, 0}]);
 		toggle ->
 			log("toggle received..."),
 			loopInitialize(toggleSet(KConfig), GGTs);
@@ -83,7 +85,7 @@ loopReady(KConfig,GGTs) ->
 				0 ->
 					log("Received final result: " ++ CMi);
 				1 ->
-					{_,FirstMi,_} = erlang:nth0(0, GGTs),
+					{_,FirstMi,_} = nth0(0, GGTs),
 					SmalllestGGT = getSmallestGGT(GGTs, FirstMi),
 					case CMi > SmalllestGGT of
 						true -> 
@@ -154,15 +156,15 @@ buildRing(GGTs) ->
 	setNeighbors(GGTs, 0).
 
 setNeighbors(GGTs, 0) ->
-	LeftN = erlang:nth0(lists:last(GGTs), GGTs),
-	RightN = erlang:nth0(1, GGTs),
-	{GGT,_,_} = erlang:nth0(0, GGTs),
+	LeftN = lists:last(GGTs), GGTs,
+	RightN = nth0(1, GGTs),
+	{GGT,_,_} = nth0(0, GGTs),
 	GGT ! {setneighbors,LeftN,RightN},
 	setNeighbors(GGTs, 1);
 setNeighbors(GGTs, Pos) ->
-	LeftN = erlang:nth0(Pos-1, GGTs),
-	RightN = erlang:nth0(Pos rem length(GGTs), GGTs),
-	{GGT,_,_} = erlang:nth0(Pos, GGTs),
+	LeftN = nth0(Pos-1, GGTs),
+	RightN = nth0(Pos rem length(GGTs), GGTs),
+	{GGT,_,_} = nth0(Pos, GGTs),
 	GGT ! {setneighbors,LeftN,RightN},
 	case length(GGTs)-1 == Pos of
 		true ->
@@ -248,7 +250,10 @@ int_ceil(X) ->
         Neg when Neg < 0 -> T;
         Pos when Pos > 0 -> T + 1;
         _ -> T
-    end.	
+    end.
+
+nth0(Index, List) ->
+	lists:nth(Index+1, List). 
 
 log(Msg) ->
 	werkzeug:logging(werkzeug:to_String(node())++".log", Msg++"\n").
