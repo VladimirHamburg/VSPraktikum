@@ -35,15 +35,18 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer) ->
 	receive
 		{setpm,MiNeu} ->
-			werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
+			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			log(ID, t_s(ID) ++ "Mi wurde neu gesetzt: " ++ t_s(MiNeu)),
-			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,Timer);
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
 		{sendy,Y} ->
-			werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
+			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			MiNeu = calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime),
-			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,Timer);
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
 		{From,{vote,Initiator}} ->
 			case VoteFlag of
+				3 ->
+					From ! {voteYes,ID},
+					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 				1 ->
 					From ! {voteYes,ID},
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
@@ -61,8 +64,8 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 				1 ->
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,2,Quota,Timer);
 				0 ->
-					werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
-					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,1,Quota,Timer)
+					TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
+					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,1,Quota,TimerNew)
 			end;			
 		kill ->
 			kill(Nameservice,ID)
@@ -72,7 +75,7 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) when Quota == YesQuota ->
 	Coordinator ! {erlang:self(),briefterm,{ID,Mi,werkzeug:timeMilliSecond()}},
 	log(ID, t_s(ID) ++ " ABSTIMMUNG ERFOLGREICH"),
-	loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,0,Quota,Timer);
+	loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,3,Quota,Timer);
 vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) ->
 	receive
 		{voteYes, CName} ->
