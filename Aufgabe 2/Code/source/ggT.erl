@@ -9,10 +9,12 @@ start(NameserviceName,Coordinator,{PrGr,Team,IDggT,StarterID},WorkTime,Quota,Ter
 	%%Registriert sich an der Erlang-Node.
 	erlang:register(ID, erlang:self()),
 	%%Registriert sich beim Nameservice.
+	%%Sequenzdiagramm: 3
 	registerByNS(Nameservice,ID),
 	log(ID, t_s(ID) ++ "beim Namensdienst und auf Node lokal registriert."),
 	%%Meldet sich beim Koordinator
 	CoordinatorContacts = askForCoord(Nameservice,Coordinator,ID),
+	%%Sequenzdiagramm: 4
 	registerByCoor(CoordinatorContacts,ID),
 	log(ID, t_s(ID) ++ "beim Koordinator gemeldet."),
 	%%Wartet auf die Setzung der Namchbarn
@@ -28,26 +30,39 @@ start(NameserviceName,Coordinator,{PrGr,Team,IDggT,StarterID},WorkTime,Quota,Ter
 %%Alle Methoden ab hier wurden im Entwurf vorgegebn.
 
 %%%% loop()
+%%Kommt es zum Timeout wird die Methode vote() aufgerufen. 
+%%Der ggT-Prozess übergeht in den Vote-Modus.
 loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,2,Quota,Timer)  ->
+	%%Startet über multicast ein Voting({From,{multicast,vote,meinname}}).
+	%%Sequenzdiagramm: 9
 	Nameservice ! {erlang:self(),{multicast,vote,ID}},
 	log(ID, t_s(ID) ++ "Zeit abgelaufen! ABSTIMMUNG!"),
 	vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,0,Quota,Timer, 0);
+%%Der ggT-Prozess erwartet {sendy,Y}, wobei Y der Mi-Wert von anderem Prozess ist. 
+%%Erhält er diesen, so wird die Berechnung ausgeführt(calc(Y,Mi)). Entsprechend dem Ergebnis wird eine Nachricht an die Nachbarn gesendet ({sendy,Y}) und der Koordinator informiert({briefmi,{Clientname,CMi,CZeit}}).
 loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer) ->
 	receive
 		{setpm,MiNeu} ->
+			%%Timeout zurücksetzen
 			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			log(ID, t_s(ID) ++ "Mi wurde neu gesetzt: " ++ t_s(MiNeu)),
 			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
+		%%Sequenzdiagramm: 8
 		{sendy,Y} ->
+			%%Timeout zurücksetzen
 			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			MiNeu = calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime),
 			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
+		%%Sequenzdiagramm: 10
 		{From,{vote,Initiator}} ->
 			case VoteFlag of
+				%%Erhält der ggT-Prozess eine {From,{vote,Initiator}} guckt er 
+				%%nach ob die hälfte des Timeout-Zeit vergangen ist. Ist das der Fall, antwortet er mit {voteYes, Name}. Sonst nichts.
 				3 ->
 					From ! {voteYes,ID},
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 				1 ->
+					%%Sequenzdiagramm: 11
 					From ! {voteYes,ID},
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 				_ ->
@@ -72,11 +87,14 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 	end.
 
 %%%% vote()
+%%Wird die benötigte Quote erreicht, benachrichtigt 
+%%den Koordinator({From,briefterm,{Clientname,CMi,CZeit}}).
 vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) when Quota == YesQuota ->
 	Coordinator ! {erlang:self(),briefterm,{ID,Mi,werkzeug:timeMilliSecond()}},
 	log(ID, t_s(ID) ++ " ABSTIMMUNG ERFOLGREICH"),
 	loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,3,Quota,Timer);
 vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) ->
+	%%Wartet auf die Antworten({voteYes,Name}).
 	receive
 		{voteYes, CName} ->
 			log(ID, "ABSTIMMUNG bei " ++ t_s(ID) ++ ":" ++ t_s(CName) ++ ": stimmt ab  mit >JA<! Quota bei " ++ t_s(YesQuota+1) ++ " UM:" ++ t_s(werkzeug:timeMilliSecond())),
@@ -95,6 +113,7 @@ kill(Nameservice,ID) ->
 	erlang:exit(erlang:self(),normal).
 %%HILFSMETHODEN%%
 
+%%Der ggT-Prozess registriert sich von Namensdienst({From,{unbind,meindienst}}) und Erlang-Node(unregister(Name)) ab.
 askForCoord(Nameservice,Coordinator,ID) ->
 	Nameservice ! {erlang:self() ,{lookup,Coordinator}},
 	receive
@@ -150,6 +169,8 @@ registerByCoor(CoordinatorContacts,ID) ->
 calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime) ->
 	log(ID, "Y erhalten: " ++ t_s(Y)),
 	NewMi = calc(Y,Mi),
+	%%Um die Berechnung zu simulieren wird nach 
+	%%der Erhalt von sendy eine bestimmte Zeit abgewartet.
 	timer:sleep(WorkTime),
 	case NewMi of
 		noop ->
