@@ -16,6 +16,7 @@ start(Nr) ->
 	Coordinator ! {erlang:self(),getsteeringval},
 	receive
 		{steeringval,WorkTime,TermTime,Quota,GGTProzessnummer} ->
+			log("Arbeitszeit: " ++ t_s(WorkTime) ++ " Terminierungszeit: " ++ t_s(TermTime) ++ " Quota: " ++ t_s(Quota) ++ " Anzahl: " ++ t_s(GGTProzessnummer)),
 			startGGTs(Nameservicename,Koordinatorname,{Praktikumsgruppe,Teamnummer,0,Nr},WorkTime,Quota,TermTime,erlang:list_to_atom(lists:concat([Praktikumsgruppe,Teamnummer,0,Nr])), GGTProzessnummer)
 	end.
 

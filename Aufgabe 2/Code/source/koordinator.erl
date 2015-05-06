@@ -17,7 +17,7 @@ start() ->
 	case Flag of
 		ok ->
 			log("entering initialisation state..."),
-			loopInitialize(KConfig, NameService, []);
+			loopInitialize(KConfig, NameService, [], 1);
 		false ->
 			fail
 	end.
@@ -36,25 +36,25 @@ readConfig() ->
 	{ok, Korrigieren} = werkzeug:get_config_value(korrigieren,Config),
 	{ArbeitsZeit, TermZeit, GGTProzessNummer, NameServiceNode, NameServiceName, KoordinatorName, Quote, Korrigieren}.
 
-loopInitialize(KConfig, NameService, GGTs) ->
+loopInitialize(KConfig, NameService, GGTs, NumStarters) ->
 	{ArbeitsZeit, TermZeit, GGTProzessNummer, _, _, _, Quote, _} = KConfig,
 	receive 
 		{Starter, getsteeringval} ->
-				AbsQuota = trunc(Quote/100*GGTProzessNummer),
+				AbsQuota = trunc(Quote/100*GGTProzessNummer*NumStarters),
 				log("Send config to starter with quota: " ++ werkzeug:to_String(AbsQuota)), 				
 				Starter ! { steeringval, ArbeitsZeit, TermZeit, AbsQuota, GGTProzessNummer },
-				loopInitialize(KConfig, NameService, GGTs);
+				loopInitialize(KConfig, NameService, GGTs, NumStarters+1);
 		{hello, ClientName} ->
 			log("Added new worker..."),
-			loopInitialize(KConfig, NameService, GGTs ++ [{ClientName, 0, 0}]);
+			loopInitialize(KConfig, NameService, GGTs ++ [{ClientName, 0, 0}], NumStarters);
 		toggle ->
 			log("toggle received..."),
-			loopInitialize(toggleSet(KConfig), NameService, GGTs);
+			loopInitialize(toggleSet(KConfig), NameService, GGTs, NumStarters);
 		step ->
 			case length(GGTs) < 2 of
 				true -> 
 					log("step received. not enough workers. Command ignored."),
-					loopInitialize(KConfig, NameService, GGTs);
+					loopInitialize(KConfig, NameService, GGTs, NumStarters);
 				false ->
 					log("step received. Initialisation ended. Building ring..."),
 					buildRing(NameService, GGTs),
@@ -62,16 +62,17 @@ loopInitialize(KConfig, NameService, GGTs) ->
 					DoRepeat = loopReady(KConfig, NameService, GGTs),
 					case DoRepeat of 
 						true ->
-							loopInitialize(KConfig, NameService, []);
+							loopInitialize(KConfig, NameService, [], NumStarters);
 						false ->
 							log("shutdown...")
 					end
 			end;
 		kill ->
+			sendKill(NameService, GGTs),
 			log("kill received. bye!");
 		_ ->
 			log("unknown message. ignored."),
-			loopInitialize(KConfig, NameService, GGTs)
+			loopInitialize(KConfig, NameService, GGTs, NumStarters)
 	end.
 
 
@@ -112,6 +113,7 @@ loopReady(KConfig, NameService, GGTs) ->
 			pingGGTs(NameService, GGTs),
 			loopReady(KConfig, NameService, GGTs);
 		toggle ->
+			log("Received toggle command"),
 			loopReady(toggleSet(KConfig), NameService, GGTs);
 		{calc,WggT} ->
 			log("Start new calc with Wggt: " ++  werkzeug:to_String(WggT)),
@@ -125,6 +127,9 @@ loopReady(KConfig, NameService, GGTs) ->
 		{pongGGT, GGTname} ->
 			log("Received pong from " ++ werkzeug:to_String(GGTname)),
 			loopReady(KConfig, NameService, GGTs);
+		{mi,Mi} ->
+			log("TellMi: Received Mi " ++ werkzeug:to_String(Mi)),
+			loopReady(KConfig, NameService, GGTs);			
 		_ ->
 			log("unknown message. ignored."),
 			loopReady(KConfig, NameService, GGTs)
