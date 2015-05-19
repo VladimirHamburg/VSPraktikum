@@ -2,3 +2,7 @@ Aufgabe1/Code/CLIENT.log
 *.db
 *.log
 *.cfg
+/Aufgabe 3/Implementation/Aufgabe3/nbproject/private/
+/Aufgabe 3/Implementation/Aufgabe3/build/
+/Aufgabe 3/Implementation/NameService/nbproject/private/
+/Aufgabe 3/Implementation/accessor_two/nbproject/private/
