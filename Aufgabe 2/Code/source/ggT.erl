@@ -25,19 +25,19 @@ start(NameserviceName,Coordinator,{PrGr,Team,IDggT,StarterID},WorkTime,Quota,Ter
 	%%Wartet auf initialen Mi-Wert
 	Mi = waitForMi(Nameservice,ID),
 	log(ID, t_s(ID) ++ "Mi " ++ t_s(Mi) ++ " bekommen."),
-	loop(Mi, ID, Nameservice, CoordinatorContacts, {LeftN,RightN}, {PrGr,Team,ID,StarterID}, WorkTime,TermTime,"LogFile",0,Quota,werkzeug:reset_timer(ID, trunc(TermTime/2), vote)).
+	loop(Mi, ID, Nameservice, CoordinatorContacts, {LeftN,RightN}, {PrGr,Team,IDggT,StarterID}, WorkTime,TermTime,"LogFile",noTime,Quota,werkzeug:reset_timer(ID, trunc(TermTime/2), vote)).
 
 %%Alle Methoden ab hier wurden im Entwurf vorgegebn.
 
 %%%% loop()
 %%Kommt es zum Timeout wird die Methode vote() aufgerufen. 
 %%Der ggT-Prozess übergeht in den Vote-Modus.
-loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,2,Quota,Timer)  ->
+loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,endTime,Quota,Timer)  ->
 	%%Startet über multicast ein Voting({From,{multicast,vote,meinname}}).
 	%%Sequenzdiagramm: 9
 	Nameservice ! {erlang:self(),{multicast,vote,ID}},
 	log(ID, t_s(ID) ++ "Zeit abgelaufen! ABSTIMMUNG!"),
-	vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,0,Quota,Timer, 0);
+	vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,noTime,Quota,Timer, 0);
 %%Der ggT-Prozess erwartet {sendy,Y}, wobei Y der Mi-Wert von anderem Prozess ist. 
 %%Erhält er diesen, so wird die Berechnung ausgeführt(calc(Y,Mi)). Entsprechend dem Ergebnis wird eine Nachricht an die Nachbarn gesendet ({sendy,Y}) und der Koordinator informiert({briefmi,{Clientname,CMi,CZeit}}).
 loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer) ->
@@ -46,28 +46,31 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 			%%Timeout zurücksetzen
 			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			log(ID, t_s(ID) ++ "Mi wurde neu gesetzt: " ++ t_s(MiNeu)),
-			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,noTime,Quota,TimerNew);
 		%%Sequenzdiagramm: 8
 		{sendy,Y} ->
 			%%Timeout zurücksetzen
 			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
 			MiNeu = calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime),
-			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,0,Quota,TimerNew);
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,noTime,Quota,TimerNew);
 		%%Sequenzdiagramm: 10
 		{From,{vote,Initiator}} ->
+			log(ID, "vote-Anfrage vom " ++ t_s(Initiator)),
 			case VoteFlag of
 				%%Erhält der ggT-Prozess eine {From,{vote,Initiator}} guckt er 
 				%%nach ob die hälfte des Timeout-Zeit vergangen ist. Ist das der Fall, antwortet er mit {voteYes, Name}. Sonst nichts.
-				3 ->
+				termTime ->
 					From ! {voteYes,ID},
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
-				1 ->
+				halfTime ->
 					%%Sequenzdiagramm: 11
 					From ! {voteYes,ID},
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 				_ ->
 					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer)
 			end;
+		{voteYes, _} ->
+			loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 		{From,tellmi} ->
 			From ! {mi,Mi},
 			loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
@@ -76,11 +79,13 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 			loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,VoteFlag,Quota,Timer);
 		vote ->
 			case VoteFlag of
-				1 ->
-					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,2,Quota,Timer);
-				0 ->
+				halfTime ->
+					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,endTime,Quota,Timer);
+				noTime ->
 					TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
-					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,1,Quota,TimerNew)
+					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,halfTime,Quota,TimerNew);
+				termTime ->
+					loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,termTime,Quota,Timer)
 			end;			
 		kill ->
 			kill(Nameservice,ID)
@@ -89,10 +94,10 @@ loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 %%%% vote()
 %%Wird die benötigte Quote erreicht, benachrichtigt 
 %%den Koordinator({From,briefterm,{Clientname,CMi,CZeit}}).
-vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) when Quota == YesQuota ->
+vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,_,Quota,Timer, YesQuota) when Quota == YesQuota ->
 	Coordinator ! {erlang:self(),briefterm,{ID,Mi,werkzeug:timeMilliSecond()}},
 	log(ID, t_s(ID) ++ " ABSTIMMUNG ERFOLGREICH"),
-	loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,3,Quota,Timer);
+	loop(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,termTime,Quota,Timer);
 vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota) ->
 	%%Wartet auf die Antworten({voteYes,Name}).
 	receive
@@ -100,8 +105,26 @@ vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFi
 			log(ID, "ABSTIMMUNG bei " ++ t_s(ID) ++ ":" ++ t_s(CName) ++ ": stimmt ab  mit >JA<! Quota bei " ++ t_s(YesQuota+1) ++ " UM:" ++ t_s(werkzeug:timeMilliSecond())),
 			vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota+1);
 		{From,{vote,Initiator}} ->
+			log(ID, "vote-Anfrage vom " ++ t_s(Initiator)),
 			From ! {voteYes, ID},
 			vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota);
+		{setpm,MiNeu} ->
+			%%Timeout zurücksetzen
+			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
+			log(ID, t_s(ID) ++ "Mi wurde neu gesetzt: " ++ t_s(MiNeu)),
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,noTime,Quota,TimerNew);
+		{From,tellmi} ->
+			From ! {mi,Mi},
+			vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota);
+		{From,pingGGT} ->
+			From ! {pongGGT, ID},
+			vote(Mi, ID, Nameservice, Coordinator, NBors, AllIDData, WorkTime,TermTime,LogFile,VoteFlag,Quota,Timer, YesQuota);
+		%%Sequenzdiagramm: 8
+		{sendy,Y} ->
+			%%Timeout zurücksetzen
+			TimerNew = werkzeug:reset_timer(Timer, trunc(TermTime/2), vote),
+			MiNeu = calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime),
+			loop(MiNeu, ID, Nameservice, Coordinator, NBors, AllIDData,WorkTime, TermTime,LogFile,noTime,Quota,TimerNew);
 		kill ->
 			kill(Nameservice,ID)
 	end.
@@ -171,7 +194,7 @@ calcNewMi(Y,Mi,Coordinator,NBors,ID,WorkTime) ->
 	NewMi = calc(Y,Mi),
 	%%Um die Berechnung zu simulieren wird nach 
 	%%der Erhalt von sendy eine bestimmte Zeit abgewartet.
-	timer:sleep(WorkTime),
+	timer:sleep(WorkTime*1000),
 	case NewMi of
 		noop ->
 			log(ID, "Mi wurde nicht geaendert: " ++ t_s(Mi)),
