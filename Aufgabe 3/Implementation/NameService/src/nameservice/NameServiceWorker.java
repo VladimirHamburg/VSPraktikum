@@ -12,7 +12,7 @@ public class NameServiceWorker extends Thread  {
 
 	private NameServiceServer server;
     private int connectionID;
-    private ConcurrentHashMap<String, String> db;
+    private ConcurrentHashMap<String, ConnectionData> db;
     private Socket socket;
     
     private BufferedReader inFromClient;
@@ -20,7 +20,7 @@ public class NameServiceWorker extends Thread  {
 	
     boolean serviceRequested = true;
     
-    public NameServiceWorker(NameServiceServer server, int connectionID, ConcurrentHashMap<String, String> db, Socket socket) {
+    public NameServiceWorker(NameServiceServer server, int connectionID, ConcurrentHashMap<String, ConnectionData> db, Socket socket) {
     	this.server = server;
         this.connectionID = connectionID;
         this.db = db;
@@ -41,12 +41,13 @@ public class NameServiceWorker extends Thread  {
             }
             
             socket.close();
+            writeLog("connection closed");
             server.ConnectionClosed();
         } catch (IOException e) {
         	writeLog("connection lost!");
             server.ConnectionClosed();
         }
-        writeLog("connection closed");
+        
     }
 	
 	private void parseRequest(String[] splitData) throws IOException {
@@ -69,15 +70,16 @@ public class NameServiceWorker extends Thread  {
 	}
 	
 	private void commandRebind(String[] splitData) {
-		if (splitData.length != 3) {
+		if (splitData.length != 5) {
 			writeLog("Received bad request!");
 		}
 		
-		String name = splitData[1];
-		String id = splitData[2];
+		String host = splitData[1];
+		String port = splitData[2];
+		String name = splitData[3];
 		
-		db.put(name, id);
-		writeLog("rebind Name:"+name+" ID:"+id);
+		db.put(name, new ConnectionData(host, port));
+		writeLog("rebind Name:" + name + " @ " + host + ":" + port);
 	}
 	
 	private void commandResolve(String[] splitData) throws IOException {
@@ -91,9 +93,10 @@ public class NameServiceWorker extends Thread  {
 			writeLog("resolve Name:"+name+" failed!");
 			outToClient.writeBytes("null\n");
 		}
-		String id = db.get(name);
-		writeLog("resolve Name:"+name+" ID:"+id);
-		outToClient.writeBytes(id + "\n");
+		
+		ConnectionData entry = db.get(name);
+		writeLog("resolve Name:" + name + " @ " + entry.Host + ":" + entry.Port);
+		outToClient.writeBytes(name + ":" + entry.Host + ":" + entry.Port + "\n");
 	}
 	
 	private void commandClose() {

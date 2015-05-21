@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class NameServiceServer  extends Thread {
+public class NameServiceServer extends Thread {
 
 	private static final int SOCKET_TIMEOUT_MS = 10000;
 	
@@ -25,7 +25,7 @@ public class NameServiceServer  extends Thread {
 	@Override
     public void run() {
         int connectionID = 0;
-        ConcurrentHashMap<String, String> db  = new ConcurrentHashMap<String, String>();
+        ConcurrentHashMap<String, ConnectionData> db  = new ConcurrentHashMap<String, ConnectionData>();
         
         try {
             welcomeSocket = new ServerSocket(port);

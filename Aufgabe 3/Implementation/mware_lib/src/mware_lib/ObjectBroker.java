@@ -1,32 +1,36 @@
 package mware_lib;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class ObjectBroker {
 	
-	private String serviceHost;
-	private int listenPort;
 	boolean debug;
+	private NameService ns;
+	private InvokationServer imc;
+	private ConcurrentHashMap<String, Object> db;
 	
-	public ObjectBroker(String serviceHost, int listenPort, boolean debug) {
-		this.serviceHost = serviceHost;
-		this.listenPort = listenPort;
-		this.debug = debug;
-	}
-
-
-
-	 // Das hier zurückgelieferte Objekt soll der zentrale Einstiegspunkt
-	// der Middleware aus Applikationssicht sein.
-	// Parameter: Host und Port, bei dem die Dienste (hier: Namensdienst)
-	// kontaktiert werden sollen. Mit debug	sollen 	Test-
-	// ausgaben der Middleware ein- oder ausgeschaltet 	werden
-	// können. 
-	public static ObjectBroker init(String serviceHost, int listenPort, boolean debug){
+	public static ObjectBroker init(String serviceHost, int listenPort, boolean debug) throws UnknownHostException{	
 		return new ObjectBroker(serviceHost, listenPort, debug); 
+	}
+	
+	private ObjectBroker(String serviceHost, int listenPort, boolean debug) throws UnknownHostException {		
+		this.debug = debug;
+		this.db = new ConcurrentHashMap<String, Object>();
+		this.imc = new InvokationServer(db);
+		
+		String imcHost = InetAddress.getLocalHost().getHostName();
+		int imcPort = imc.getPort();
+		
+		this.ns = new NameServiceProxy(serviceHost, listenPort, imcHost, imcPort, db, debug);
+		
+		this.imc.start();
 	}
 	
 	// Liefert den Namensdienst (Stellvetreterobjekt).
 	public NameService getNameService(){
-		return new NameServiceProxy(serviceHost, listenPort, debug);
+		return ns;
 	}
 	
 	// Beendet die Benutzung der Middleware in dieser Anwendung.
