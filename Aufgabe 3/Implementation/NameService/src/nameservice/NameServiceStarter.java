@@ -5,11 +5,11 @@ import java.net.*;
 
 public class NameServiceStarter {
 	
-	private static final int PORT_PARAM_ARRAY_POS = 1;
-	private static final int MAX_CONNECTIONS_PARAM_ARRAY_POS = 2;
+	private static final int PORT_PARAM_ARRAY_POS = 0;
+	private static final int MAX_CONNECTIONS_PARAM_ARRAY_POS = 1;
 	private static final int MAX_CONNECTIONS_DEFAULT = 500;
-	private static final int MAX_PORT_NUMBER = 1;
-	private static final int MIN_PORT_NUMBER = 65536;
+	private static final int MAX_PORT_NUMBER = 65536;
+	private static final int MIN_PORT_NUMBER = 1;
 	public static String usage = "Usage: nameservice <port> [maxConnections=100]";
 	
 	public static void main(String [] args)
@@ -36,7 +36,7 @@ public class NameServiceStarter {
 		
 		
 		System.out.println("Starting namesevice on port " + port + " allowing "+maxConnections+" concurrent connections");
-		(new NameServiceServer(port, maxConnections)).run();
+		(new NameServiceServer(port, maxConnections)).start();
 	}
 	
 	
@@ -63,7 +63,7 @@ public class NameServiceStarter {
 		int port = Integer.parseInt(args[PORT_PARAM_ARRAY_POS]);
 		
 		// Check port boundaries
-		if (port < MAX_PORT_NUMBER || MIN_PORT_NUMBER < 1)
+		if (port > MAX_PORT_NUMBER || port < MIN_PORT_NUMBER)
 		{
 			System.out.println("Port number must be between "+MIN_PORT_NUMBER+" and "+MAX_PORT_NUMBER+"!");
 			return false;

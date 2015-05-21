@@ -1,47 +1,53 @@
 package mware_lib;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class NameServiceProxy extends NameService {
 	
 	private String serviceHost;
 	private int listenPort;
+	private String imcHost;
+	private int imcPort;
+	private ConcurrentHashMap<String, Object> db;
 	boolean debug; 
-	int intID = 0;
-
 	
-	public NameServiceProxy(String serviceHost, int listenPort, boolean debug) {
+	int intID = 0;
+	
+	public NameServiceProxy(String serviceHost, int listenPort, String imcHost, int imcPort, ConcurrentHashMap<String, Object> db, boolean debug) {
 		this.serviceHost = serviceHost;
 		this.listenPort = listenPort;
+		this.imcHost = imcHost;
+		this.imcPort = imcPort;
 		this.debug = debug;
 	}
 
 	@Override
 	public void rebind(Object servant, String name) {
-		String id = new Integer(intID).toString();
-		intID++;
-		id = id + servant.getClass().getName();
-		onlySend("rebind:" + id + ":" + name);
-		
+		onlySend("rebind:"+ imcHost +":" + imcPort + ":" + name);
+		db.put(name, servant);
 	}
-
+	
 	@Override
 	public Object resolve(String name) {
-		return null;
+		return sendReceive("resolve:"+name).split(":");
 	}
 	
 	private void onlySend(String message){
 		try {
+			// Open
 			Socket socket = new Socket(serviceHost, listenPort);
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			out.write(message);
-			out.newLine();
-			out.flush();
-			out.close();
+			DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
+			
+			// Send
+			outToServer.writeBytes(message+"\n");
+			outToServer.writeBytes("close\n");
+			
+			// Close
 			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -49,12 +55,26 @@ public class NameServiceProxy extends NameService {
 		}
 	}
 	
-	private String send_recive(String message){
-		return null;
+	private String sendReceive(String message){
+		String result = "";
+		try {
+			// Open
+			Socket socket = new Socket(serviceHost, listenPort);
+			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
+			
+			// Send receive
+			outToServer.writeBytes(message+"\n");
+			result = inFromServer.readLine();
+			outToServer.writeBytes("close\n");
+			
+			// Close
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
-	
-	public int myRandom(int low, int high) {
-        return (int) (Math.random() * (high - low) + low);
-    }
-
 }
