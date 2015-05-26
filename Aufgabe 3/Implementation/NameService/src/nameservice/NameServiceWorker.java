@@ -104,8 +104,20 @@ public class NameServiceWorker extends Thread  {
 		serviceRequested = false;
 	}
     
-    private void writeLog(String message) {
-    	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss "+connectionID+"] ");
-    	 System.out.println(sdf.format(new Date()) +  message);
-    }
+	private void writeLog(String message) {
+	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss" + connectionID + "]");
+	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	String hostName;
+	   	 try {
+			hostName = java.net.InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e1) {
+			hostName = "";
+		}
+	   	 System.out.println(hostName);
+	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("nameservice_" + hostName + ".log", true)))) {
+	   	    out.println(sdf.format(new Date()) +  message);
+	   	}catch (IOException e) {
+	   	    //exception handling left as an exercise for the reader
+	   	}
+	   }
 }

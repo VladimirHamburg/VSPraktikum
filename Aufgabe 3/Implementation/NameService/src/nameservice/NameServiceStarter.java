@@ -2,6 +2,8 @@ package nameservice;
 
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NameServiceStarter {
 	
@@ -35,7 +37,8 @@ public class NameServiceStarter {
 		
 		
 		
-		System.out.println("Starting namesevice on port " + port + " allowing "+maxConnections+" concurrent connections");
+		//System.out.println("Starting namesevice on port " + port + " allowing "+maxConnections+" concurrent connections");
+		writeLog("Starting namesevice on port " + port + " allowing "+maxConnections+" concurrent connections");
 		(new NameServiceServer(port, maxConnections)).start();
 	}
 	
@@ -65,14 +68,16 @@ public class NameServiceStarter {
 		// Check port boundaries
 		if (port > MAX_PORT_NUMBER || port < MIN_PORT_NUMBER)
 		{
-			System.out.println("Port number must be between "+MIN_PORT_NUMBER+" and "+MAX_PORT_NUMBER+"!");
+			//System.out.println("Port number must be between "+MIN_PORT_NUMBER+" and "+MAX_PORT_NUMBER+"!");
+			writeLog("Port number must be between "+MIN_PORT_NUMBER+" and "+MAX_PORT_NUMBER+"!");
 			return false;
 		}
 		
 		// Check if port is already assigned
 		if(!available(port))
 		{
-			System.out.println("Port number "+port+" is already in use!");
+			//System.out.println("Port number "+port+" is already in use!");
+			writeLog("Port number "+port+" is already in use!");
 			return false;
 		}
 		
@@ -85,7 +90,7 @@ public class NameServiceStarter {
 	 */
 	private static boolean CheckMaxConnectionsIsPresent(String [] args)
 	{
-		return args.length >= 3;
+		return args.length >= MAX_CONNECTIONS_PARAM_ARRAY_POS+1;
 	}
 	
 	/**
@@ -95,10 +100,10 @@ public class NameServiceStarter {
 	private static boolean CheckMaxConnectionsIsValid(String [] args)
 	{
 		// Check for correct parameters
-		if (args.length < MAX_CONNECTIONS_PARAM_ARRAY_POS+1) {
-			System.out.println(usage);
-			return false;
-		}
+		//if (args.length < MAX_CONNECTIONS_PARAM_ARRAY_POS+1) {
+			//System.out.println(usage);
+			//return false;
+		//}
 		
 		// Check if max connections is numeric
 		try {
@@ -155,4 +160,20 @@ public class NameServiceStarter {
 	    return false;
 	}
 	
+	private static void writeLog(String message) {
+	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss ]");
+	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	String hostName;
+	   	 try {
+			hostName = java.net.InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e1) {
+			hostName = "";
+		}
+	   	 System.out.println(hostName);
+	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("nameservice_" + hostName + ".log", true)))) {
+	   	    out.println(sdf.format(new Date()) +  message);
+	   	}catch (IOException e) {
+	   	    //exception handling left as an exercise for the reader
+	   	}
+	   }
 }
