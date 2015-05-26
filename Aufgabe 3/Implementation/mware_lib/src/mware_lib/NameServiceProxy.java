@@ -23,12 +23,14 @@ public class NameServiceProxy extends NameService {
 		this.listenPort = listenPort;
 		this.imcHost = imcHost;
 		this.imcPort = imcPort;
+		this.db = db;
 		this.debug = debug;
 	}
 
 	@Override
 	public void rebind(Object servant, String name) {
 		onlySend("rebind:"+ imcHost +":" + imcPort + ":" + name);
+		System.out.println("FUCKER" +  name + "     " + servant.toString());
 		db.put(name, servant);
 	}
 	
