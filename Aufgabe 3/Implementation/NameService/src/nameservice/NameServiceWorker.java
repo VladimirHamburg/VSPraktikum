@@ -66,10 +66,6 @@ public class NameServiceWorker extends Thread  {
 	}
 	
 	private void commandRebind(String[] splitData) {
-		if (splitData.length != 3) {
-			writeLog("Received bad request!");
-		}
-		
 		String host = splitData[1];
 		String port = splitData[2];
 		String name = splitData[3];
@@ -79,10 +75,6 @@ public class NameServiceWorker extends Thread  {
 	}
 	
 	private void commandResolve(String[] splitData) throws IOException {
-		if (splitData.length != 2) {
-			writeLog("Received bad request!");
-		}
-		
 		String name = splitData[1];
 		
 		if (!db.contains(name)) {
@@ -101,19 +93,20 @@ public class NameServiceWorker extends Thread  {
 	}
     
 	private void writeLog(String message) {
-	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss" + connectionID + "]");
-	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss" + connectionID + "]");
+	   	System.out.println(sdf.format(new Date()) +  message);
 	   	String hostName;
-	   	 try {
+	   	
+	   	try {
 			hostName = java.net.InetAddress.getLocalHost().getHostName();
 		} catch (UnknownHostException e1) {
 			hostName = "";
 		}
-	   	 System.out.println(hostName);
+
 	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("nameservice_" + hostName + ".log", true)))) {
 	   	    out.println(sdf.format(new Date()) +  message);
 	   	}catch (IOException e) {
 	   	    //exception handling left as an exercise for the reader
 	   	}
-	   }
+   }
 }

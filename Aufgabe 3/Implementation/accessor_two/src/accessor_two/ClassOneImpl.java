@@ -19,10 +19,6 @@ public class ClassOneImpl extends ClassOneImplBase {
 	private int port;
 	
 	ClassOneImpl(String[] splitData) {
-		if (splitData.length != 3) {
-			writeLog("accessor_two.ClassOneImplBase: Invalid raw object");
-			throw new InvalidParameterException("Invalid raw object");
-		}
 		name = splitData[0];
 		host = splitData[1];
 		port = Integer.parseInt(splitData[2]);

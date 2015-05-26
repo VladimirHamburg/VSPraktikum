@@ -20,9 +20,6 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 	private int port;
 	
 	ClassTwoImpl(String[] splitData) {
-		if (splitData.length != 3) {
-			throw new InvalidParameterException("Invalid raw object");
-		}
 		name = splitData[0];
 		host = splitData[1];
 		port = Integer.parseInt(splitData[2]);

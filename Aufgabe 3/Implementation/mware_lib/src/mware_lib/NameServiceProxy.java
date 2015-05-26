@@ -30,7 +30,6 @@ public class NameServiceProxy extends NameService {
 	@Override
 	public void rebind(Object servant, String name) {
 		onlySend("rebind:"+ imcHost +":" + imcPort + ":" + name);
-		System.out.println("FUCKER" +  name + "     " + servant.toString());
 		db.put(name, servant);
 	}
 	
