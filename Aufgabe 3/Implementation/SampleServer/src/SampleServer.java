@@ -1,4 +1,6 @@
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import mware_lib.*;
 
@@ -23,4 +25,10 @@ public class SampleServer {
 		
 		objBroker.shutDown();
 	}
+	
+    private static void writeLog(String classmethod, String message) {
+    	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss ");
+    	 String logEntry = sdf.format(new Date()) + classmethod + " ] " +  message;
+    	 System.out.println(logEntry);
+    }
 }

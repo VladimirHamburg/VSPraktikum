@@ -21,18 +21,20 @@ public class Skelleton extends Thread {
     public Skelleton(InvokationServer server, int connectionID, ConcurrentHashMap<String, Object> db, Socket socket) {
     	this.server = server;
         this.connectionID = connectionID;
+        this.db = db;
         this.socket = socket;
     }
     
     @Override
     public void run() {
-		writeLog("connetion opened");
+		writeLog("connection opened");
         try {
             inFromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             outToClient = new DataOutputStream(socket.getOutputStream());
             
             while (serviceRequested) {
             	String rawData  = inFromClient.readLine();
+            	writeLog("RAW INCOMING: " + rawData);
             	String[] splitData = rawData.split(":");
             	parseInvoke(splitData);    	
             }
@@ -47,14 +49,17 @@ public class Skelleton extends Thread {
     }
     
     private void parseInvoke(String[] splitData) throws IOException {
-		if (splitData.length < 2) {
-			writeLog("Received bad request!");
+    	if (splitData[0].equals("Close")) {
+    		writeLog("Close...");
+    		serviceRequested = false;
+    	}
+    	
+    	String name = splitData[0];
+    	
+		if (!db.containsKey(name)) {
+			writeLog("Invalid name " + name + ". DB contains " + db.size() + " entries!");
+			serviceRequested = false;
 			return;
-		}
-
-		String name = splitData[0];
-		if (!db.contains(name)) {
-			writeLog("Invalid name");
 		}
 		
 		Object obj = db.get(name);
@@ -74,7 +79,7 @@ public class Skelleton extends Thread {
     	String param1 = splitData[2];
     	int param2 = Integer.parseInt(splitData[3]);
     	
-    	if (methodName != "methodOne") {
+    	if (methodName.equals("methodOne")) {
 	    	try {
 	    		String result = obj.methodOne(param1, param2);
 	    		outToClient.writeBytes("result:"+result+"\n");
@@ -88,16 +93,16 @@ public class Skelleton extends Thread {
     
     public void invokeAccessor_oneClassTwoImplBase(accessor_one.ClassTwoImplBase obj, String[] splitData) throws IOException {  	
     	String methodName = splitData[1];
-    	double param1 = Double.parseDouble(splitData[2]);
-    	
-    	if (methodName == "methodOne") {
+    	  	
+    	if (methodName.equals("methodOne")) {
         	try {
+        		double param1 = Double.parseDouble(splitData[2]);
         		Integer result = obj.methodOne(param1);
         		outToClient.writeBytes("result:"+result.toString()+"\n");
         	} catch (accessor_one.SomeException110 ex) {
         		outToClient.writeBytes("SomeException110:"+ex.getMessage()+"\n");
         	}
-    	} else if (methodName == "methodTwo") {
+    	} else if (methodName.equals("methodTwo")) {
         	try {
         		Double result = obj.methodTwo();
         		outToClient.writeBytes("result:"+result.toString()+"\n");
@@ -114,14 +119,14 @@ public class Skelleton extends Thread {
     	String param1 = splitData[2];
     	double param2 = Double.parseDouble(splitData[3]);
     	
-    	if (methodName == "methodOne") {
+    	if (methodName.equals("methodOne")) {
         	try {
         		Double result = obj.methodOne(param1, param2);
         		outToClient.writeBytes("result:"+result.toString()+"\n");
         	} catch (accessor_two.SomeException112 ex) {
         		outToClient.writeBytes("SomeException112:"+ex.getMessage()+"\n");
         	}
-    	} else if (methodName == "methodTwo") {
+    	} else if (methodName.equals("methodTwo")) {
         	try {
         		Double result = obj.methodTwo(param1, param2);
         		outToClient.writeBytes("result:"+result.toString()+"\n");
@@ -136,7 +141,8 @@ public class Skelleton extends Thread {
     }
     
     private void writeLog(String message) {
-   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss "+connectionID+"] ");
-   	 System.out.println(sdf.format(new Date()) +  message);
+    	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss ");
+	   	String logEntry = sdf.format(new Date()) + connectionID + " ] " +  message;
+	   	System.out.println(logEntry);
     }
 }

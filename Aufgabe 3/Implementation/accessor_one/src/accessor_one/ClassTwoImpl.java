@@ -40,7 +40,7 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 
 	@Override
 	public double methodTwo() throws SomeException112 {
-		String[] result = sendReceive("methodTwo:" + name).split(":");
+		String[] result = sendReceive(name + ":methodTwo").split(":");
 		String type = result[0]; 
 		String msg = result[1];
 		if (type == "result") {
@@ -75,8 +75,8 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 	}
 
 	private void writeLog(String message) {
-	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss]");
-	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss]");
+	   	System.out.println(sdf.format(new Date()) +  message);
 	   	String hostName;
 	   	 try {
 			hostName = java.net.InetAddress.getLocalHost().getHostName();
@@ -88,5 +88,5 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 	   	}catch (IOException e) {
 	   	    //exception handling left as an exercise for the reader
 	   	}
-	   }
+	}
 }

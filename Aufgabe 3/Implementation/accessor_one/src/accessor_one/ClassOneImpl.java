@@ -19,9 +19,11 @@ public class ClassOneImpl extends ClassOneImplBase {
 	private int port;
 	
 	ClassOneImpl(String[] splitData) {
+		System.out.println("BITCH VERSUCHT" + splitData[0] );
 		name = splitData[0];
 		host = splitData[1];
 		port = Integer.parseInt(splitData[2]);
+		
 		writeLog("accessor_one.ClassOneImplBase (\"" + name + "\")" );
 	}
 	

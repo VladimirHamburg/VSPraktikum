@@ -99,8 +99,9 @@ public class SampleClient {
 	}
 	
     private static void writeLog(String classmethod, String message) {
-     	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss "+classmethod+"] ");
-     	 System.out.println(sdf.format(new Date()) +  message);
-     }
+     	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss ");
+     	 String logEntry = sdf.format(new Date()) + classmethod + " ] " +  message;
+     	 System.out.println(logEntry);
+    }
 
 }

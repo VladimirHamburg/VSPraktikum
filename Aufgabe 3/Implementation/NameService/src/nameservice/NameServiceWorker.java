@@ -36,7 +36,7 @@ public class NameServiceWorker extends Thread  {
             
             while (serviceRequested) {
             	String rawData  = inFromClient.readLine();
-            	System.out.println("RAW INCOMING: " + rawData);
+            	writeLog("RAW INCOMING: " + rawData);
             	String[] splitData = rawData.split(":");
             	parseRequest(splitData);       	
             }
@@ -77,9 +77,10 @@ public class NameServiceWorker extends Thread  {
 	private void commandResolve(String[] splitData) throws IOException {
 		String name = splitData[1];
 		
-		if (!db.contains(name)) {
+		if (!db.containsKey(name)) {		
 			writeLog("resolve Name:"+name+" failed!");
 			outToClient.writeBytes("null\n");
+			return;
 		}
 		
 		ConnectionData entry = db.get(name);
@@ -93,8 +94,9 @@ public class NameServiceWorker extends Thread  {
 	}
     
 	private void writeLog(String message) {
-	   	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss" + connectionID + "]");
-	   	System.out.println(sdf.format(new Date()) +  message);
+	   	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss ");
+	   	String logEntry = sdf.format(new Date()) + connectionID + " ] " +  message;
+	   	System.out.println(logEntry);
 	   	String hostName;
 	   	
 	   	try {
@@ -104,7 +106,7 @@ public class NameServiceWorker extends Thread  {
 		}
 
 	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("nameservice_" + hostName + ".log", true)))) {
-	   	    out.println(sdf.format(new Date()) +  message);
+	   	    out.println(logEntry);
 	   	}catch (IOException e) {
 	   	    //exception handling left as an exercise for the reader
 	   	}
