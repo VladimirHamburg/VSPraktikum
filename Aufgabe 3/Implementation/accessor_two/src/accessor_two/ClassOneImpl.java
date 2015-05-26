@@ -88,7 +88,6 @@ public class ClassOneImpl extends ClassOneImplBase {
 		} catch (UnknownHostException e1) {
 			hostName = "";
 		}
-	   	 System.out.println(hostName);
 	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("accessor_two_" + hostName + ".log", true)))) {
 	   	    out.println(sdf.format(new Date()) +  message);
 	   	}catch (IOException e) {

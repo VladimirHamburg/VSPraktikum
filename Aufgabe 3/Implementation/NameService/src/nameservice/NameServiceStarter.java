@@ -169,7 +169,6 @@ public class NameServiceStarter {
 		} catch (UnknownHostException e1) {
 			hostName = "";
 		}
-	   	 System.out.println(hostName);
 	   	try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("nameservice_" + hostName + ".log", true)))) {
 	   	    out.println(sdf.format(new Date()) +  message);
 	   	}catch (IOException e) {
