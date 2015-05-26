@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InvokationServer extends Thread {
 	
-	private static final int SYS_MAX_PORT_NUMBER = 1;
-	private static final int SYS_MIN_PORT_NUMBER = 65536;
+	private static final int SYS_MAX_PORT_NUMBER = 65536;
+	private static final int SYS_MIN_PORT_NUMBER = 1;
 	private static final int MIN_PORT = 40000;
 	private static final int MAX_PORT = 65000;
 	

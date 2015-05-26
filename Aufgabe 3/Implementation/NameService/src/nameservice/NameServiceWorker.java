@@ -36,6 +36,7 @@ public class NameServiceWorker extends Thread  {
             
             while (serviceRequested) {
             	String rawData  = inFromClient.readLine();
+            	System.out.println("RAW INCOMING: " + rawData);
             	String[] splitData = rawData.split(":");
             	parseRequest(splitData);       	
             }
@@ -51,18 +52,13 @@ public class NameServiceWorker extends Thread  {
     }
 	
 	private void parseRequest(String[] splitData) throws IOException {
-		if (splitData.length >= 1) {
-			writeLog("Received bad request!");
-			return;
-		}
-		
 		String command = splitData[0];
 		
-		if (command == "rebind") {
+		if (command.equals("rebind")) {
 			commandRebind(splitData);
-		} else if (command == "resolve") {
+		} else if (command.equals("resolve")) {
 			commandResolve(splitData);
-		} else if (command == "close") {
+		} else if (command.equals("close")) {
 			commandClose();
 		} else {
 			writeLog("Invalid command param: "+command);
@@ -70,7 +66,7 @@ public class NameServiceWorker extends Thread  {
 	}
 	
 	private void commandRebind(String[] splitData) {
-		if (splitData.length != 5) {
+		if (splitData.length != 3) {
 			writeLog("Received bad request!");
 		}
 		
