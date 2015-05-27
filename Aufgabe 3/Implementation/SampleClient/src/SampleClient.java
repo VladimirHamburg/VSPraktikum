@@ -10,11 +10,15 @@ import mware_lib.*;
 public class SampleClient {
 
 	public static void main(String[] args) throws UnknownHostException {
-		ObjectBroker objBroker = ObjectBroker.init("localhost", 5655, true);
+		// Sequenzdiagram  8
+		ObjectBroker objBroker = ObjectBroker.init("lab25", 5655, true);
+		// Sequenzdiagram  9 + 10
 		NameService nameSvc = objBroker.getNameService();
 		
 		// Sample Classes resolve
+		// Sequenzdiagram  11
 		Object a1c1Ref = nameSvc.resolve("a1c1");
+		// Sequenzdiagram  15
 		accessor_one.ClassOneImplBase a1c1 = accessor_one.ClassOneImplBase.narrowCast(a1c1Ref);
 		
 		Object a1c2Ref = nameSvc.resolve("a1c2");
@@ -26,6 +30,7 @@ public class SampleClient {
 		// Call remotes
 		// A1C1
 		try {
+			// Sequenzdiagram  16
 			String s = a1c1.methodOne("hi there!", 567);
 			writeLog("a1c1.methodOne", s);
 		} catch (accessor_one.SomeException112 e) {

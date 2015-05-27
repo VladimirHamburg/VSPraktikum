@@ -13,12 +13,12 @@ public class NameServiceProxy extends NameService {
 	private int listenPort;
 	private String imcHost;
 	private int imcPort;
-	private ConcurrentHashMap<String, Object> db;
+	private ConcurrentHashMap<String, Invokeable> db;
 	boolean debug; 
 	
 	int intID = 0;
 	
-	public NameServiceProxy(String serviceHost, int listenPort, String imcHost, int imcPort, ConcurrentHashMap<String, Object> db, boolean debug) {
+	public NameServiceProxy(String serviceHost, int listenPort, String imcHost, int imcPort, ConcurrentHashMap<String, Invokeable> db, boolean debug) {
 		this.serviceHost = serviceHost;
 		this.listenPort = listenPort;
 		this.imcHost = imcHost;
@@ -29,12 +29,14 @@ public class NameServiceProxy extends NameService {
 
 	@Override
 	public void rebind(Object servant, String name) {
+		// Sequenzdiagram  6 + 7
 		onlySend("rebind:"+ imcHost +":" + imcPort + ":" + name);
-		db.put(name, servant);
+		db.put(name, (Invokeable)servant);
 	}
 	
 	@Override
 	public Object resolve(String name) {
+		// Sequenzdiagram  12 + 13
 		return sendReceive("resolve:"+name).split(":");
 	}
 	

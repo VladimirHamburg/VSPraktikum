@@ -9,7 +9,7 @@ public class ObjectBroker {
 	boolean debug;
 	private NameService ns;
 	private InvokationServer imc;
-	private ConcurrentHashMap<String, Object> db;
+	private ConcurrentHashMap<String, Invokeable> db;
 	
 	public static ObjectBroker init(String serviceHost, int listenPort, boolean debug) throws UnknownHostException{	
 		return new ObjectBroker(serviceHost, listenPort, debug); 
@@ -17,7 +17,7 @@ public class ObjectBroker {
 	
 	private ObjectBroker(String serviceHost, int listenPort, boolean debug) throws UnknownHostException {		
 		this.debug = debug;
-		this.db = new ConcurrentHashMap<String, Object>();
+		this.db = new ConcurrentHashMap<String, Invokeable>();
 		this.imc = new InvokationServer(db);
 		
 		String imcHost = InetAddress.getLocalHost().getHostName();

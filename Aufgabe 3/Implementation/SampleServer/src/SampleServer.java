@@ -10,20 +10,21 @@ public class SampleServer {
 	public static void main(String[] args) throws UnknownHostException, InterruptedException {
 
 		// Create sample objects
+		// Sequenzdiagram  1
 		A1SampleClassOne a1c1 = new A1SampleClassOne();
 		A1SampleClassTwo a1c2 = new A1SampleClassTwo();
 		A2SampleClassOne a2c1 = new A2SampleClassOne();
 		
-		ObjectBroker objBroker = ObjectBroker.init("localhost", 5655, true);
+		// Sequenzdiagram  2
+		ObjectBroker objBroker = ObjectBroker.init("lab25", 5655, true);
 		
+		// Sequenzdiagram  3
 		NameService nameSvc = objBroker.getNameService();
+		// Sequenzdiagram  5
 		nameSvc.rebind((Object) a1c1, "a1c1");
 		nameSvc.rebind((Object) a1c2, "a1c2");
 		nameSvc.rebind((Object) a2c1, "a2c1");
 		
-		Thread.sleep(30000);
-		
-		objBroker.shutDown();
 	}
 	
     private static void writeLog(String classmethod, String message) {

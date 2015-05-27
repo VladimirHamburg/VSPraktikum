@@ -1,0 +1,36 @@
+ 
+(abg627@lab28)~/ErlangPro/client>java test2/Client2 lab25 5655
+IMC: Waiting for connection - listening on TCP port 61066
+--------------------------------------------------------------
+accessor_one.ClassOneImplBase ('zumsel1')
+methodOne
+param1 = "null"
+param2 = 12
+accessor_one.SomeException112 with message 'you must be joking! - 12'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassTwoImplBase ('zumsel2')
+methodOne
+param1 = 1.0
+Return value = 170
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassTwoImplBase ('zumsel2')
+methodTwo
+Return value = 120.0
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassOneImplBase ('zumsel3')
+methodOne
+param1 = "moinsen!"
+param2 = 17.1
+accessor_two.SomeException112 with message 'Cod 'n' rice twice - moinsen!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassOneImplBase ('zumsel3')
+methodTwo
+param1 = "hej alle!"
+param2 = 3.5
+accessor_two.SomeException304 with message 'Cod 'n' rice twice - hej alle!'
+--------------------------------------------------------------
+

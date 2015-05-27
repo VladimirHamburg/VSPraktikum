@@ -16,14 +16,14 @@ public class InvokationServer extends Thread {
 	private static final int MAX_CONNECTIONS = 100;
 	
 	private int port;   
-	private ConcurrentHashMap<String, Object> db;
+	private ConcurrentHashMap<String, Invokeable> db;
     
     private volatile int currentConnections; 
     
     private ServerSocket welcomeSocket;
     private Socket connectionSocket;
    
-    public InvokationServer(ConcurrentHashMap<String, Object> db) {
+    public InvokationServer(ConcurrentHashMap<String, Invokeable> db) {
 		port = getFreePort();
 		this.db = db;
 	}

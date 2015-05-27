@@ -19,7 +19,6 @@ public class ClassOneImpl extends ClassOneImplBase {
 	private int port;
 	
 	ClassOneImpl(String[] splitData) {
-		System.out.println("BITCH VERSUCHT" + splitData[0] );
 		name = splitData[0];
 		host = splitData[1];
 		port = Integer.parseInt(splitData[2]);
@@ -29,6 +28,7 @@ public class ClassOneImpl extends ClassOneImplBase {
 	
 	@Override
 	public String methodOne(String param1, int param2) throws SomeException112 {
+		// Sequenzdiagram  17
 		String[] result = sendReceive(name + ":methodOne:" + param1 + ":" + param2).split(":");
 		String type = result[0]; 
 		String msg = result[1];

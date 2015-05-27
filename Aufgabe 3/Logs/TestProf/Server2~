@@ -1,0 +1,30 @@
+ 
+(abg627@lab28)~/ErlangPro/server>java test2/Server2 lab25 5655
+IMC: Waiting for connection - listening on TCP port 53515
+Press ENTER to exit...
+[15-05-27 03:24:49 1 ] connection opened
+[15-05-27 03:24:49 1 ] RAW INCOMING: zumsel1:methodOne:null:12
+methodOne(String null, int 12)
+[15-05-27 03:24:49 1 ] RAW INCOMING: close
+[15-05-27 03:24:49 1 ] Close...
+[15-05-27 03:24:49 1 ] connection closed
+[15-05-27 03:24:49 2 ] connection opened
+[15-05-27 03:24:49 2 ] RAW INCOMING: zumsel2:methodOne:1.0
+[15-05-27 03:24:49 2 ] RAW INCOMING: close
+[15-05-27 03:24:49 2 ] Close...
+[15-05-27 03:24:49 2 ] connection closed
+[15-05-27 03:24:49 3 ] connection opened
+[15-05-27 03:24:49 3 ] RAW INCOMING: zumsel2:methodTwo
+[15-05-27 03:24:49 3 ] RAW INCOMING: close
+[15-05-27 03:24:49 3 ] Close...
+[15-05-27 03:24:49 3 ] connection closed
+[15-05-27 03:24:49 4 ] connection opened
+[15-05-27 03:24:49 4 ] RAW INCOMING: zumsel3:methodOne:moinsen!:17.1
+[15-05-27 03:24:49 4 ] RAW INCOMING: close
+[15-05-27 03:24:49 4 ] Close...
+[15-05-27 03:24:49 4 ] connection closed
+[15-05-27 03:24:49 5 ] connection opened
+[15-05-27 03:24:49 5 ] RAW INCOMING: zumsel3:methodTwo:hej alle!:3.5
+[15-05-27 03:24:49 5 ] RAW INCOMING: close
+[15-05-27 03:24:49 5 ] Close...
+[15-05-27 03:24:49 5 ] connection closed
