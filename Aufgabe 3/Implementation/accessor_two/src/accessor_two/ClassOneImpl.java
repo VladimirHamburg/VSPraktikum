@@ -30,12 +30,12 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String[] result = sendReceive(name + ":methodOne:" + param1 + ":" + param2).split(":");
 		String type = result[0]; 
 		String msg = result[1];
-		if (type == "result") {
+		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
-			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + param1 + ":" + param2 + " return:" + returnValue.toString());
+			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + " params("+  param1 + ":" + param2 + ") return: " + returnValue.toString());
 			return Double.parseDouble(msg);
 		}	
-		writeLog("accessor_two.ClassOneImpl.methodOne.SomeException112:" +msg);
+		writeLog("accessor_two.ClassOneImpl.methodOne.SomeException112: " +msg);
 		throw new SomeException112(msg);
 	}
 
@@ -44,15 +44,15 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String[] result = sendReceive(name +":methodTwo:" + param1 + ":" + param2).split(":");
 		String type = result[0]; 
 		String msg = result[1];
-		if (type == "result") {
+		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
-			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + param1 + ":" + param2 + " return:" + returnValue.toString());
+			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + " params("+  param1 + ":" + param2 + ") return: " + returnValue.toString());
 			return Double.parseDouble(msg);
 		} else if ( type == SomeException112.class.getName()) {	
-			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException112:" + msg);
+			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException112: " + msg);
 			throw new SomeException112(msg);
 		} else {	
-			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException304:" + msg);
+			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException304: " + msg);
 			throw new SomeException304(msg);
 		}
 	}
@@ -81,7 +81,7 @@ public class ClassOneImpl extends ClassOneImplBase {
 	
 	private void writeLog(String message) {
 	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss]");
-	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	 //System.out.println(sdf.format(new Date()) +  message);
 	   	String hostName;
 	   	 try {
 			hostName = java.net.InetAddress.getLocalHost().getHostName();

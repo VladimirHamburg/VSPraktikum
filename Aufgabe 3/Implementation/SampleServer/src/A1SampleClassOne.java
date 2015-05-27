@@ -9,7 +9,7 @@ public class A1SampleClassOne extends ClassOneImplBase {
 		if (param2 == 1337) {
 			throw new SomeException112("Param2 was to leet!");
 		} else {
-			return param1 +  ((Integer)(param2)).toString();
+			return param1 +  ((Integer)(param2+1)).toString();
 		}
 	}
 }

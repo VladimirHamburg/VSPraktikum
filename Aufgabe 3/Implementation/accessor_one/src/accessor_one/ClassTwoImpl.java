@@ -29,9 +29,9 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 		String[] result = sendReceive(name + ":methodOne:"  + param1).split(":");
 		String type = result[0]; 
 		String msg = result[1];
-		if (type == "result") {
+		if (type.equals("result")) {
 			Integer returnValue = Integer.parseInt(msg);
-			writeLog("accessor_one.ClassTwoImpl.methodOne:" + name + ":" + param1 + " return:" + returnValue.toString());
+			writeLog("accessor_one.ClassTwoImpl.methodOne:" + name + "params("+ ":" + param1 + ") return: " + returnValue.toString());
 			return Integer.parseInt(msg);
 		}
 		writeLog("accessor_one.ClassTwoImpl.methodOne.SomeException110: " + msg); 
@@ -43,9 +43,9 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 		String[] result = sendReceive(name + ":methodTwo").split(":");
 		String type = result[0]; 
 		String msg = result[1];
-		if (type == "result") {
+		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
-			writeLog("accessor_one.ClassTwoImpl.methodTwo:" + name +  " return:" + returnValue.toString());
+			writeLog("accessor_one.ClassTwoImpl.methodTwo:" + name +  " return: " + returnValue.toString());
 			return Double.parseDouble(msg);
 		}	
 		writeLog("accessor_one.ClassTwoImpl.methodTwo.SomeException112: " + msg); 
@@ -76,7 +76,7 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 
 	private void writeLog(String message) {
 	   	SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss]");
-	   	System.out.println(sdf.format(new Date()) +  message);
+	   	//System.out.println(sdf.format(new Date()) +  message);
 	   	String hostName;
 	   	 try {
 			hostName = java.net.InetAddress.getLocalHost().getHostName();
