@@ -13,6 +13,8 @@ import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import accessor_two.werkzeug;
+
 public class ClassOneImpl extends ClassOneImplBase {
 	private String name;
 	private String host;
@@ -32,9 +34,11 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String msg = result[1];
 		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
+			werkzeug.printResult("accessor_two.ClassOneImpl", name, "methodOne", param1, param2, Double.parseDouble(msg));
 			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + " params("+  param1 + ":" + param2 + ") return: " + returnValue.toString());
 			return Double.parseDouble(msg);
-		}	
+		}
+		werkzeug.printError("accessor_two.ClassOneImpl", name, "methodOne", param1, param2, "SomeException112",msg);
 		writeLog("accessor_two.ClassOneImpl.methodOne.SomeException112: " +msg);
 		throw new SomeException112(msg);
 	}
@@ -46,12 +50,15 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String msg = result[1];
 		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
+			werkzeug.printResult("accessor_two.ClassOneImpl", name, "methodTwo", param1, param2, Double.parseDouble(msg));
 			writeLog("accessor_two.ClassOneImpl.methodOne:" + name + ":" + " params("+  param1 + ":" + param2 + ") return: " + returnValue.toString());
 			return Double.parseDouble(msg);
 		} else if ( type == SomeException112.class.getName()) {	
+			werkzeug.printError("accessor_two.ClassOneImpl", name, "methodTwo", param1, param2, "SomeException112", msg);
 			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException112: " + msg);
 			throw new SomeException112(msg);
 		} else {	
+			werkzeug.printError("accessor_two.ClassOneImpl", name, "methodTwo", param1, param2, "SomeException304", msg);
 			writeLog("accessor_two.ClassOneImpl.methodTwo.SomeException304: " + msg);
 			throw new SomeException304(msg);
 		}

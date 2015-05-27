@@ -1,0 +1,56 @@
+[15-05-27 05:42:41 ]Starting namesevice on port 5655 allowing 500 concurrent connections
+[15-05-27 05:42:41 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 05:43:50 1 ] connetion opened
+[15-05-27 05:43:50 3 ] connetion opened
+[15-05-27 05:43:50 2 ] connetion opened
+[15-05-27 05:43:50 1 ] RAW INCOMING: rebind:XEN-NB:53685:a1c1
+[15-05-27 05:43:50 1 ] rebind Name:a1c1 @ XEN-NB:53685
+[15-05-27 05:43:50 1 ] RAW INCOMING: close
+[15-05-27 05:43:50 1 ] Close...
+[15-05-27 05:43:50 1 ] connection closed
+[15-05-27 05:43:50 2 ] RAW INCOMING: rebind:XEN-NB:53685:a1c2
+[15-05-27 05:43:50 2 ] rebind Name:a1c2 @ XEN-NB:53685
+[15-05-27 05:43:50 2 ] RAW INCOMING: close
+[15-05-27 05:43:50 2 ] Close...
+[15-05-27 05:43:50 3 ] RAW INCOMING: rebind:XEN-NB:53685:a2c1
+[15-05-27 05:43:50 3 ] rebind Name:a2c1 @ XEN-NB:53685
+[15-05-27 05:43:50 3 ] RAW INCOMING: close
+[15-05-27 05:43:50 3 ] Close...
+[15-05-27 05:43:50 3 ] connection closed
+[15-05-27 05:43:50 2 ] connection closed
+[15-05-27 05:44:41 4 ] connetion opened
+[15-05-27 05:44:41 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 05:44:41 4 ] resolve Name:a1c1 @ XEN-NB:53685
+[15-05-27 05:44:41 4 ] RAW INCOMING: close
+[15-05-27 05:44:41 4 ] Close...
+[15-05-27 05:44:41 4 ] connection closed
+[15-05-27 05:44:41 5 ] connetion opened
+[15-05-27 05:44:41 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 05:44:41 5 ] resolve Name:a1c2 @ XEN-NB:53685
+[15-05-27 05:44:41 5 ] RAW INCOMING: close
+[15-05-27 05:44:41 5 ] Close...
+[15-05-27 05:44:41 5 ] connection closed
+[15-05-27 05:44:41 6 ] connetion opened
+[15-05-27 05:44:41 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 05:44:41 6 ] resolve Name:a2c1 @ XEN-NB:53685
+[15-05-27 05:44:41 6 ] RAW INCOMING: close
+[15-05-27 05:44:41 6 ] Close...
+[15-05-27 05:44:41 6 ] connection closed
+[15-05-27 05:46:29 7 ] connetion opened
+[15-05-27 05:46:29 7 ] RAW INCOMING: resolve:a1c1
+[15-05-27 05:46:29 7 ] resolve Name:a1c1 @ XEN-NB:53685
+[15-05-27 05:46:29 7 ] RAW INCOMING: close
+[15-05-27 05:46:29 7 ] Close...
+[15-05-27 05:46:29 7 ] connection closed
+[15-05-27 05:46:29 8 ] connetion opened
+[15-05-27 05:46:29 8 ] RAW INCOMING: resolve:a1c2
+[15-05-27 05:46:29 8 ] resolve Name:a1c2 @ XEN-NB:53685
+[15-05-27 05:46:29 8 ] RAW INCOMING: close
+[15-05-27 05:46:29 8 ] Close...
+[15-05-27 05:46:29 8 ] connection closed
+[15-05-27 05:46:29 9 ] connetion opened
+[15-05-27 05:46:29 9 ] RAW INCOMING: resolve:a2c1
+[15-05-27 05:46:29 9 ] resolve Name:a2c1 @ XEN-NB:53685
+[15-05-27 05:46:29 9 ] RAW INCOMING: close
+[15-05-27 05:46:29 9 ] Close...
+[15-05-27 05:46:29 9 ] connection closed

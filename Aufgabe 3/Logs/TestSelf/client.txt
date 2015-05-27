@@ -1,0 +1,66 @@
+--------------------------------------------------------------
+accessor_one.ClassOneImpl ('a1c1')
+methodOne
+param1 = "hi there!"
+param2 = 567
+Return value = 'hi there!568'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassOneImpl ('a1c1')
+methodOne
+param1 = "hi there!"
+param2 = 1337
+SomeException112 with message 'Param2 was to leet!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassTwoImpl ('a1c2')
+methodOne
+param1 = 5.0
+Return value = 5
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassTwoImpl ('a1c2')
+methodOne
+param1 = 1337.0
+SomeException110 with message 'You cant write numbers above 1336!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_one.ClassTwoImpl ('a1c2')
+methodTwo
+SomeException112 with message '50 / 50 chance. You failed!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_two.ClassOneImpl ('a2c1')
+methodOne
+param1 = "RemoteCall!"
+param2 = 300.1
+Return value = -300.1
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_two.ClassOneImpl ('a2c1')
+methodOne
+param1 = "RemoteCall!"
+param2 = -300.1
+SomeException112 with message 'Param2 cant be negative!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_two.ClassOneImpl ('a2c1')
+methodTwo
+param1 = "RemoteCall!"
+param2 = 0.0
+Return value = 0.0
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_two.ClassOneImpl ('a2c1')
+methodTwo
+param1 = "RemoteCall!"
+param2 = -1.0
+SomeException304 with message 'Param2 cant be negative!'
+--------------------------------------------------------------
+--------------------------------------------------------------
+accessor_two.ClassOneImpl ('a2c1')
+methodTwo
+param1 = "RemoteCall!"
+param2 = 1.0
+SomeException304 with message 'Param2 cant be positive!'
+--------------------------------------------------------------

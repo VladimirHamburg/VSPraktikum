@@ -1,0 +1,100 @@
+[15-05-27 05:44:41 1 ] connection opened
+[15-05-27 05:44:41 1 ] RAW INCOMING: a1c1:methodOne:hi there!:567
+[15-05-27 05:44:41 1 ] RAW INCOMING: close
+[15-05-27 05:44:41 1 ] Close...
+[15-05-27 05:44:41 1 ] connection closed
+[15-05-27 05:44:41 2 ] connection opened
+[15-05-27 05:44:41 2 ] RAW INCOMING: a1c1:methodOne:hi there!:1337
+[15-05-27 05:44:41 2 ] RAW INCOMING: close
+[15-05-27 05:44:41 2 ] Close...
+[15-05-27 05:44:41 2 ] connection closed
+[15-05-27 05:44:41 3 ] connection opened
+[15-05-27 05:44:41 3 ] RAW INCOMING: a1c2:methodOne:5.0
+[15-05-27 05:44:41 3 ] RAW INCOMING: close
+[15-05-27 05:44:41 3 ] Close...
+[15-05-27 05:44:41 4 ] connection opened
+[15-05-27 05:44:41 3 ] connection closed
+[15-05-27 05:44:41 4 ] RAW INCOMING: a1c2:methodOne:1337.0
+[15-05-27 05:44:41 4 ] RAW INCOMING: close
+[15-05-27 05:44:41 4 ] Close...
+[15-05-27 05:44:41 4 ] connection closed
+[15-05-27 05:44:41 5 ] connection opened
+[15-05-27 05:44:41 5 ] RAW INCOMING: a1c2:methodTwo
+[15-05-27 05:44:41 5 ] RAW INCOMING: close
+[15-05-27 05:44:41 5 ] Close...
+[15-05-27 05:44:41 5 ] connection closed
+[15-05-27 05:44:41 6 ] connection opened
+[15-05-27 05:44:41 6 ] RAW INCOMING: a2c1:methodOne:RemoteCall!:300.1
+[15-05-27 05:44:41 6 ] RAW INCOMING: close
+[15-05-27 05:44:41 6 ] Close...
+[15-05-27 05:44:41 6 ] connection closed
+[15-05-27 05:44:41 7 ] connection opened
+[15-05-27 05:44:41 7 ] RAW INCOMING: a2c1:methodOne:RemoteCall!:-300.1
+[15-05-27 05:44:41 7 ] RAW INCOMING: close
+[15-05-27 05:44:41 7 ] Close...
+[15-05-27 05:44:41 7 ] connection closed
+[15-05-27 05:44:41 8 ] connection opened
+[15-05-27 05:44:41 8 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:0.0
+[15-05-27 05:44:41 8 ] RAW INCOMING: close
+[15-05-27 05:44:41 8 ] Close...
+[15-05-27 05:44:41 9 ] connection opened
+[15-05-27 05:44:41 8 ] connection closed
+[15-05-27 05:44:41 9 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:-1.0
+[15-05-27 05:44:41 9 ] RAW INCOMING: close
+[15-05-27 05:44:41 9 ] Close...
+[15-05-27 05:44:41 9 ] connection closed
+[15-05-27 05:44:41 10 ] connection opened
+[15-05-27 05:44:41 10 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:1.0
+[15-05-27 05:44:41 10 ] RAW INCOMING: close
+[15-05-27 05:44:41 10 ] Close...
+[15-05-27 05:44:41 10 ] connection closed
+[15-05-27 05:46:29 11 ] connection opened
+[15-05-27 05:46:29 11 ] RAW INCOMING: a1c1:methodOne:hi there!:567
+[15-05-27 05:46:29 11 ] RAW INCOMING: close
+[15-05-27 05:46:29 11 ] Close...
+[15-05-27 05:46:29 12 ] connection opened
+[15-05-27 05:46:29 11 ] connection closed
+[15-05-27 05:46:29 12 ] RAW INCOMING: a1c1:methodOne:hi there!:1337
+[15-05-27 05:46:29 12 ] RAW INCOMING: close
+[15-05-27 05:46:29 12 ] Close...
+[15-05-27 05:46:29 12 ] connection closed
+[15-05-27 05:46:29 13 ] connection opened
+[15-05-27 05:46:29 13 ] RAW INCOMING: a1c2:methodOne:5.0
+[15-05-27 05:46:29 13 ] RAW INCOMING: close
+[15-05-27 05:46:29 13 ] Close...
+[15-05-27 05:46:29 13 ] connection closed
+[15-05-27 05:46:29 14 ] connection opened
+[15-05-27 05:46:29 14 ] RAW INCOMING: a1c2:methodOne:1337.0
+[15-05-27 05:46:29 14 ] RAW INCOMING: close
+[15-05-27 05:46:29 14 ] Close...
+[15-05-27 05:46:29 14 ] connection closed
+[15-05-27 05:46:29 15 ] connection opened
+[15-05-27 05:46:29 15 ] RAW INCOMING: a1c2:methodTwo
+[15-05-27 05:46:29 15 ] RAW INCOMING: close
+[15-05-27 05:46:29 15 ] Close...
+[15-05-27 05:46:29 15 ] connection closed
+[15-05-27 05:46:29 16 ] connection opened
+[15-05-27 05:46:29 16 ] RAW INCOMING: a2c1:methodOne:RemoteCall!:300.1
+[15-05-27 05:46:29 17 ] connection opened
+[15-05-27 05:46:29 16 ] RAW INCOMING: close
+[15-05-27 05:46:29 17 ] RAW INCOMING: a2c1:methodOne:RemoteCall!:-300.1
+[15-05-27 05:46:29 17 ] RAW INCOMING: close
+[15-05-27 05:46:29 17 ] Close...
+[15-05-27 05:46:29 17 ] connection closed
+[15-05-27 05:46:29 16 ] Close...
+[15-05-27 05:46:29 18 ] connection opened
+[15-05-27 05:46:29 16 ] connection closed
+[15-05-27 05:46:29 18 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:0.0
+[15-05-27 05:46:29 18 ] RAW INCOMING: close
+[15-05-27 05:46:29 18 ] Close...
+[15-05-27 05:46:29 18 ] connection closed
+[15-05-27 05:46:29 19 ] connection opened
+[15-05-27 05:46:29 19 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:-1.0
+[15-05-27 05:46:29 19 ] RAW INCOMING: close
+[15-05-27 05:46:29 19 ] Close...
+[15-05-27 05:46:29 19 ] connection closed
+[15-05-27 05:46:29 20 ] connection opened
+[15-05-27 05:46:29 20 ] RAW INCOMING: a2c1:methodTwo:RemoteCall!:1.0
+[15-05-27 05:46:29 20 ] RAW INCOMING: close
+[15-05-27 05:46:29 20 ] Close...
+[15-05-27 05:46:29 20 ] connection closed
