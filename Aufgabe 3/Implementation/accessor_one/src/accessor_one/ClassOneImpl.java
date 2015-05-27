@@ -32,8 +32,8 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String[] result = sendReceive(name + ":methodOne:" + param1 + ":" + param2).split(":");
 		String type = result[0]; 
 		String msg = result[1];
-		if (type == "result") {
-			writeLog("accessor_one.ClassOneImpl.methodOne:" + name + ":" + param1 + ":" + param2 + " return:" + msg);
+		if (type.equals("result")) {
+			writeLog("accessor_one.ClassOneImpl.methodOne:" + name + ":" +" params("+ param1 + ":" + param2 + ") return: " + msg);
 			return msg;
 		}
 		writeLog("accessor_one.ClassOneImpl.methodOne.SomeException112: " + msg);
@@ -64,7 +64,7 @@ public class ClassOneImpl extends ClassOneImplBase {
 	
 	private void writeLog(String message) {
 	   	 SimpleDateFormat sdf = new SimpleDateFormat("[yy-MM-dd hh:mm:ss]");
-	   	 System.out.println(sdf.format(new Date()) +  message);
+	   	 //System.out.println(sdf.format(new Date()) +  message);
 	   	String hostName;
 	   	 try {
 			hostName = java.net.InetAddress.getLocalHost().getHostName();
