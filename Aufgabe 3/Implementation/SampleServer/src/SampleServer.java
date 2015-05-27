@@ -8,7 +8,8 @@ import mware_lib.*;
 public class SampleServer {
 
 	public static void main(String[] args) throws UnknownHostException, InterruptedException {
-
+		
+		try {
 		// Create sample objects
 		// Sequenzdiagram  1
 		A1SampleClassOne a1c1 = new A1SampleClassOne();
@@ -16,7 +17,7 @@ public class SampleServer {
 		A2SampleClassOne a2c1 = new A2SampleClassOne();
 		
 		// Sequenzdiagram  2
-		ObjectBroker objBroker = ObjectBroker.init("lab25", 5655, true);
+		ObjectBroker objBroker = ObjectBroker.init(args[0], Integer.parseInt(args[1]), true);
 		
 		// Sequenzdiagram  3
 		NameService nameSvc = objBroker.getNameService();
@@ -24,6 +25,9 @@ public class SampleServer {
 		nameSvc.rebind((Object) a1c1, "a1c1");
 		nameSvc.rebind((Object) a1c2, "a1c2");
 		nameSvc.rebind((Object) a2c1, "a2c1");
+		} catch (Exception e) {
+			System.out.println("Usage: SampleServer <NS_Host> <NS_Port>");
+		}
 		
 	}
 	

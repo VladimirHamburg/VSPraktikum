@@ -10,8 +10,14 @@ import mware_lib.*;
 public class SampleClient {
 
 	public static void main(String[] args) throws UnknownHostException {
+		ObjectBroker objBroker;
+		try {
 		// Sequenzdiagram  8
-		ObjectBroker objBroker = ObjectBroker.init("lab25", 5655, true);
+			objBroker = ObjectBroker.init(args[0], Integer.parseInt(args[1]), true);
+		} catch (Exception e) {
+			System.out.println("Usage: SampleClient <NS_Host> <NS_Port>");
+			return;
+		}
 		// Sequenzdiagram  9 + 10
 		NameService nameSvc = objBroker.getNameService();
 		
