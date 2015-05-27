@@ -1,4 +1,4 @@
-package logik;
+package sampleserver2;
 
 import java.net.UnknownHostException;
 

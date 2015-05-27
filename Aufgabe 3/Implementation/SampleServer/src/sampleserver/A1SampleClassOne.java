@@ -1,4 +1,4 @@
-package logik;
+package sampleserver;
 import accessor_one.ClassOneImplBase;
 import accessor_one.SomeException112;
 

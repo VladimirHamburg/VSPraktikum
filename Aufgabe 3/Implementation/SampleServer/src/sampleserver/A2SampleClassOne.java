@@ -1,3 +1,4 @@
+package sampleserver;
 import accessor_two.*;
 
 public class A2SampleClassOne extends ClassOneImplBase {

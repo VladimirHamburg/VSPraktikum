@@ -1,4 +1,4 @@
-package logik;
+package sampleserver;
 import java.util.*;
 
 import accessor_one.*;

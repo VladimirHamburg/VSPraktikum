@@ -1,3 +1,4 @@
+package sampleserver2;
 import accessor_one.ClassOneImplBase;
 import accessor_one.SomeException112;
 
