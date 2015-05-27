@@ -35,7 +35,4 @@ public abstract class ClassOneImplBase implements Invokeable {
    	 String logEntry = sdf.format(new Date())+ " ] " +  message;
    	 System.out.println(logEntry);
    }
-	
-	
-	
 }

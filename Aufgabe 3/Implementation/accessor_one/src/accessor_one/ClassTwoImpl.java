@@ -31,9 +31,11 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 		String msg = result[1];
 		if (type.equals("result")) {
 			Integer returnValue = Integer.parseInt(msg);
+			werkzeug.printResult("accessor_one.ClassTwoImpl", name, "methodOne", param1, Integer.parseInt(msg));
 			writeLog("accessor_one.ClassTwoImpl.methodOne:" + name + "params("+ ":" + param1 + ") return: " + returnValue.toString());
 			return Integer.parseInt(msg);
 		}
+		werkzeug.printError("accessor_one.ClassTwoImpl", name, "methodOne", param1, "SomeException110", msg);
 		writeLog("accessor_one.ClassTwoImpl.methodOne.SomeException110: " + msg); 
 		throw new SomeException110(msg);
 	}
@@ -45,9 +47,11 @@ public class ClassTwoImpl extends ClassTwoImplBase {
 		String msg = result[1];
 		if (type.equals("result")) {
 			Double returnValue = Double.parseDouble(msg);
+			werkzeug.printResult("accessor_one.ClassTwoImpl", name, "methodTwo", Double.parseDouble(msg));
 			writeLog("accessor_one.ClassTwoImpl.methodTwo:" + name +  " return: " + returnValue.toString());
 			return Double.parseDouble(msg);
-		}	
+		}
+		werkzeug.printError("accessor_one.ClassTwoImpl", name, "methodTwo", "SomeException112", msg);
 		writeLog("accessor_one.ClassTwoImpl.methodTwo.SomeException112: " + msg); 
 		throw new SomeException112(msg);
 	}
