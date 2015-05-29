@@ -1,5 +1,5 @@
 1.Um Namesdienst zu starten wird folgender Befehl benutzt:
-	java nameservice/NameService <port>
+	java nameservice/NameServiceStarter <port>
 <port> ist der Port auf dem der Namesdienst lauscht.
 
 2.Damit die Testprogramme ausgeührt werden können, muss ein Namensdienst vorhanden sein. Die Packeges der Middleware sollen auf einer Ordner-Ebene mit Testprogrammen sein. Die Reinfolge soll eingehalten werden. 
@@ -10,3 +10,5 @@ Die Test-Programme werden wie folgt gestartertet:
 
 	java sampleclient/SampleClient <NS_host> <NS_port> 
 
+<NS_host> Name des Rechners wo der Namesdienst läuft.
+<NS_port> Port von diesem.
