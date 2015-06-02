@@ -32,11 +32,9 @@ public class ClassOneImpl extends ClassOneImplBase {
 		String type = result[0]; 
 		String msg = result[1];
 		if (type.equals("result")) {
-			werkzeug.printResult("accessor_one.ClassOneImpl", name, "methodOne", param1, param2, msg);
 			//writeLog("accessor_one.ClassOneImpl.methodOne:" + name + ":" +" params("+ param1 + ":" + param2 + ") return: " + msg);
 			return msg;
 		}
-		werkzeug.printError("accessor_one.ClassOneImpl", name, "methodOne", param1, param2, "SomeException112", msg);
 		//writeLog("accessor_one.ClassOneImpl.methodOne.SomeException112: " + msg);
 		throw new SomeException112(msg);
 	}

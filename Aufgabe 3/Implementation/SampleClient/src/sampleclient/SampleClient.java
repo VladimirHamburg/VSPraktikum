@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import accessor_one.*;
-import accessor_one.werkzeug;
+import sampleclient.werkzeug;
 import accessor_two.*;
 import mware_lib.*;
 
