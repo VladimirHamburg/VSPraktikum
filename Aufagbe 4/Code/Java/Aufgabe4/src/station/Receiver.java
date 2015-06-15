@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
+import java.sql.Time;
 
 public class Receiver implements Runnable {
 	private String ipAddress = "225.10.1.2";
@@ -14,12 +15,16 @@ public class Receiver implements Runnable {
 	private byte[] buffer;
 	private InetAddress real_address;
 	private Boolean work_flag = true;
+	private SlotManager slotMan;
+	private TimeManager timeMan;
 	
 
-	public Receiver(String ipAddress, String adapter, int port) {
+	public Receiver(String ipAddress, String adapter, int port, SlotManager slotMan, TimeManager timeMan) {
 		this.ipAddress = ipAddress;
 		this.adapter = adapter;
 		this.port = port;
+		this.slotMan = slotMan;
+		this.timeMan = timeMan;
 		buffer = new byte[34];
 		try {
 			real_address = InetAddress.getByName(this.ipAddress);
