@@ -45,7 +45,7 @@ public class Receiver implements Runnable {
 				DatagramPacket msgPacket = new DatagramPacket(buffer, buffer.length);
 				mSocket.receive(msgPacket);
 				
-				// TODO Daten weiterleitung
+				// TODO Daten weiterleiten
 			}
 			
 		} catch (IOException ex) {

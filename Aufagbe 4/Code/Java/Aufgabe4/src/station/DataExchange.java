@@ -19,8 +19,8 @@ public class DataExchange {
 	}
 	
 	public void proceed(int frameN){
-		if(buffer.size() == 1){
-			// TODO: Datenweiterleiten
+		if(buffer.size() == 1&& frameN != 1){
+			// TODO: Daten weiterleiten
 		}else{
 			buffer = new ArrayList<>();
 		}
