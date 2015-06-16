@@ -1,0 +1,24 @@
+[15-05-27 11:45:03]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-27 11:45:03]accessor_one.ClassOneImpl.methodOne:a1c1:hi there!:567 return:hi there!568
+[15-05-27 11:45:03]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-27 11:45:03]accessor_one.ClassTwoImpl.methodOne:a1c2:5.0 return:5
+[15-05-27 11:45:03]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-27 11:45:03]accessor_one.ClassTwoImpl.methodTwo.SomeException112: 50 / 50 chance. You failed!
+[15-05-27 11:49:12]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-27 11:49:13]accessor_one.ClassOneImpl.methodOne:a1c1:hi there!:567 return:hi there!568
+[15-05-27 11:49:13]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-27 11:49:13]accessor_one.ClassTwoImpl.methodOne:a1c2:5.0 return:5
+[15-05-27 11:49:13]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-27 11:49:13]accessor_one.ClassTwoImpl.methodTwo:a1c2 return:1337.3
+[15-05-27 11:52:41]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-27 11:52:41]accessor_one.ClassOneImpl.methodOne:a1c1:params(hi there!:567) return:hi there!568
+[15-05-27 11:52:41]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-27 11:52:41]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return:5
+[15-05-27 11:52:41]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-27 11:52:41]accessor_one.ClassTwoImpl.methodTwo:a1c2 return:1337.3
+[15-05-27 11:54:08]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-27 11:54:08]accessor_one.ClassOneImpl.methodOne:a1c1: params(hi there!:567) return:hi there!568
+[15-05-27 11:54:08]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-27 11:54:08]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return:5
+[15-05-27 11:54:08]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-27 11:54:08]accessor_one.ClassTwoImpl.methodTwo:a1c2 return:1337.3

@@ -1,0 +1,76 @@
+[15-06-03 11:03:27 ]Starting namesevice on port 5555 allowing 500 concurrent connections
+[15-06-03 11:03:27 ]NameServer: Waiting for connection - listening on TCP port 5555
+[15-06-03 11:05:11 1 ] connetion opened
+[15-06-03 11:05:11 2 ] connetion opened
+[15-06-03 11:05:11 3 ] connetion opened
+[15-06-03 11:05:11 3 ] RAW INCOMING: rebind:STUDIUM:44694:a2c1
+[15-06-03 11:05:11 2 ] RAW INCOMING: rebind:STUDIUM:44694:a1c2
+[15-06-03 11:05:11 1 ] RAW INCOMING: rebind:STUDIUM:44694:a1c1
+[15-06-03 11:05:11 2 ] rebind Name:a1c2 @ STUDIUM:44694
+[15-06-03 11:05:11 1 ] rebind Name:a1c1 @ STUDIUM:44694
+[15-06-03 11:05:11 3 ] rebind Name:a2c1 @ STUDIUM:44694
+[15-06-03 11:05:11 1 ] RAW INCOMING: close
+[15-06-03 11:05:11 2 ] RAW INCOMING: close
+[15-06-03 11:05:11 3 ] RAW INCOMING: close
+[15-06-03 11:05:11 2 ] Close...
+[15-06-03 11:05:11 3 ] Close...
+[15-06-03 11:05:11 1 ] Close...
+[15-06-03 11:05:11 2 ] connection closed
+[15-06-03 11:05:11 3 ] connection closed
+[15-06-03 11:05:11 1 ] connection closed
+[15-06-03 11:05:35 4 ] connetion opened
+[15-06-03 11:05:35 4 ] RAW INCOMING: resolve:a1c1
+[15-06-03 11:05:35 4 ] resolve Name:a1c1 @ STUDIUM:44694
+[15-06-03 11:05:35 4 ] RAW INCOMING: close
+[15-06-03 11:05:35 4 ] Close...
+[15-06-03 11:05:35 4 ] connection closed
+[15-06-03 11:05:35 5 ] connetion opened
+[15-06-03 11:05:35 5 ] RAW INCOMING: resolve:a1c2
+[15-06-03 11:05:35 5 ] resolve Name:a1c2 @ STUDIUM:44694
+[15-06-03 11:05:35 5 ] RAW INCOMING: close
+[15-06-03 11:05:35 5 ] Close...
+[15-06-03 11:05:35 6 ] connetion opened
+[15-06-03 11:05:35 5 ] connection closed
+[15-06-03 11:05:35 6 ] RAW INCOMING: resolve:a2c1
+[15-06-03 11:05:35 6 ] resolve Name:a2c1 @ STUDIUM:44694
+[15-06-03 11:05:35 6 ] RAW INCOMING: close
+[15-06-03 11:05:35 6 ] Close...
+[15-06-03 11:05:35 6 ] connection closed
+[15-06-03 11:07:19 7 ] connetion opened
+[15-06-03 11:07:19 7 ] RAW INCOMING: rebind:STUDIUM:48164:zumsel1
+[15-06-03 11:07:19 7 ] rebind Name:zumsel1 @ STUDIUM:48164
+[15-06-03 11:07:19 7 ] RAW INCOMING: close
+[15-06-03 11:07:19 7 ] Close...
+[15-06-03 11:07:19 7 ] connection closed
+[15-06-03 11:07:19 8 ] connetion opened
+[15-06-03 11:07:19 8 ] RAW INCOMING: rebind:STUDIUM:48164:zumsel2
+[15-06-03 11:07:19 8 ] rebind Name:zumsel2 @ STUDIUM:48164
+[15-06-03 11:07:19 8 ] RAW INCOMING: close
+[15-06-03 11:07:19 9 ] connetion opened
+[15-06-03 11:07:19 8 ] Close...
+[15-06-03 11:07:19 9 ] RAW INCOMING: rebind:STUDIUM:48164:zumsel3
+[15-06-03 11:07:19 8 ] connection closed
+[15-06-03 11:07:19 9 ] rebind Name:zumsel3 @ STUDIUM:48164
+[15-06-03 11:07:19 9 ] RAW INCOMING: close
+[15-06-03 11:07:19 9 ] Close...
+[15-06-03 11:07:19 9 ] connection closed
+[15-06-03 11:07:56 10 ] connetion opened
+[15-06-03 11:07:56 10 ] RAW INCOMING: resolve:zumsel1
+[15-06-03 11:07:56 10 ] resolve Name:zumsel1 @ STUDIUM:48164
+[15-06-03 11:07:56 10 ] RAW INCOMING: close
+[15-06-03 11:07:56 10 ] Close...
+[15-06-03 11:07:56 10 ] connection closed
+[15-06-03 11:07:56 11 ] connetion opened
+[15-06-03 11:07:56 11 ] RAW INCOMING: resolve:zumsel2
+[15-06-03 11:07:56 11 ] resolve Name:zumsel2 @ STUDIUM:48164
+[15-06-03 11:07:56 11 ] RAW INCOMING: close
+[15-06-03 11:07:56 11 ] Close...
+[15-06-03 11:07:56 11 ] connection closed
+[15-06-03 11:07:57 12 ] connetion opened
+[15-06-03 11:07:57 12 ] RAW INCOMING: resolve:zumsel3
+[15-06-03 11:07:57 12 ] resolve Name:zumsel3 @ STUDIUM:48164
+[15-06-03 11:07:57 12 ] RAW INCOMING: close
+[15-06-03 11:07:57 12 ] Close...
+[15-06-03 11:07:57 12 ] connection closed
+[15-06-11 05:51:51 ]Starting namesevice on port 5555 allowing 500 concurrent connections
+[15-06-11 05:51:51 ]NameServer: Waiting for connection - listening on TCP port 5555

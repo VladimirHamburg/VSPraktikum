@@ -1,0 +1,584 @@
+[15-05-27 05:28:46 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-27 05:28:46 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-27 05:29:16 1 ] connetion opened
+[15-05-27 05:29:16 2 ] connetion opened
+[15-05-27 05:29:16 1 ] RAW INCOMING: rebind:STUDIUM:64399:a1c1
+[15-05-27 05:29:16 2 ] RAW INCOMING: rebind:STUDIUM:64399:a1c2
+[15-05-27 05:29:16 3 ] connetion opened
+[15-05-27 05:29:16 3 ] RAW INCOMING: rebind:STUDIUM:64399:a2c1
+[15-05-27 05:29:16 2 ] rebind Name:a1c2 @ STUDIUM:64399
+[15-05-27 05:29:16 3 ] rebind Name:a2c1 @ STUDIUM:64399
+[15-05-27 05:29:16 2 ] RAW INCOMING: close
+[15-05-27 05:29:16 2 ] Close...
+[15-05-27 05:29:16 3 ] RAW INCOMING: close
+[15-05-27 05:29:16 1 ] rebind Name:a1c1 @ STUDIUM:64399
+[15-05-27 05:29:16 3 ] Close...
+[15-05-27 05:29:16 1 ] RAW INCOMING: close
+[15-05-27 05:29:16 1 ] Close...
+[15-05-27 05:29:16 2 ] connection closed
+[15-05-27 05:29:16 3 ] connection closed
+[15-05-27 05:29:16 1 ] connection closed
+[15-05-27 05:30:04 4 ] connetion opened
+[15-05-27 05:30:04 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 05:30:04 4 ] resolve Name:a1c1 @ STUDIUM:64399
+[15-05-27 05:30:04 4 ] RAW INCOMING: close
+[15-05-27 05:30:04 4 ] Close...
+[15-05-27 05:30:04 4 ] connection closed
+[15-05-27 05:30:04 5 ] connetion opened
+[15-05-27 05:30:04 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 05:30:04 5 ] resolve Name:a1c2 @ STUDIUM:64399
+[15-05-27 05:30:04 5 ] RAW INCOMING: close
+[15-05-27 05:30:04 5 ] Close...
+[15-05-27 05:30:04 5 ] connection closed
+[15-05-27 05:30:04 6 ] connetion opened
+[15-05-27 05:30:04 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 05:30:04 6 ] resolve Name:a2c1 @ STUDIUM:64399
+[15-05-27 05:30:04 6 ] RAW INCOMING: close
+[15-05-27 05:30:04 6 ] Close...
+[15-05-27 05:30:04 6 ] connection closed
+[15-05-29 03:49:43 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-29 03:49:43 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-29 03:49:53 1 ] connetion opened
+[15-05-29 03:49:53 2 ] connetion opened
+[15-05-29 03:49:53 3 ] connetion opened
+[15-05-29 03:49:53 2 ] RAW INCOMING: rebind:STUDIUM:64676:a1c2
+[15-05-29 03:49:53 3 ] RAW INCOMING: rebind:STUDIUM:64676:a2c1
+[15-05-29 03:49:53 2 ] rebind Name:a1c2 @ STUDIUM:64676
+[15-05-29 03:49:53 2 ] RAW INCOMING: close
+[15-05-29 03:49:53 2 ] Close...
+[15-05-29 03:49:53 3 ] rebind Name:a2c1 @ STUDIUM:64676
+[15-05-29 03:49:53 1 ] RAW INCOMING: rebind:STUDIUM:64676:a1c1
+[15-05-29 03:49:53 2 ] connection closed
+[15-05-29 03:49:53 3 ] RAW INCOMING: close
+[15-05-29 03:49:53 1 ] rebind Name:a1c1 @ STUDIUM:64676
+[15-05-29 03:49:53 1 ] RAW INCOMING: close
+[15-05-29 03:49:53 3 ] Close...
+[15-05-29 03:49:53 1 ] Close...
+[15-05-29 03:49:53 3 ] connection closed
+[15-05-29 03:49:53 1 ] connection closed
+[15-05-29 03:50:09 4 ] connetion opened
+[15-05-29 03:50:09 4 ] RAW INCOMING: resolve:a1c1
+[15-05-29 03:50:09 4 ] resolve Name:a1c1 @ STUDIUM:64676
+[15-05-29 03:50:09 4 ] RAW INCOMING: close
+[15-05-29 03:50:09 4 ] Close...
+[15-05-29 03:50:09 4 ] connection closed
+[15-05-29 03:50:09 5 ] connetion opened
+[15-05-29 03:50:09 5 ] RAW INCOMING: resolve:a1c2
+[15-05-29 03:50:09 5 ] resolve Name:a1c2 @ STUDIUM:64676
+[15-05-29 03:50:09 5 ] RAW INCOMING: close
+[15-05-29 03:50:09 5 ] Close...
+[15-05-29 03:50:09 5 ] connection closed
+[15-05-29 03:50:09 6 ] connetion opened
+[15-05-29 03:50:09 6 ] RAW INCOMING: resolve:a2c1
+[15-05-29 03:50:09 6 ] resolve Name:a2c1 @ STUDIUM:64676
+[15-05-29 03:50:09 6 ] RAW INCOMING: close
+[15-05-29 03:50:09 6 ] Close...
+[15-05-29 03:50:09 6 ] connection closed
+[15-05-29 03:51:48 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-29 03:51:48 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-29 03:51:56 2 ] connetion opened
+[15-05-29 03:51:56 1 ] connetion opened
+[15-05-29 03:51:56 3 ] connetion opened
+[15-05-29 03:51:56 3 ] RAW INCOMING: rebind:STUDIUM:56784:a2c1
+[15-05-29 03:51:56 2 ] RAW INCOMING: rebind:STUDIUM:56784:a1c2
+[15-05-29 03:51:56 1 ] RAW INCOMING: rebind:STUDIUM:56784:a1c1
+[15-05-29 03:51:56 3 ] rebind Name:a2c1 @ STUDIUM:56784
+[15-05-29 03:51:56 2 ] rebind Name:a1c2 @ STUDIUM:56784
+[15-05-29 03:51:56 2 ] RAW INCOMING: close
+[15-05-29 03:51:56 3 ] RAW INCOMING: close
+[15-05-29 03:51:56 2 ] Close...
+[15-05-29 03:51:56 3 ] Close...
+[15-05-29 03:51:56 2 ] connection closed
+[15-05-29 03:51:56 3 ] connection closed
+[15-05-29 03:51:57 1 ] rebind Name:a1c1 @ STUDIUM:56784
+[15-05-29 03:51:57 1 ] RAW INCOMING: close
+[15-05-29 03:51:57 1 ] Close...
+[15-05-29 03:51:57 1 ] connection closed
+[15-05-29 03:52:04 4 ] connetion opened
+[15-05-29 03:52:04 4 ] RAW INCOMING: resolve:a1c1
+[15-05-29 03:52:04 4 ] resolve Name:a1c1 @ STUDIUM:56784
+[15-05-29 03:52:04 4 ] RAW INCOMING: close
+[15-05-29 03:52:04 4 ] Close...
+[15-05-29 03:52:04 4 ] connection closed
+[15-05-29 03:52:04 5 ] connetion opened
+[15-05-29 03:52:04 5 ] RAW INCOMING: resolve:a1c2
+[15-05-29 03:52:04 5 ] resolve Name:a1c2 @ STUDIUM:56784
+[15-05-29 03:52:04 5 ] RAW INCOMING: close
+[15-05-29 03:52:04 5 ] Close...
+[15-05-29 03:52:04 5 ] connection closed
+[15-05-29 03:52:04 6 ] connetion opened
+[15-05-29 03:52:04 6 ] RAW INCOMING: resolve:a2c1
+[15-05-29 03:52:04 6 ] resolve Name:a2c1 @ STUDIUM:56784
+[15-05-29 03:52:04 6 ] RAW INCOMING: close
+[15-05-29 03:52:04 6 ] Close...
+[15-05-29 03:52:04 6 ] connection closed
+[15-05-29 04:44:20 9 ] connetion opened
+[15-05-29 04:44:20 7 ] connetion opened
+[15-05-29 04:44:20 8 ] connetion opened
+[15-05-29 04:44:20 9 ] RAW INCOMING: rebind:STUDIUM:51410:a2c1
+[15-05-29 04:44:20 8 ] RAW INCOMING: rebind:STUDIUM:51410:a1c2
+[15-05-29 04:44:20 7 ] RAW INCOMING: rebind:STUDIUM:51410:a1c1
+[15-05-29 04:44:20 9 ] rebind Name:a2c1 @ STUDIUM:51410
+[15-05-29 04:44:20 8 ] rebind Name:a1c2 @ STUDIUM:51410
+[15-05-29 04:44:20 7 ] rebind Name:a1c1 @ STUDIUM:51410
+[15-05-29 04:44:20 9 ] RAW INCOMING: close
+[15-05-29 04:44:20 7 ] RAW INCOMING: close
+[15-05-29 04:44:20 8 ] RAW INCOMING: close
+[15-05-29 04:44:20 9 ] Close...
+[15-05-29 04:44:20 7 ] Close...
+[15-05-29 04:44:20 8 ] Close...
+[15-05-29 04:44:20 9 ] connection closed
+[15-05-29 04:44:20 7 ] connection closed
+[15-05-29 04:44:20 8 ] connection closed
+[15-05-29 04:44:26 10 ] connetion opened
+[15-05-29 04:44:26 10 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:44:26 10 ] resolve Name:a1c1 @ STUDIUM:51410
+[15-05-29 04:44:26 10 ] RAW INCOMING: close
+[15-05-29 04:44:26 10 ] Close...
+[15-05-29 04:44:26 10 ] connection closed
+[15-05-29 04:44:26 11 ] connetion opened
+[15-05-29 04:44:26 11 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:44:26 11 ] resolve Name:a1c2 @ STUDIUM:51410
+[15-05-29 04:44:26 11 ] RAW INCOMING: close
+[15-05-29 04:44:26 11 ] Close...
+[15-05-29 04:44:26 11 ] connection closed
+[15-05-29 04:44:26 12 ] connetion opened
+[15-05-29 04:44:26 12 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:44:26 12 ] resolve Name:a2c1 @ STUDIUM:51410
+[15-05-29 04:44:26 12 ] RAW INCOMING: close
+[15-05-29 04:44:26 12 ] Close...
+[15-05-29 04:44:26 12 ] connection closed
+[15-05-29 04:48:01 13 ] connetion opened
+[15-05-29 04:48:01 13 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:48:01 13 ] resolve Name:a1c1 @ STUDIUM:51410
+[15-05-29 04:48:01 13 ] RAW INCOMING: close
+[15-05-29 04:48:01 13 ] Close...
+[15-05-29 04:48:01 13 ] connection closed
+[15-05-29 04:48:01 14 ] connetion opened
+[15-05-29 04:48:01 14 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:48:01 14 ] resolve Name:a1c2 @ STUDIUM:51410
+[15-05-29 04:48:01 14 ] RAW INCOMING: close
+[15-05-29 04:48:01 14 ] Close...
+[15-05-29 04:48:01 14 ] connection closed
+[15-05-29 04:48:01 15 ] connetion opened
+[15-05-29 04:48:01 15 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:48:01 15 ] resolve Name:a2c1 @ STUDIUM:51410
+[15-05-29 04:48:01 15 ] RAW INCOMING: close
+[15-05-29 04:48:01 15 ] Close...
+[15-05-29 04:48:01 15 ] connection closed
+[15-05-29 04:48:48 16 ] connetion opened
+[15-05-29 04:48:48 16 ] RAW INCOMING: rebind:STUDIUM:61688:a1c1
+[15-05-29 04:48:48 17 ] connetion opened
+[15-05-29 04:48:48 17 ] RAW INCOMING: rebind:STUDIUM:61688:a1c2
+[15-05-29 04:48:48 16 ] rebind Name:a1c1 @ STUDIUM:61688
+[15-05-29 04:48:48 17 ] rebind Name:a1c2 @ STUDIUM:61688
+[15-05-29 04:48:48 16 ] RAW INCOMING: close
+[15-05-29 04:48:48 17 ] RAW INCOMING: close
+[15-05-29 04:48:48 16 ] Close...
+[15-05-29 04:48:48 17 ] Close...
+[15-05-29 04:48:48 18 ] connetion opened
+[15-05-29 04:48:48 16 ] connection closed
+[15-05-29 04:48:48 17 ] connection closed
+[15-05-29 04:48:48 18 ] RAW INCOMING: rebind:STUDIUM:61688:a2c1
+[15-05-29 04:48:48 18 ] rebind Name:a2c1 @ STUDIUM:61688
+[15-05-29 04:48:48 18 ] RAW INCOMING: close
+[15-05-29 04:48:48 18 ] Close...
+[15-05-29 04:48:48 18 ] connection closed
+[15-05-29 04:50:51 19 ] connetion opened
+[15-05-29 04:50:51 19 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:50:51 19 ] resolve Name:a1c1 @ STUDIUM:61688
+[15-05-29 04:50:51 19 ] RAW INCOMING: close
+[15-05-29 04:50:51 19 ] Close...
+[15-05-29 04:50:51 19 ] connection closed
+[15-05-29 04:50:51 20 ] connetion opened
+[15-05-29 04:50:51 20 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:50:51 20 ] resolve Name:a1c2 @ STUDIUM:61688
+[15-05-29 04:50:51 20 ] RAW INCOMING: close
+[15-05-29 04:50:51 20 ] Close...
+[15-05-29 04:50:51 20 ] connection closed
+[15-05-29 04:50:51 21 ] connetion opened
+[15-05-29 04:50:51 21 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:50:51 21 ] resolve Name:a2c1 @ STUDIUM:61688
+[15-05-29 04:50:51 21 ] RAW INCOMING: close
+[15-05-29 04:50:51 21 ] Close...
+[15-05-29 04:50:51 21 ] connection closed
+[15-05-29 04:51:29 22 ] connetion opened
+[15-05-29 04:51:29 23 ] connetion opened
+[15-05-29 04:51:29 23 ] RAW INCOMING: rebind:STUDIUM:64452:a1c2
+[15-05-29 04:51:29 23 ] rebind Name:a1c2 @ STUDIUM:64452
+[15-05-29 04:51:29 22 ] RAW INCOMING: rebind:STUDIUM:64452:a1c1
+[15-05-29 04:51:29 24 ] connetion opened
+[15-05-29 04:51:29 23 ] RAW INCOMING: close
+[15-05-29 04:51:29 24 ] RAW INCOMING: rebind:STUDIUM:64452:a2c1
+[15-05-29 04:51:29 22 ] rebind Name:a1c1 @ STUDIUM:64452
+[15-05-29 04:51:29 24 ] rebind Name:a2c1 @ STUDIUM:64452
+[15-05-29 04:51:29 23 ] Close...
+[15-05-29 04:51:29 22 ] RAW INCOMING: close
+[15-05-29 04:51:29 24 ] RAW INCOMING: close
+[15-05-29 04:51:29 23 ] connection closed
+[15-05-29 04:51:29 24 ] Close...
+[15-05-29 04:51:29 22 ] Close...
+[15-05-29 04:51:29 24 ] connection closed
+[15-05-29 04:51:29 22 ] connection closed
+[15-05-29 04:51:36 25 ] connetion opened
+[15-05-29 04:51:36 25 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:51:36 25 ] resolve Name:a1c1 @ STUDIUM:64452
+[15-05-29 04:51:36 25 ] RAW INCOMING: close
+[15-05-29 04:51:36 25 ] Close...
+[15-05-29 04:51:36 25 ] connection closed
+[15-05-29 04:51:36 26 ] connetion opened
+[15-05-29 04:51:36 26 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:51:36 26 ] resolve Name:a1c2 @ STUDIUM:64452
+[15-05-29 04:51:36 26 ] RAW INCOMING: close
+[15-05-29 04:51:36 26 ] Close...
+[15-05-29 04:51:36 26 ] connection closed
+[15-05-29 04:51:36 27 ] connetion opened
+[15-05-29 04:51:36 27 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:51:36 27 ] resolve Name:a2c1 @ STUDIUM:64452
+[15-05-29 04:51:36 27 ] RAW INCOMING: close
+[15-05-29 04:51:36 27 ] Close...
+[15-05-29 04:51:36 27 ] connection closed
+[15-05-29 04:55:40 30 ] connetion opened
+[15-05-29 04:55:40 28 ] connetion opened
+[15-05-29 04:55:40 29 ] connetion opened
+[15-05-29 04:55:40 29 ] RAW INCOMING: rebind:STUDIUM:51411:a1c2
+[15-05-29 04:55:40 28 ] RAW INCOMING: rebind:STUDIUM:51411:a1c1
+[15-05-29 04:55:40 30 ] RAW INCOMING: rebind:STUDIUM:51411:a2c1
+[15-05-29 04:55:40 28 ] rebind Name:a1c1 @ STUDIUM:51411
+[15-05-29 04:55:40 30 ] rebind Name:a2c1 @ STUDIUM:51411
+[15-05-29 04:55:40 29 ] rebind Name:a1c2 @ STUDIUM:51411
+[15-05-29 04:55:40 28 ] RAW INCOMING: close
+[15-05-29 04:55:40 30 ] RAW INCOMING: close
+[15-05-29 04:55:40 29 ] RAW INCOMING: close
+[15-05-29 04:55:40 28 ] Close...
+[15-05-29 04:55:40 29 ] Close...
+[15-05-29 04:55:40 30 ] Close...
+[15-05-29 04:55:40 28 ] connection closed
+[15-05-29 04:55:40 30 ] connection closed
+[15-05-29 04:55:40 29 ] connection closed
+[15-05-29 04:55:46 31 ] connetion opened
+[15-05-29 04:55:46 31 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:55:46 31 ] resolve Name:a1c1 @ STUDIUM:51411
+[15-05-29 04:55:46 31 ] RAW INCOMING: close
+[15-05-29 04:55:46 31 ] Close...
+[15-05-29 04:55:46 31 ] connection closed
+[15-05-29 04:55:46 32 ] connetion opened
+[15-05-29 04:55:46 32 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:55:46 32 ] resolve Name:a1c2 @ STUDIUM:51411
+[15-05-29 04:55:46 32 ] RAW INCOMING: close
+[15-05-29 04:55:46 32 ] Close...
+[15-05-29 04:55:46 32 ] connection closed
+[15-05-29 04:55:46 33 ] connetion opened
+[15-05-29 04:55:46 33 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:55:46 33 ] resolve Name:a2c1 @ STUDIUM:51411
+[15-05-29 04:55:46 33 ] RAW INCOMING: close
+[15-05-29 04:55:46 33 ] Close...
+[15-05-29 04:55:46 33 ] connection closed
+[15-05-29 04:56:27 34 ] connetion opened
+[15-05-29 04:56:27 34 ] RAW INCOMING: rebind:STUDIUM:46584:a1c1
+[15-05-29 04:56:27 35 ] connetion opened
+[15-05-29 04:56:27 34 ] rebind Name:a1c1 @ STUDIUM:46584
+[15-05-29 04:56:27 35 ] RAW INCOMING: rebind:STUDIUM:46584:a1c2
+[15-05-29 04:56:27 34 ] RAW INCOMING: close
+[15-05-29 04:56:27 36 ] connetion opened
+[15-05-29 04:56:27 35 ] rebind Name:a1c2 @ STUDIUM:46584
+[15-05-29 04:56:27 34 ] Close...
+[15-05-29 04:56:27 36 ] RAW INCOMING: rebind:STUDIUM:46584:a2c1
+[15-05-29 04:56:27 35 ] RAW INCOMING: close
+[15-05-29 04:56:27 36 ] rebind Name:a2c1 @ STUDIUM:46584
+[15-05-29 04:56:27 34 ] connection closed
+[15-05-29 04:56:27 35 ] Close...
+[15-05-29 04:56:27 36 ] RAW INCOMING: close
+[15-05-29 04:56:27 36 ] Close...
+[15-05-29 04:56:27 35 ] connection closed
+[15-05-29 04:56:27 36 ] connection closed
+[15-05-29 04:56:35 37 ] connetion opened
+[15-05-29 04:56:35 37 ] RAW INCOMING: resolve:a1c1
+[15-05-29 04:56:35 37 ] resolve Name:a1c1 @ STUDIUM:46584
+[15-05-29 04:56:35 37 ] RAW INCOMING: close
+[15-05-29 04:56:35 37 ] Close...
+[15-05-29 04:56:35 37 ] connection closed
+[15-05-29 04:56:35 38 ] connetion opened
+[15-05-29 04:56:35 38 ] RAW INCOMING: resolve:a1c2
+[15-05-29 04:56:35 38 ] resolve Name:a1c2 @ STUDIUM:46584
+[15-05-29 04:56:35 38 ] RAW INCOMING: close
+[15-05-29 04:56:35 38 ] Close...
+[15-05-29 04:56:35 38 ] connection closed
+[15-05-29 04:56:35 39 ] connetion opened
+[15-05-29 04:56:35 39 ] RAW INCOMING: resolve:a2c1
+[15-05-29 04:56:35 39 ] resolve Name:a2c1 @ STUDIUM:46584
+[15-05-29 04:56:35 39 ] RAW INCOMING: close
+[15-05-29 04:56:35 39 ] Close...
+[15-05-29 04:56:35 39 ] connection closed
+[15-05-29 05:02:03 40 ] connetion opened
+[15-05-29 05:02:03 41 ] connetion opened
+[15-05-29 05:02:03 41 ] RAW INCOMING: rebind:STUDIUM:50406:a1c2
+[15-05-29 05:02:03 40 ] RAW INCOMING: rebind:STUDIUM:50406:a1c1
+[15-05-29 05:02:03 41 ] rebind Name:a1c2 @ STUDIUM:50406
+[15-05-29 05:02:03 40 ] rebind Name:a1c1 @ STUDIUM:50406
+[15-05-29 05:02:03 42 ] connetion opened
+[15-05-29 05:02:03 41 ] RAW INCOMING: close
+[15-05-29 05:02:03 40 ] RAW INCOMING: close
+[15-05-29 05:02:03 41 ] Close...
+[15-05-29 05:02:03 42 ] RAW INCOMING: rebind:STUDIUM:50406:a2c1
+[15-05-29 05:02:03 40 ] Close...
+[15-05-29 05:02:03 42 ] rebind Name:a2c1 @ STUDIUM:50406
+[15-05-29 05:02:03 41 ] connection closed
+[15-05-29 05:02:03 40 ] connection closed
+[15-05-29 05:02:03 42 ] RAW INCOMING: close
+[15-05-29 05:02:03 42 ] Close...
+[15-05-29 05:02:03 42 ] connection closed
+[15-05-29 05:02:12 43 ] connetion opened
+[15-05-29 05:02:12 43 ] RAW INCOMING: resolve:a1c1
+[15-05-29 05:02:12 43 ] resolve Name:a1c1 @ STUDIUM:50406
+[15-05-29 05:02:12 43 ] RAW INCOMING: close
+[15-05-29 05:02:12 43 ] Close...
+[15-05-29 05:02:12 43 ] connection closed
+[15-05-29 05:02:12 44 ] connetion opened
+[15-05-29 05:02:12 44 ] RAW INCOMING: resolve:a1c2
+[15-05-29 05:02:12 44 ] resolve Name:a1c2 @ STUDIUM:50406
+[15-05-29 05:02:12 44 ] RAW INCOMING: close
+[15-05-29 05:02:12 44 ] Close...
+[15-05-29 05:02:12 44 ] connection closed
+[15-05-29 05:02:12 45 ] connetion opened
+[15-05-29 05:02:12 45 ] RAW INCOMING: resolve:a2c1
+[15-05-29 05:02:12 45 ] resolve Name:a2c1 @ STUDIUM:50406
+[15-05-29 05:02:12 45 ] RAW INCOMING: close
+[15-05-29 05:02:12 45 ] Close...
+[15-05-29 05:02:12 45 ] connection closed
+[15-05-29 05:03:09 46 ] connetion opened
+[15-05-29 05:03:09 46 ] RAW INCOMING: rebind:STUDIUM:60783:a1c1
+[15-05-29 05:03:09 47 ] connetion opened
+[15-05-29 05:03:09 46 ] rebind Name:a1c1 @ STUDIUM:60783
+[15-05-29 05:03:09 46 ] RAW INCOMING: close
+[15-05-29 05:03:09 47 ] RAW INCOMING: rebind:STUDIUM:60783:a1c2
+[15-05-29 05:03:09 48 ] connetion opened
+[15-05-29 05:03:09 46 ] Close...
+[15-05-29 05:03:09 47 ] rebind Name:a1c2 @ STUDIUM:60783
+[15-05-29 05:03:09 48 ] RAW INCOMING: rebind:STUDIUM:60783:a2c1
+[15-05-29 05:03:09 47 ] RAW INCOMING: close
+[15-05-29 05:03:09 46 ] connection closed
+[15-05-29 05:03:09 48 ] rebind Name:a2c1 @ STUDIUM:60783
+[15-05-29 05:03:09 47 ] Close...
+[15-05-29 05:03:09 48 ] RAW INCOMING: close
+[15-05-29 05:03:09 48 ] Close...
+[15-05-29 05:03:09 47 ] connection closed
+[15-05-29 05:03:09 48 ] connection closed
+[15-05-29 05:03:16 49 ] connetion opened
+[15-05-29 05:03:16 49 ] RAW INCOMING: resolve:a1c1
+[15-05-29 05:03:16 49 ] resolve Name:a1c1 @ STUDIUM:60783
+[15-05-29 05:03:16 49 ] RAW INCOMING: close
+[15-05-29 05:03:16 49 ] Close...
+[15-05-29 05:03:16 49 ] connection closed
+[15-05-29 05:03:16 50 ] connetion opened
+[15-05-29 05:03:16 50 ] RAW INCOMING: resolve:a1c2
+[15-05-29 05:03:16 50 ] resolve Name:a1c2 @ STUDIUM:60783
+[15-05-29 05:03:16 50 ] RAW INCOMING: close
+[15-05-29 05:03:16 50 ] Close...
+[15-05-29 05:03:16 50 ] connection closed
+[15-05-29 05:03:16 51 ] connetion opened
+[15-05-29 05:03:16 51 ] RAW INCOMING: resolve:a2c1
+[15-05-29 05:03:16 51 ] resolve Name:a2c1 @ STUDIUM:60783
+[15-05-29 05:03:16 51 ] RAW INCOMING: close
+[15-05-29 05:03:16 51 ] Close...
+[15-05-29 05:03:16 51 ] connection closed
+[15-05-29 05:13:27 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-29 05:13:27 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-29 05:13:40 2 ] connetion opened
+[15-05-29 05:13:40 1 ] connetion opened
+[15-05-29 05:13:40 3 ] connetion opened
+[15-05-29 05:13:40 2 ] RAW INCOMING: rebind:STUDIUM:58225:a1c2
+[15-05-29 05:13:40 1 ] RAW INCOMING: rebind:STUDIUM:58225:a1c1
+[15-05-29 05:13:40 3 ] RAW INCOMING: rebind:STUDIUM:58225:a2c1
+[15-05-29 05:13:40 1 ] rebind Name:a1c1 @ STUDIUM:58225
+[15-05-29 05:13:40 3 ] rebind Name:a2c1 @ STUDIUM:58225
+[15-05-29 05:13:40 1 ] RAW INCOMING: close
+[15-05-29 05:13:40 3 ] RAW INCOMING: close
+[15-05-29 05:13:40 2 ] rebind Name:a1c2 @ STUDIUM:58225
+[15-05-29 05:13:40 3 ] Close...
+[15-05-29 05:13:40 1 ] Close...
+[15-05-29 05:13:40 2 ] RAW INCOMING: close
+[15-05-29 05:13:40 1 ] connection closed
+[15-05-29 05:13:40 3 ] connection closed
+[15-05-29 05:13:40 2 ] Close...
+[15-05-29 05:13:40 2 ] connection closed
+[15-05-29 05:14:27 4 ] connetion opened
+[15-05-29 05:14:27 5 ] connetion opened
+[15-05-29 05:14:27 4 ] RAW INCOMING: rebind:STUDIUM:46958:a1c1
+[15-05-29 05:14:27 4 ] rebind Name:a1c1 @ STUDIUM:46958
+[15-05-29 05:14:27 5 ] RAW INCOMING: rebind:STUDIUM:46958:a1c2
+[15-05-29 05:14:27 4 ] RAW INCOMING: close
+[15-05-29 05:14:27 5 ] rebind Name:a1c2 @ STUDIUM:46958
+[15-05-29 05:14:27 4 ] Close...
+[15-05-29 05:14:27 5 ] RAW INCOMING: close
+[15-05-29 05:14:27 4 ] connection closed
+[15-05-29 05:14:27 5 ] Close...
+[15-05-29 05:14:27 5 ] connection closed
+[15-05-29 05:14:37 6 ] connetion opened
+[15-05-29 05:14:37 6 ] RAW INCOMING: resolve:a1c1
+[15-05-29 05:14:37 6 ] resolve Name:a1c1 @ STUDIUM:46958
+[15-05-29 05:14:37 6 ] RAW INCOMING: close
+[15-05-29 05:14:37 6 ] Close...
+[15-05-29 05:14:37 6 ] connection closed
+[15-05-29 05:14:37 7 ] connetion opened
+[15-05-29 05:14:37 7 ] RAW INCOMING: resolve:a1c2
+[15-05-29 05:14:37 7 ] resolve Name:a1c2 @ STUDIUM:46958
+[15-05-29 05:14:37 7 ] RAW INCOMING: close
+[15-05-29 05:14:37 7 ] Close...
+[15-05-29 05:14:37 7 ] connection closed
+[15-05-29 05:14:37 8 ] connetion opened
+[15-05-29 05:14:37 8 ] RAW INCOMING: resolve:a2c1
+[15-05-29 05:14:37 8 ] resolve Name:a2c1 @ STUDIUM:58225
+[15-05-29 05:14:37 8 ] RAW INCOMING: close
+[15-05-29 05:14:37 8 ] Close...
+[15-05-29 05:14:37 8 ] connection closed
+[15-05-29 05:27:33 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-29 05:27:33 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-29 05:27:40 2 ] connetion opened
+[15-05-29 05:27:40 3 ] connetion opened
+[15-05-29 05:27:40 1 ] connetion opened
+[15-05-29 05:27:40 3 ] RAW INCOMING: rebind:STUDIUM:62324:a2c1
+[15-05-29 05:27:40 1 ] RAW INCOMING: rebind:STUDIUM:62324:a1c1
+[15-05-29 05:27:40 2 ] RAW INCOMING: rebind:STUDIUM:62324:a1c2
+[15-05-29 05:27:40 3 ] rebind Name:a2c1 @ STUDIUM:62324
+[15-05-29 05:27:40 1 ] rebind Name:a1c1 @ STUDIUM:62324
+[15-05-29 05:27:40 1 ] RAW INCOMING: close
+[15-05-29 05:27:40 3 ] RAW INCOMING: close
+[15-05-29 05:27:40 2 ] rebind Name:a1c2 @ STUDIUM:62324
+[15-05-29 05:27:40 1 ] Close...
+[15-05-29 05:27:40 3 ] Close...
+[15-05-29 05:27:40 1 ] connection closed
+[15-05-29 05:27:40 2 ] RAW INCOMING: close
+[15-05-29 05:27:40 3 ] connection closed
+[15-05-29 05:27:40 2 ] Close...
+[15-05-29 05:27:40 2 ] connection closed
+[15-05-29 05:27:45 4 ] connetion opened
+[15-05-29 05:27:45 4 ] RAW INCOMING: rebind:STUDIUM:57716:a1c1
+[15-05-29 05:27:45 5 ] connetion opened
+[15-05-29 05:27:45 4 ] rebind Name:a1c1 @ STUDIUM:57716
+[15-05-29 05:27:45 5 ] RAW INCOMING: rebind:STUDIUM:57716:a1c2
+[15-05-29 05:27:45 4 ] RAW INCOMING: close
+[15-05-29 05:27:45 5 ] rebind Name:a1c2 @ STUDIUM:57716
+[15-05-29 05:27:45 4 ] Close...
+[15-05-29 05:27:45 5 ] RAW INCOMING: close
+[15-05-29 05:27:45 4 ] connection closed
+[15-05-29 05:27:45 5 ] Close...
+[15-05-29 05:27:45 5 ] connection closed
+[15-05-29 05:27:51 6 ] connetion opened
+[15-05-29 05:27:51 6 ] RAW INCOMING: resolve:a1c1
+[15-05-29 05:27:51 6 ] resolve Name:a1c1 @ STUDIUM:57716
+[15-05-29 05:27:51 6 ] RAW INCOMING: close
+[15-05-29 05:27:51 6 ] Close...
+[15-05-29 05:27:51 6 ] connection closed
+[15-05-29 05:27:51 7 ] connetion opened
+[15-05-29 05:27:51 7 ] RAW INCOMING: resolve:a1c2
+[15-05-29 05:27:51 7 ] resolve Name:a1c2 @ STUDIUM:57716
+[15-05-29 05:27:51 7 ] RAW INCOMING: close
+[15-05-29 05:27:51 7 ] Close...
+[15-05-29 05:27:51 7 ] connection closed
+[15-05-29 05:27:51 8 ] connetion opened
+[15-05-29 05:27:51 8 ] RAW INCOMING: resolve:a2c1
+[15-05-29 05:27:51 8 ] resolve Name:a2c1 @ STUDIUM:62324
+[15-05-29 05:27:51 8 ] RAW INCOMING: close
+[15-05-29 05:27:51 8 ] Close...
+[15-05-29 05:27:51 8 ] connection closed
+[15-06-02 03:05:51 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-06-02 03:05:51 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-06-02 03:05:56 2 ] connetion opened
+[15-06-02 03:05:56 3 ] connetion opened
+[15-06-02 03:05:56 2 ] RAW INCOMING: rebind:STUDIUM:58307:a1c2
+[15-06-02 03:05:56 3 ] RAW INCOMING: rebind:STUDIUM:58307:a2c1
+[15-06-02 03:05:56 2 ] rebind Name:a1c2 @ STUDIUM:58307
+[15-06-02 03:05:56 2 ] RAW INCOMING: close
+[15-06-02 03:05:56 3 ] rebind Name:a2c1 @ STUDIUM:58307
+[15-06-02 03:05:56 2 ] Close...
+[15-06-02 03:05:56 3 ] RAW INCOMING: close
+[15-06-02 03:05:56 3 ] Close...
+[15-06-02 03:05:56 1 ] connetion opened
+[15-06-02 03:05:56 2 ] connection closed
+[15-06-02 03:05:56 3 ] connection closed
+[15-06-02 03:05:56 1 ] RAW INCOMING: rebind:STUDIUM:58307:a1c1
+[15-06-02 03:05:56 1 ] rebind Name:a1c1 @ STUDIUM:58307
+[15-06-02 03:05:56 1 ] RAW INCOMING: close
+[15-06-02 03:05:56 1 ] Close...
+[15-06-02 03:05:56 1 ] connection closed
+[15-06-02 03:06:02 4 ] connetion opened
+[15-06-02 03:06:02 4 ] RAW INCOMING: rebind:STUDIUM:62738:a1c1
+[15-06-02 03:06:02 5 ] connetion opened
+[15-06-02 03:06:02 4 ] rebind Name:a1c1 @ STUDIUM:62738
+[15-06-02 03:06:02 4 ] RAW INCOMING: close
+[15-06-02 03:06:02 5 ] RAW INCOMING: rebind:STUDIUM:62738:a1c2
+[15-06-02 03:06:02 4 ] Close...
+[15-06-02 03:06:02 4 ] connection closed
+[15-06-02 03:06:02 5 ] rebind Name:a1c2 @ STUDIUM:62738
+[15-06-02 03:06:02 5 ] RAW INCOMING: close
+[15-06-02 03:06:02 5 ] Close...
+[15-06-02 03:06:02 5 ] connection closed
+[15-06-02 03:06:07 6 ] connetion opened
+[15-06-02 03:06:07 6 ] RAW INCOMING: resolve:a1c1
+[15-06-02 03:06:07 6 ] resolve Name:a1c1 @ STUDIUM:62738
+[15-06-02 03:06:07 6 ] RAW INCOMING: close
+[15-06-02 03:06:07 6 ] Close...
+[15-06-02 03:06:07 6 ] connection closed
+[15-06-02 03:06:07 7 ] connetion opened
+[15-06-02 03:06:07 7 ] RAW INCOMING: resolve:a1c2
+[15-06-02 03:06:07 7 ] resolve Name:a1c2 @ STUDIUM:62738
+[15-06-02 03:06:07 7 ] RAW INCOMING: close
+[15-06-02 03:06:07 7 ] Close...
+[15-06-02 03:06:07 7 ] connection closed
+[15-06-02 03:06:07 8 ] connetion opened
+[15-06-02 03:06:07 8 ] RAW INCOMING: resolve:a2c1
+[15-06-02 03:06:07 8 ] resolve Name:a2c1 @ STUDIUM:58307
+[15-06-02 03:06:07 8 ] RAW INCOMING: close
+[15-06-02 03:06:07 8 ] Close...
+[15-06-02 03:06:07 8 ] connection closed
+[15-06-02 04:01:48 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-06-02 04:01:48 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-06-02 04:02:24 1 ] connetion opened
+[15-06-02 04:02:24 3 ] connetion opened
+[15-06-02 04:02:24 2 ] connetion opened
+[15-06-02 04:02:24 1 ] RAW INCOMING: rebind:STUDIUM:56499:a1c1
+[15-06-02 04:02:24 2 ] RAW INCOMING: rebind:STUDIUM:56499:a1c2
+[15-06-02 04:02:24 3 ] RAW INCOMING: rebind:STUDIUM:56499:a2c1
+[15-06-02 04:02:24 1 ] rebind Name:a1c1 @ STUDIUM:56499
+[15-06-02 04:02:24 3 ] rebind Name:a2c1 @ STUDIUM:56499
+[15-06-02 04:02:24 1 ] RAW INCOMING: close
+[15-06-02 04:02:24 1 ] Close...
+[15-06-02 04:02:24 3 ] RAW INCOMING: close
+[15-06-02 04:02:24 2 ] rebind Name:a1c2 @ STUDIUM:56499
+[15-06-02 04:02:24 1 ] connection closed
+[15-06-02 04:02:24 3 ] Close...
+[15-06-02 04:02:24 2 ] RAW INCOMING: close
+[15-06-02 04:02:24 3 ] connection closed
+[15-06-02 04:02:24 2 ] Close...
+[15-06-02 04:02:24 2 ] connection closed
+[15-06-02 04:02:28 4 ] connetion opened
+[15-06-02 04:02:28 4 ] RAW INCOMING: rebind:STUDIUM:57418:a1c1
+[15-06-02 04:02:28 5 ] connetion opened
+[15-06-02 04:02:28 5 ] RAW INCOMING: rebind:STUDIUM:57418:a1c2
+[15-06-02 04:02:28 4 ] rebind Name:a1c1 @ STUDIUM:57418
+[15-06-02 04:02:28 4 ] RAW INCOMING: close
+[15-06-02 04:02:28 4 ] Close...
+[15-06-02 04:02:28 5 ] rebind Name:a1c2 @ STUDIUM:57418
+[15-06-02 04:02:28 4 ] connection closed
+[15-06-02 04:02:28 5 ] RAW INCOMING: close
+[15-06-02 04:02:28 5 ] Close...
+[15-06-02 04:02:28 5 ] connection closed
+[15-06-02 04:02:32 6 ] connetion opened
+[15-06-02 04:02:32 6 ] RAW INCOMING: resolve:a1c1
+[15-06-02 04:02:32 6 ] resolve Name:a1c1 @ STUDIUM:57418
+[15-06-02 04:02:32 6 ] RAW INCOMING: close
+[15-06-02 04:02:32 6 ] Close...
+[15-06-02 04:02:32 6 ] connection closed
+[15-06-02 04:02:32 7 ] connetion opened
+[15-06-02 04:02:32 7 ] RAW INCOMING: resolve:a1c2
+[15-06-02 04:02:32 7 ] resolve Name:a1c2 @ STUDIUM:57418
+[15-06-02 04:02:32 7 ] RAW INCOMING: close
+[15-06-02 04:02:32 7 ] Close...
+[15-06-02 04:02:32 7 ] connection closed
+[15-06-02 04:02:32 8 ] connetion opened
+[15-06-02 04:02:32 8 ] RAW INCOMING: resolve:a2c1
+[15-06-02 04:02:32 8 ] resolve Name:a2c1 @ STUDIUM:56499
+[15-06-02 04:02:32 8 ] RAW INCOMING: close
+[15-06-02 04:02:32 8 ] Close...
+[15-06-02 04:02:32 8 ] connection closed

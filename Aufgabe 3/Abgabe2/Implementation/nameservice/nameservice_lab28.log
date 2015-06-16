@@ -1,0 +1,80 @@
+[15-05-27 12:26:12 ]Starting namesevice on port 4545 allowing 15 concurrent connections
+[15-05-27 12:26:12 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-27 12:26:34 ]Starting namesevice on port 5655 allowing 15 concurrent connections
+[15-05-27 12:26:34 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 12:26:51 2 ] connetion opened
+[15-05-27 12:26:51 1 ] connetion opened
+[15-05-27 12:26:51 3 ] connetion opened
+[15-05-27 12:26:51 2 ] RAW INCOMING: rebind:lab28:62737:a1c2
+[15-05-27 12:26:51 3 ] RAW INCOMING: rebind:lab28:62737:a2c1
+[15-05-27 12:26:51 1 ] RAW INCOMING: rebind:lab28:62737:a1c1
+[15-05-27 12:26:51 3 ] rebind Name:a2c1 @ lab28:62737
+[15-05-27 12:26:51 1 ] rebind Name:a1c1 @ lab28:62737
+[15-05-27 12:26:51 2 ] rebind Name:a1c2 @ lab28:62737
+[15-05-27 12:26:51 3 ] RAW INCOMING: close
+[15-05-27 12:26:51 1 ] RAW INCOMING: close
+[15-05-27 12:26:51 2 ] RAW INCOMING: close
+[15-05-27 12:26:51 3 ] Close...
+[15-05-27 12:26:51 2 ] Close...
+[15-05-27 12:26:51 1 ] Close...
+[15-05-27 12:26:51 3 ] connection closed
+[15-05-27 12:26:51 1 ] connection closed
+[15-05-27 12:26:51 2 ] connection closed
+[15-05-27 12:26:56 4 ] connetion opened
+[15-05-27 12:26:56 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 12:26:56 4 ] resolve Name:a1c1 @ lab28:62737
+[15-05-27 12:26:56 4 ] RAW INCOMING: close
+[15-05-27 12:26:56 4 ] Close...
+[15-05-27 12:26:56 4 ] connection closed
+[15-05-27 12:26:56 5 ] connetion opened
+[15-05-27 12:26:56 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 12:26:56 5 ] resolve Name:a1c2 @ lab28:62737
+[15-05-27 12:26:56 5 ] RAW INCOMING: close
+[15-05-27 12:26:56 5 ] Close...
+[15-05-27 12:26:56 5 ] connection closed
+[15-05-27 12:26:56 6 ] connetion opened
+[15-05-27 12:26:56 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 12:26:56 6 ] resolve Name:a2c1 @ lab28:62737
+[15-05-27 12:26:56 6 ] RAW INCOMING: close
+[15-05-27 12:26:56 6 ] Close...
+[15-05-27 12:26:56 6 ] connection closed
+[15-05-27 12:29:25 ]Starting namesevice on port 5655 allowing 15 concurrent connections
+[15-05-27 12:29:25 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 12:29:44 2 ] connetion opened
+[15-05-27 12:29:44 1 ] connetion opened
+[15-05-27 12:29:44 3 ] connetion opened
+[15-05-27 12:29:44 2 ] RAW INCOMING: rebind:lab28:58843:a1c2
+[15-05-27 12:29:44 3 ] RAW INCOMING: rebind:lab28:58843:a2c1
+[15-05-27 12:29:44 1 ] RAW INCOMING: rebind:lab28:58843:a1c1
+[15-05-27 12:29:44 1 ] rebind Name:a1c1 @ lab28:58843
+[15-05-27 12:29:44 2 ] rebind Name:a1c2 @ lab28:58843
+[15-05-27 12:29:44 3 ] rebind Name:a2c1 @ lab28:58843
+[15-05-27 12:29:44 1 ] RAW INCOMING: close
+[15-05-27 12:29:44 2 ] RAW INCOMING: close
+[15-05-27 12:29:44 1 ] Close...
+[15-05-27 12:29:44 3 ] RAW INCOMING: close
+[15-05-27 12:29:44 2 ] Close...
+[15-05-27 12:29:44 1 ] connection closed
+[15-05-27 12:29:44 2 ] connection closed
+[15-05-27 12:29:44 3 ] Close...
+[15-05-27 12:29:44 3 ] connection closed
+[15-05-27 12:29:52 4 ] connetion opened
+[15-05-27 12:29:52 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 12:29:52 4 ] resolve Name:a1c1 @ lab28:58843
+[15-05-27 12:29:52 4 ] RAW INCOMING: close
+[15-05-27 12:29:52 4 ] Close...
+[15-05-27 12:29:52 4 ] connection closed
+[15-05-27 12:29:52 5 ] connetion opened
+[15-05-27 12:29:52 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 12:29:52 5 ] resolve Name:a1c2 @ lab28:58843
+[15-05-27 12:29:52 5 ] RAW INCOMING: close
+[15-05-27 12:29:52 5 ] Close...
+[15-05-27 12:29:52 6 ] connetion opened
+[15-05-27 12:29:52 5 ] connection closed
+[15-05-27 12:29:52 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 12:29:52 6 ] resolve Name:a2c1 @ lab28:58843
+[15-05-27 12:29:52 6 ] RAW INCOMING: close
+[15-05-27 12:29:52 6 ] Close...
+[15-05-27 12:29:52 6 ] connection closed
+[15-05-27 12:34:44 ]Starting namesevice on port 5655 allowing 15 concurrent connections
+[15-05-27 12:34:44 ]NameServer: Waiting for connection - listening on TCP port 5655

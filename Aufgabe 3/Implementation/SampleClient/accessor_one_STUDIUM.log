@@ -1,0 +1,36 @@
+[15-05-27 05:30:04]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-27 05:30:04]accessor_one.ClassOneImpl.methodOne:a1c1: params(hi there!:567) return: hi there!568
+[15-05-27 05:30:04]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-27 05:30:04]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-27 05:30:04]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-27 05:30:04]accessor_one.ClassTwoImpl.methodTwo.SomeException112: 50 / 50 chance. You failed!
+[15-05-29 03:50:09]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 03:50:09]accessor_one.ClassOneImpl.methodOne:a1c1: params(hi there!:567) return: hi there!568
+[15-05-29 03:50:09]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-29 03:50:09]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 03:50:09]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 03:50:09]accessor_one.ClassTwoImpl.methodTwo:a1c2 return: 1337.3
+[15-05-29 03:52:04]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 03:52:04]accessor_one.ClassOneImpl.methodOne:a1c1: params(hi there!:567) return: hi there!568
+[15-05-29 03:52:04]accessor_one.ClassOneImpl.methodOne.SomeException112: Param2 was to leet!
+[15-05-29 03:52:04]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 03:52:04]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 03:52:04]accessor_one.ClassTwoImpl.methodTwo:a1c2 return: 1337.3
+[15-05-29 04:44:26]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:44:26]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 04:44:26]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 04:44:26]accessor_one.ClassTwoImpl.methodTwo:a1c2 return: 1337.3
+[15-05-29 04:48:01]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:50:51]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:51:36]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:51:36]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 04:51:36]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 04:51:36]accessor_one.ClassTwoImpl.methodTwo:a1c2 return: 1337.3
+[15-05-29 04:55:46]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:55:46]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 04:55:46]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 04:55:46]accessor_one.ClassTwoImpl.methodTwo:a1c2 return: 1337.3
+[15-05-29 04:56:35]accessor_one.ClassOneImplBase ("a1c1")
+[15-05-29 04:56:35]accessor_one.ClassTwoImpl.methodOne:a1c2params(:5.0) return: 5
+[15-05-29 04:56:35]accessor_one.ClassTwoImpl.methodOne.SomeException110: You cant write numbers above 1336!
+[15-05-29 04:56:35]accessor_one.ClassTwoImpl.methodTwo.SomeException112: 50 / 50 chance. You failed!

@@ -1,0 +1,6 @@
+[15-05-27 06:10:51]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-27 06:10:51]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-27 06:10:51]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-27 06:10:51]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-27 06:10:51]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-27 06:10:51]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!

@@ -1,0 +1,264 @@
+[15-05-27 11:28:32 ]Starting namesevice on port 4545 allowing 25 concurrent connections
+[15-05-27 11:28:32 ]NameServer: Waiting for connection - listening on TCP port 4545
+[15-05-27 11:30:20 ]Starting namesevice on port 5655 allowing 25 concurrent connections
+[15-05-27 11:30:20 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 11:30:26 2 ] connetion opened
+[15-05-27 11:30:26 3 ] connetion opened
+[15-05-27 11:30:26 1 ] connetion opened
+[15-05-27 11:30:26 3 ] RAW INCOMING: rebind:PICARD:51009:a2c1
+[15-05-27 11:30:26 1 ] RAW INCOMING: rebind:PICARD:51009:a1c1
+[15-05-27 11:30:26 2 ] RAW INCOMING: rebind:PICARD:51009:a1c2
+[15-05-27 11:30:26 3 ] rebind Name:a2c1 @ PICARD:51009
+[15-05-27 11:30:26 2 ] rebind Name:a1c2 @ PICARD:51009
+[15-05-27 11:30:26 1 ] rebind Name:a1c1 @ PICARD:51009
+[15-05-27 11:30:26 3 ] RAW INCOMING: close
+[15-05-27 11:30:26 2 ] RAW INCOMING: close
+[15-05-27 11:30:26 1 ] RAW INCOMING: close
+[15-05-27 11:30:26 3 ] Close...
+[15-05-27 11:30:26 2 ] Close...
+[15-05-27 11:30:26 1 ] Close...
+[15-05-27 11:30:26 3 ] connection closed
+[15-05-27 11:30:26 2 ] connection closed
+[15-05-27 11:30:26 1 ] connection closed
+[15-05-27 11:30:37 4 ] connetion opened
+[15-05-27 11:30:37 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:30:37 4 ] resolve Name:a1c1 @ PICARD:51009
+[15-05-27 11:30:37 4 ] RAW INCOMING: close
+[15-05-27 11:30:37 4 ] Close...
+[15-05-27 11:30:37 4 ] connection closed
+[15-05-27 11:30:37 5 ] connetion opened
+[15-05-27 11:30:37 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:30:37 5 ] resolve Name:a1c2 @ PICARD:51009
+[15-05-27 11:30:37 5 ] RAW INCOMING: close
+[15-05-27 11:30:37 5 ] Close...
+[15-05-27 11:30:37 5 ] connection closed
+[15-05-27 11:30:37 6 ] connetion opened
+[15-05-27 11:30:37 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:30:37 6 ] resolve Name:a2c1 @ PICARD:51009
+[15-05-27 11:30:37 6 ] RAW INCOMING: close
+[15-05-27 11:30:37 6 ] Close...
+[15-05-27 11:30:37 6 ] connection closed
+[15-05-27 11:37:10 ]Starting namesevice on port 5655 allowing 25 concurrent connections
+[15-05-27 11:37:10 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 11:37:15 1 ] connetion opened
+[15-05-27 11:37:15 3 ] connetion opened
+[15-05-27 11:37:15 2 ] connetion opened
+[15-05-27 11:37:15 2 ] RAW INCOMING: rebind:PICARD:61612:a1c2
+[15-05-27 11:37:15 3 ] RAW INCOMING: rebind:PICARD:61612:a2c1
+[15-05-27 11:37:15 1 ] RAW INCOMING: rebind:PICARD:61612:a1c1
+[15-05-27 11:37:15 2 ] rebind Name:a1c2 @ PICARD:61612
+[15-05-27 11:37:15 1 ] rebind Name:a1c1 @ PICARD:61612
+[15-05-27 11:37:15 3 ] rebind Name:a2c1 @ PICARD:61612
+[15-05-27 11:37:15 1 ] RAW INCOMING: close
+[15-05-27 11:37:15 2 ] RAW INCOMING: close
+[15-05-27 11:37:15 3 ] RAW INCOMING: close
+[15-05-27 11:37:15 2 ] Close...
+[15-05-27 11:37:15 3 ] Close...
+[15-05-27 11:37:15 1 ] Close...
+[15-05-27 11:37:15 3 ] connection closed
+[15-05-27 11:37:15 2 ] connection closed
+[15-05-27 11:37:15 1 ] connection closed
+[15-05-27 11:37:21 4 ] connetion opened
+[15-05-27 11:37:21 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:37:21 4 ] resolve Name:a1c1 @ PICARD:61612
+[15-05-27 11:37:21 4 ] RAW INCOMING: close
+[15-05-27 11:37:21 4 ] Close...
+[15-05-27 11:37:21 4 ] connection closed
+[15-05-27 11:37:21 5 ] connetion opened
+[15-05-27 11:37:21 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:37:21 5 ] resolve Name:a1c2 @ PICARD:61612
+[15-05-27 11:37:21 5 ] RAW INCOMING: close
+[15-05-27 11:37:21 5 ] Close...
+[15-05-27 11:37:21 5 ] connection closed
+[15-05-27 11:37:21 6 ] connetion opened
+[15-05-27 11:37:21 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:37:21 6 ] resolve Name:a2c1 @ PICARD:61612
+[15-05-27 11:37:21 6 ] RAW INCOMING: close
+[15-05-27 11:37:21 6 ] Close...
+[15-05-27 11:37:21 6 ] connection closed
+[15-05-27 11:40:33 7 ] connetion opened
+[15-05-27 11:40:33 9 ] connetion opened
+[15-05-27 11:40:33 8 ] connetion opened
+[15-05-27 11:40:33 7 ] RAW INCOMING: rebind:PICARD:52230:a1c1
+[15-05-27 11:40:33 9 ] RAW INCOMING: rebind:PICARD:52230:a2c1
+[15-05-27 11:40:33 8 ] RAW INCOMING: rebind:PICARD:52230:a1c2
+[15-05-27 11:40:33 7 ] rebind Name:a1c1 @ PICARD:52230
+[15-05-27 11:40:33 8 ] rebind Name:a1c2 @ PICARD:52230
+[15-05-27 11:40:33 7 ] RAW INCOMING: close
+[15-05-27 11:40:33 9 ] rebind Name:a2c1 @ PICARD:52230
+[15-05-27 11:40:33 8 ] RAW INCOMING: close
+[15-05-27 11:40:33 7 ] Close...
+[15-05-27 11:40:33 9 ] RAW INCOMING: close
+[15-05-27 11:40:33 8 ] Close...
+[15-05-27 11:40:33 9 ] Close...
+[15-05-27 11:40:33 7 ] connection closed
+[15-05-27 11:40:33 8 ] connection closed
+[15-05-27 11:40:33 9 ] connection closed
+[15-05-27 11:40:37 10 ] connetion opened
+[15-05-27 11:40:37 10 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:40:37 10 ] resolve Name:a1c1 @ PICARD:52230
+[15-05-27 11:40:37 10 ] RAW INCOMING: close
+[15-05-27 11:40:37 10 ] Close...
+[15-05-27 11:40:37 10 ] connection closed
+[15-05-27 11:40:37 11 ] connetion opened
+[15-05-27 11:40:37 11 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:40:37 11 ] resolve Name:a1c2 @ PICARD:52230
+[15-05-27 11:40:37 11 ] RAW INCOMING: close
+[15-05-27 11:40:37 11 ] Close...
+[15-05-27 11:40:37 11 ] connection closed
+[15-05-27 11:40:37 12 ] connetion opened
+[15-05-27 11:40:37 12 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:40:37 12 ] resolve Name:a2c1 @ PICARD:52230
+[15-05-27 11:40:37 12 ] RAW INCOMING: close
+[15-05-27 11:40:37 12 ] Close...
+[15-05-27 11:40:37 12 ] connection closed
+[15-05-27 11:44:59 13 ] connetion opened
+[15-05-27 11:44:59 15 ] connetion opened
+[15-05-27 11:44:59 14 ] connetion opened
+[15-05-27 11:44:59 14 ] RAW INCOMING: rebind:PICARD:42664:a1c2
+[15-05-27 11:44:59 15 ] RAW INCOMING: rebind:PICARD:42664:a2c1
+[15-05-27 11:44:59 13 ] RAW INCOMING: rebind:PICARD:42664:a1c1
+[15-05-27 11:44:59 15 ] rebind Name:a2c1 @ PICARD:42664
+[15-05-27 11:44:59 14 ] rebind Name:a1c2 @ PICARD:42664
+[15-05-27 11:44:59 13 ] rebind Name:a1c1 @ PICARD:42664
+[15-05-27 11:44:59 14 ] RAW INCOMING: close
+[15-05-27 11:44:59 15 ] RAW INCOMING: close
+[15-05-27 11:44:59 13 ] RAW INCOMING: close
+[15-05-27 11:44:59 14 ] Close...
+[15-05-27 11:44:59 13 ] Close...
+[15-05-27 11:44:59 14 ] connection closed
+[15-05-27 11:44:59 15 ] Close...
+[15-05-27 11:44:59 15 ] connection closed
+[15-05-27 11:44:59 13 ] connection closed
+[15-05-27 11:45:03 16 ] connetion opened
+[15-05-27 11:45:03 16 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:45:03 16 ] resolve Name:a1c1 @ PICARD:42664
+[15-05-27 11:45:03 16 ] RAW INCOMING: close
+[15-05-27 11:45:03 16 ] Close...
+[15-05-27 11:45:03 16 ] connection closed
+[15-05-27 11:45:03 17 ] connetion opened
+[15-05-27 11:45:03 17 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:45:03 17 ] resolve Name:a1c2 @ PICARD:42664
+[15-05-27 11:45:03 17 ] RAW INCOMING: close
+[15-05-27 11:45:03 17 ] Close...
+[15-05-27 11:45:03 17 ] connection closed
+[15-05-27 11:45:03 18 ] connetion opened
+[15-05-27 11:45:03 18 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:45:03 18 ] resolve Name:a2c1 @ PICARD:42664
+[15-05-27 11:45:03 18 ] RAW INCOMING: close
+[15-05-27 11:45:03 18 ] Close...
+[15-05-27 11:45:03 18 ] connection closed
+[15-05-27 11:49:02 ]Starting namesevice on port 5655 allowing 25 concurrent connections
+[15-05-27 11:49:02 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 11:49:08 2 ] connetion opened
+[15-05-27 11:49:08 1 ] connetion opened
+[15-05-27 11:49:08 3 ] connetion opened
+[15-05-27 11:49:08 2 ] RAW INCOMING: rebind:PICARD:45919:a1c2
+[15-05-27 11:49:08 1 ] RAW INCOMING: rebind:PICARD:45919:a1c1
+[15-05-27 11:49:08 3 ] RAW INCOMING: rebind:PICARD:45919:a2c1
+[15-05-27 11:49:08 3 ] rebind Name:a2c1 @ PICARD:45919
+[15-05-27 11:49:08 1 ] rebind Name:a1c1 @ PICARD:45919
+[15-05-27 11:49:08 2 ] rebind Name:a1c2 @ PICARD:45919
+[15-05-27 11:49:08 3 ] RAW INCOMING: close
+[15-05-27 11:49:08 1 ] RAW INCOMING: close
+[15-05-27 11:49:08 3 ] Close...
+[15-05-27 11:49:08 2 ] RAW INCOMING: close
+[15-05-27 11:49:08 1 ] Close...
+[15-05-27 11:49:08 2 ] Close...
+[15-05-27 11:49:08 3 ] connection closed
+[15-05-27 11:49:08 1 ] connection closed
+[15-05-27 11:49:08 2 ] connection closed
+[15-05-27 11:49:12 4 ] connetion opened
+[15-05-27 11:49:12 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:49:12 4 ] resolve Name:a1c1 @ PICARD:45919
+[15-05-27 11:49:12 4 ] RAW INCOMING: close
+[15-05-27 11:49:12 4 ] Close...
+[15-05-27 11:49:12 4 ] connection closed
+[15-05-27 11:49:12 5 ] connetion opened
+[15-05-27 11:49:12 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:49:12 5 ] resolve Name:a1c2 @ PICARD:45919
+[15-05-27 11:49:12 5 ] RAW INCOMING: close
+[15-05-27 11:49:12 5 ] Close...
+[15-05-27 11:49:12 5 ] connection closed
+[15-05-27 11:49:12 6 ] connetion opened
+[15-05-27 11:49:12 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:49:12 6 ] resolve Name:a2c1 @ PICARD:45919
+[15-05-27 11:49:12 6 ] RAW INCOMING: close
+[15-05-27 11:49:12 6 ] Close...
+[15-05-27 11:49:12 6 ] connection closed
+[15-05-27 11:52:26 ]Starting namesevice on port 5655 allowing 25 concurrent connections
+[15-05-27 11:52:26 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 11:52:35 2 ] connetion opened
+[15-05-27 11:52:35 1 ] connetion opened
+[15-05-27 11:52:35 3 ] connetion opened
+[15-05-27 11:52:35 1 ] RAW INCOMING: rebind:PICARD:45689:a1c1
+[15-05-27 11:52:35 3 ] RAW INCOMING: rebind:PICARD:45689:a2c1
+[15-05-27 11:52:35 2 ] RAW INCOMING: rebind:PICARD:45689:a1c2
+[15-05-27 11:52:36 2 ] rebind Name:a1c2 @ PICARD:45689
+[15-05-27 11:52:36 3 ] rebind Name:a2c1 @ PICARD:45689
+[15-05-27 11:52:36 1 ] rebind Name:a1c1 @ PICARD:45689
+[15-05-27 11:52:36 2 ] RAW INCOMING: close
+[15-05-27 11:52:36 1 ] RAW INCOMING: close
+[15-05-27 11:52:36 3 ] RAW INCOMING: close
+[15-05-27 11:52:36 2 ] Close...
+[15-05-27 11:52:36 1 ] Close...
+[15-05-27 11:52:36 3 ] Close...
+[15-05-27 11:52:36 2 ] connection closed
+[15-05-27 11:52:36 1 ] connection closed
+[15-05-27 11:52:36 3 ] connection closed
+[15-05-27 11:52:41 4 ] connetion opened
+[15-05-27 11:52:41 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:52:41 4 ] resolve Name:a1c1 @ PICARD:45689
+[15-05-27 11:52:41 4 ] RAW INCOMING: close
+[15-05-27 11:52:41 4 ] Close...
+[15-05-27 11:52:41 4 ] connection closed
+[15-05-27 11:52:41 5 ] connetion opened
+[15-05-27 11:52:41 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:52:41 5 ] resolve Name:a1c2 @ PICARD:45689
+[15-05-27 11:52:41 5 ] RAW INCOMING: close
+[15-05-27 11:52:41 5 ] Close...
+[15-05-27 11:52:41 5 ] connection closed
+[15-05-27 11:52:41 6 ] connetion opened
+[15-05-27 11:52:41 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:52:41 6 ] resolve Name:a2c1 @ PICARD:45689
+[15-05-27 11:52:41 6 ] RAW INCOMING: close
+[15-05-27 11:52:41 6 ] Close...
+[15-05-27 11:52:41 6 ] connection closed
+[15-05-27 11:54:00 ]Starting namesevice on port 5655 allowing 25 concurrent connections
+[15-05-27 11:54:00 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 11:54:05 1 ] connetion opened
+[15-05-27 11:54:05 2 ] connetion opened
+[15-05-27 11:54:05 3 ] connetion opened
+[15-05-27 11:54:05 1 ] RAW INCOMING: rebind:PICARD:51507:a1c1
+[15-05-27 11:54:05 3 ] RAW INCOMING: rebind:PICARD:51507:a2c1
+[15-05-27 11:54:05 2 ] RAW INCOMING: rebind:PICARD:51507:a1c2
+[15-05-27 11:54:05 2 ] rebind Name:a1c2 @ PICARD:51507
+[15-05-27 11:54:05 3 ] rebind Name:a2c1 @ PICARD:51507
+[15-05-27 11:54:05 1 ] rebind Name:a1c1 @ PICARD:51507
+[15-05-27 11:54:05 2 ] RAW INCOMING: close
+[15-05-27 11:54:05 1 ] RAW INCOMING: close
+[15-05-27 11:54:05 3 ] RAW INCOMING: close
+[15-05-27 11:54:05 2 ] Close...
+[15-05-27 11:54:05 3 ] Close...
+[15-05-27 11:54:05 1 ] Close...
+[15-05-27 11:54:05 2 ] connection closed
+[15-05-27 11:54:05 1 ] connection closed
+[15-05-27 11:54:05 3 ] connection closed
+[15-05-27 11:54:08 4 ] connetion opened
+[15-05-27 11:54:08 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 11:54:08 4 ] resolve Name:a1c1 @ PICARD:51507
+[15-05-27 11:54:08 4 ] RAW INCOMING: close
+[15-05-27 11:54:08 4 ] Close...
+[15-05-27 11:54:08 4 ] connection closed
+[15-05-27 11:54:08 5 ] connetion opened
+[15-05-27 11:54:08 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 11:54:08 5 ] resolve Name:a1c2 @ PICARD:51507
+[15-05-27 11:54:08 5 ] RAW INCOMING: close
+[15-05-27 11:54:08 5 ] Close...
+[15-05-27 11:54:08 5 ] connection closed
+[15-05-27 11:54:08 6 ] connetion opened
+[15-05-27 11:54:08 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 11:54:08 6 ] resolve Name:a2c1 @ PICARD:51507
+[15-05-27 11:54:08 6 ] RAW INCOMING: close
+[15-05-27 11:54:08 6 ] Close...
+[15-05-27 11:54:08 6 ] connection closed

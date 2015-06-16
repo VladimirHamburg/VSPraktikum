@@ -1,0 +1,44 @@
+[15-05-27 05:30:04]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-27 05:30:04]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-27 05:30:04]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-27 05:30:04]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-27 05:30:04]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-27 05:30:04]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 03:50:09]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 03:50:09]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 03:50:09]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 03:50:09]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 03:50:09]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 03:50:09]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 03:52:04]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 03:52:04]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 03:52:04]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 03:52:04]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 03:52:04]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 03:52:04]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 04:44:26]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:44:26]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 04:44:26]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 04:44:26]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 04:44:26]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 04:44:26]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 04:48:01]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:50:51]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:51:36]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:51:36]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 04:51:36]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 04:51:36]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 04:51:36]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 04:51:36]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 04:55:46]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:55:46]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 04:55:46]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 04:55:46]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 04:55:46]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 04:55:46]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!
+[15-05-29 04:56:35]accessor_two.ClassOneImplBase ("a2c1")
+[15-05-29 04:56:35]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:300.1) return: -300.1
+[15-05-29 04:56:35]accessor_two.ClassOneImpl.methodOne.SomeException112: Param2 cant be negative!
+[15-05-29 04:56:35]accessor_two.ClassOneImpl.methodOne:a2c1: params(RemoteCall!:0.0) return: 0.0
+[15-05-29 04:56:35]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be negative!
+[15-05-29 04:56:35]accessor_two.ClassOneImpl.methodTwo.SomeException304: Param2 cant be positive!

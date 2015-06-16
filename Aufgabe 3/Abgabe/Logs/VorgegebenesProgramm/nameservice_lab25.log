@@ -1,0 +1,374 @@
+[15-05-27 01:00:14 ]Starting namesevice on port 5655 allowing 500 concurrent connections
+[15-05-27 01:00:14 ]NameServer: Waiting for connection - listening on TCP port 5655
+[15-05-27 01:00:57 2 ] connetion opened
+[15-05-27 01:00:57 1 ] connetion opened
+[15-05-27 01:00:57 3 ] connetion opened
+[15-05-27 01:00:57 3 ] RAW INCOMING: rebind:lab28:62258:a2c1
+[15-05-27 01:00:57 1 ] RAW INCOMING: rebind:lab28:62258:a1c1
+[15-05-27 01:00:57 2 ] RAW INCOMING: rebind:lab28:62258:a1c2
+[15-05-27 01:00:57 3 ] rebind Name:a2c1 @ lab28:62258
+[15-05-27 01:00:57 2 ] rebind Name:a1c2 @ lab28:62258
+[15-05-27 01:00:57 3 ] RAW INCOMING: close
+[15-05-27 01:00:57 1 ] rebind Name:a1c1 @ lab28:62258
+[15-05-27 01:00:57 1 ] RAW INCOMING: close
+[15-05-27 01:00:57 2 ] RAW INCOMING: close
+[15-05-27 01:00:57 1 ] Close...
+[15-05-27 01:00:57 3 ] Close...
+[15-05-27 01:00:57 2 ] Close...
+[15-05-27 01:00:57 1 ] connection closed
+[15-05-27 01:00:57 2 ] connection closed
+[15-05-27 01:00:57 3 ] connection closed
+[15-05-27 01:01:08 4 ] connetion opened
+[15-05-27 01:01:08 4 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:01:08 4 ] resolve Name:a1c1 @ lab28:62258
+[15-05-27 01:01:08 4 ] RAW INCOMING: close
+[15-05-27 01:01:08 4 ] Close...
+[15-05-27 01:01:08 4 ] connection closed
+[15-05-27 01:01:08 5 ] connetion opened
+[15-05-27 01:01:08 5 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:01:08 5 ] resolve Name:a1c2 @ lab28:62258
+[15-05-27 01:01:08 5 ] RAW INCOMING: close
+[15-05-27 01:01:08 5 ] Close...
+[15-05-27 01:01:08 5 ] connection closed
+[15-05-27 01:01:08 6 ] connetion opened
+[15-05-27 01:01:08 6 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:01:08 6 ] resolve Name:a2c1 @ lab28:62258
+[15-05-27 01:01:08 6 ] RAW INCOMING: close
+[15-05-27 01:01:08 6 ] Close...
+[15-05-27 01:01:08 6 ] connection closed
+[15-05-27 01:02:06 7 ] connetion opened
+[15-05-27 01:02:06 7 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:02:06 7 ] resolve Name:a1c1 @ lab28:62258
+[15-05-27 01:02:06 7 ] RAW INCOMING: close
+[15-05-27 01:02:06 7 ] Close...
+[15-05-27 01:02:06 7 ] connection closed
+[15-05-27 01:02:06 8 ] connetion opened
+[15-05-27 01:02:06 8 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:02:06 8 ] resolve Name:a1c2 @ lab28:62258
+[15-05-27 01:02:06 8 ] RAW INCOMING: close
+[15-05-27 01:02:06 9 ] connetion opened
+[15-05-27 01:02:06 8 ] Close...
+[15-05-27 01:02:06 9 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:02:06 8 ] connection closed
+[15-05-27 01:02:06 9 ] resolve Name:a2c1 @ lab28:62258
+[15-05-27 01:02:06 9 ] RAW INCOMING: close
+[15-05-27 01:02:06 9 ] Close...
+[15-05-27 01:02:06 9 ] connection closed
+[15-05-27 01:02:39 10 ] connetion opened
+[15-05-27 01:02:39 10 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:02:39 10 ] resolve Name:a1c1 @ lab28:62258
+[15-05-27 01:02:39 10 ] RAW INCOMING: close
+[15-05-27 01:02:39 10 ] Close...
+[15-05-27 01:02:39 10 ] connection closed
+[15-05-27 01:02:39 11 ] connetion opened
+[15-05-27 01:02:39 11 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:02:39 11 ] resolve Name:a1c2 @ lab28:62258
+[15-05-27 01:02:39 11 ] RAW INCOMING: close
+[15-05-27 01:02:39 11 ] Close...
+[15-05-27 01:02:39 11 ] connection closed
+[15-05-27 01:02:39 12 ] connetion opened
+[15-05-27 01:02:39 12 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:02:39 12 ] resolve Name:a2c1 @ lab28:62258
+[15-05-27 01:02:39 12 ] RAW INCOMING: close
+[15-05-27 01:02:39 12 ] Close...
+[15-05-27 01:02:39 12 ] connection closed
+[15-05-27 01:05:55 13 ] connetion opened
+[15-05-27 01:05:56 13 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:05:56 13 ] resolve Name:a1c1 @ lab28:62258
+[15-05-27 01:05:56 13 ] RAW INCOMING: close
+[15-05-27 01:05:56 13 ] Close...
+[15-05-27 01:05:56 13 ] connection closed
+[15-05-27 01:05:56 14 ] connetion opened
+[15-05-27 01:05:56 14 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:05:56 14 ] resolve Name:a1c2 @ lab28:62258
+[15-05-27 01:05:56 14 ] RAW INCOMING: close
+[15-05-27 01:05:56 14 ] Close...
+[15-05-27 01:05:56 14 ] connection closed
+[15-05-27 01:05:56 15 ] connetion opened
+[15-05-27 01:05:56 15 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:05:56 15 ] resolve Name:a2c1 @ lab28:62258
+[15-05-27 01:05:56 15 ] RAW INCOMING: close
+[15-05-27 01:05:56 15 ] Close...
+[15-05-27 01:05:56 15 ] connection closed
+[15-05-27 01:38:07 16 ] connetion opened
+[15-05-27 01:38:07 16 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:38:07 16 ] resolve Name:a1c1 @ lab28:62258
+[15-05-27 01:38:07 16 ] RAW INCOMING: close
+[15-05-27 01:38:07 16 ] Close...
+[15-05-27 01:38:07 16 ] connection closed
+[15-05-27 01:38:07 17 ] connetion opened
+[15-05-27 01:38:07 17 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:38:07 17 ] resolve Name:a1c2 @ lab28:62258
+[15-05-27 01:38:07 17 ] RAW INCOMING: close
+[15-05-27 01:38:07 17 ] Close...
+[15-05-27 01:38:07 17 ] connection closed
+[15-05-27 01:38:07 18 ] connetion opened
+[15-05-27 01:38:07 18 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:38:07 18 ] resolve Name:a2c1 @ lab28:62258
+[15-05-27 01:38:07 18 ] RAW INCOMING: close
+[15-05-27 01:38:07 18 ] Close...
+[15-05-27 01:38:07 18 ] connection closed
+[15-05-27 01:41:54 20 ] connetion opened
+[15-05-27 01:41:54 19 ] connetion opened
+[15-05-27 01:41:54 21 ] connetion opened
+[15-05-27 01:41:54 20 ] RAW INCOMING: rebind:lab28:47513:a1c2
+[15-05-27 01:41:54 19 ] RAW INCOMING: rebind:lab28:47513:a1c1
+[15-05-27 01:41:54 21 ] RAW INCOMING: rebind:lab28:47513:a2c1
+[15-05-27 01:41:54 20 ] rebind Name:a1c2 @ lab28:47513
+[15-05-27 01:41:54 20 ] RAW INCOMING: close
+[15-05-27 01:41:54 19 ] rebind Name:a1c1 @ lab28:47513
+[15-05-27 01:41:54 20 ] Close...
+[15-05-27 01:41:54 21 ] rebind Name:a2c1 @ lab28:47513
+[15-05-27 01:41:54 19 ] RAW INCOMING: close
+[15-05-27 01:41:54 20 ] connection closed
+[15-05-27 01:41:54 21 ] RAW INCOMING: close
+[15-05-27 01:41:54 19 ] Close...
+[15-05-27 01:41:54 21 ] Close...
+[15-05-27 01:41:54 19 ] connection closed
+[15-05-27 01:41:54 21 ] connection closed
+[15-05-27 01:42:00 22 ] connetion opened
+[15-05-27 01:42:00 22 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:42:00 22 ] resolve Name:a1c1 @ lab28:47513
+[15-05-27 01:42:00 22 ] RAW INCOMING: close
+[15-05-27 01:42:00 22 ] Close...
+[15-05-27 01:42:00 22 ] connection closed
+[15-05-27 01:42:00 23 ] connetion opened
+[15-05-27 01:42:00 23 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:42:00 23 ] resolve Name:a1c2 @ lab28:47513
+[15-05-27 01:42:00 23 ] RAW INCOMING: close
+[15-05-27 01:42:00 23 ] Close...
+[15-05-27 01:42:00 23 ] connection closed
+[15-05-27 01:42:00 24 ] connetion opened
+[15-05-27 01:42:00 24 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:42:00 24 ] resolve Name:a2c1 @ lab28:47513
+[15-05-27 01:42:00 24 ] RAW INCOMING: close
+[15-05-27 01:42:00 24 ] Close...
+[15-05-27 01:42:00 24 ] connection closed
+[15-05-27 01:42:51 25 ] connetion opened
+[15-05-27 01:42:51 26 ] connetion opened
+[15-05-27 01:42:51 27 ] connetion opened
+[15-05-27 01:42:51 25 ] RAW INCOMING: rebind:lab28:51791:a1c1
+[15-05-27 01:42:51 25 ] rebind Name:a1c1 @ lab28:51791
+[15-05-27 01:42:51 27 ] RAW INCOMING: rebind:lab28:51791:a2c1
+[15-05-27 01:42:51 26 ] RAW INCOMING: rebind:lab28:51791:a1c2
+[15-05-27 01:42:51 25 ] RAW INCOMING: close
+[15-05-27 01:42:51 27 ] rebind Name:a2c1 @ lab28:51791
+[15-05-27 01:42:51 26 ] rebind Name:a1c2 @ lab28:51791
+[15-05-27 01:42:51 25 ] Close...
+[15-05-27 01:42:51 27 ] RAW INCOMING: close
+[15-05-27 01:42:51 26 ] RAW INCOMING: close
+[15-05-27 01:42:51 25 ] connection closed
+[15-05-27 01:42:51 27 ] Close...
+[15-05-27 01:42:51 26 ] Close...
+[15-05-27 01:42:51 27 ] connection closed
+[15-05-27 01:42:51 26 ] connection closed
+[15-05-27 01:42:57 28 ] connetion opened
+[15-05-27 01:42:57 28 ] RAW INCOMING: resolve:a1c1
+[15-05-27 01:42:57 28 ] resolve Name:a1c1 @ lab28:51791
+[15-05-27 01:42:57 28 ] RAW INCOMING: close
+[15-05-27 01:42:57 28 ] Close...
+[15-05-27 01:42:57 28 ] connection closed
+[15-05-27 01:42:57 29 ] connetion opened
+[15-05-27 01:42:57 29 ] RAW INCOMING: resolve:a1c2
+[15-05-27 01:42:57 29 ] resolve Name:a1c2 @ lab28:51791
+[15-05-27 01:42:57 29 ] RAW INCOMING: close
+[15-05-27 01:42:57 29 ] Close...
+[15-05-27 01:42:57 29 ] connection closed
+[15-05-27 01:42:57 30 ] connetion opened
+[15-05-27 01:42:57 30 ] RAW INCOMING: resolve:a2c1
+[15-05-27 01:42:57 30 ] resolve Name:a2c1 @ lab28:51791
+[15-05-27 01:42:57 30 ] RAW INCOMING: close
+[15-05-27 01:42:57 30 ] Close...
+[15-05-27 01:42:57 30 ] connection closed
+[15-05-27 02:27:24 31 ] connetion opened
+[15-05-27 02:27:24 32 ] connetion opened
+[15-05-27 02:27:24 33 ] connetion opened
+[15-05-27 02:27:24 31 ] RAW INCOMING: rebind:lab28:43408:a1c1
+[15-05-27 02:27:24 32 ] RAW INCOMING: rebind:lab28:43408:a1c2
+[15-05-27 02:27:24 31 ] rebind Name:a1c1 @ lab28:43408
+[15-05-27 02:27:24 33 ] RAW INCOMING: rebind:lab28:43408:a2c1
+[15-05-27 02:27:24 31 ] RAW INCOMING: close
+[15-05-27 02:27:24 32 ] rebind Name:a1c2 @ lab28:43408
+[15-05-27 02:27:24 33 ] rebind Name:a2c1 @ lab28:43408
+[15-05-27 02:27:24 32 ] RAW INCOMING: close
+[15-05-27 02:27:24 31 ] Close...
+[15-05-27 02:27:24 31 ] connection closed
+[15-05-27 02:27:24 33 ] RAW INCOMING: close
+[15-05-27 02:27:24 32 ] Close...
+[15-05-27 02:27:24 32 ] connection closed
+[15-05-27 02:27:24 33 ] Close...
+[15-05-27 02:27:24 33 ] connection closed
+[15-05-27 02:27:32 34 ] connetion opened
+[15-05-27 02:27:32 35 ] connetion opened
+[15-05-27 02:27:32 34 ] RAW INCOMING: rebind:lab28:47886:a1c1
+[15-05-27 02:27:32 35 ] RAW INCOMING: rebind:lab28:47886:a1c2
+[15-05-27 02:27:32 34 ] rebind Name:a1c1 @ lab28:47886
+[15-05-27 02:27:32 34 ] RAW INCOMING: close
+[15-05-27 02:27:32 35 ] rebind Name:a1c2 @ lab28:47886
+[15-05-27 02:27:32 34 ] Close...
+[15-05-27 02:27:32 35 ] RAW INCOMING: close
+[15-05-27 02:27:32 34 ] connection closed
+[15-05-27 02:27:32 35 ] Close...
+[15-05-27 02:27:32 35 ] connection closed
+[15-05-27 02:27:38 36 ] connetion opened
+[15-05-27 02:27:38 36 ] RAW INCOMING: resolve:a1c1
+[15-05-27 02:27:38 36 ] resolve Name:a1c1 @ lab28:47886
+[15-05-27 02:27:38 36 ] RAW INCOMING: close
+[15-05-27 02:27:38 36 ] Close...
+[15-05-27 02:27:38 36 ] connection closed
+[15-05-27 02:27:38 37 ] connetion opened
+[15-05-27 02:27:38 37 ] RAW INCOMING: resolve:a1c2
+[15-05-27 02:27:38 37 ] resolve Name:a1c2 @ lab28:47886
+[15-05-27 02:27:38 37 ] RAW INCOMING: close
+[15-05-27 02:27:38 37 ] Close...
+[15-05-27 02:27:38 37 ] connection closed
+[15-05-27 02:27:38 38 ] connetion opened
+[15-05-27 02:27:38 38 ] RAW INCOMING: resolve:a2c1
+[15-05-27 02:27:38 38 ] resolve Name:a2c1 @ lab28:43408
+[15-05-27 02:27:38 38 ] RAW INCOMING: close
+[15-05-27 02:27:38 38 ] Close...
+[15-05-27 02:27:38 38 ] connection closed
+[15-05-27 02:35:22 39 ] connetion opened
+[15-05-27 02:35:22 40 ] connetion opened
+[15-05-27 02:35:22 41 ] connetion opened
+[15-05-27 02:35:22 39 ] RAW INCOMING: rebind:lab28:44636:a1c1
+[15-05-27 02:35:22 39 ] rebind Name:a1c1 @ lab28:44636
+[15-05-27 02:35:22 41 ] RAW INCOMING: rebind:lab28:44636:a2c1
+[15-05-27 02:35:22 40 ] RAW INCOMING: rebind:lab28:44636:a1c2
+[15-05-27 02:35:22 39 ] RAW INCOMING: close
+[15-05-27 02:35:22 39 ] Close...
+[15-05-27 02:35:22 41 ] rebind Name:a2c1 @ lab28:44636
+[15-05-27 02:35:22 40 ] rebind Name:a1c2 @ lab28:44636
+[15-05-27 02:35:22 39 ] connection closed
+[15-05-27 02:35:22 41 ] RAW INCOMING: close
+[15-05-27 02:35:22 40 ] RAW INCOMING: close
+[15-05-27 02:35:22 41 ] Close...
+[15-05-27 02:35:22 40 ] Close...
+[15-05-27 02:35:22 41 ] connection closed
+[15-05-27 02:35:22 40 ] connection closed
+[15-05-27 02:35:30 42 ] connetion opened
+[15-05-27 02:35:30 42 ] RAW INCOMING: resolve:a1c1
+[15-05-27 02:35:30 42 ] resolve Name:a1c1 @ lab28:44636
+[15-05-27 02:35:30 42 ] RAW INCOMING: close
+[15-05-27 02:35:30 42 ] Close...
+[15-05-27 02:35:30 42 ] connection closed
+[15-05-27 02:35:30 43 ] connetion opened
+[15-05-27 02:35:30 43 ] RAW INCOMING: resolve:a1c2
+[15-05-27 02:35:30 43 ] resolve Name:a1c2 @ lab28:44636
+[15-05-27 02:35:30 43 ] RAW INCOMING: close
+[15-05-27 02:35:30 43 ] Close...
+[15-05-27 02:35:30 44 ] connetion opened
+[15-05-27 02:35:30 43 ] connection closed
+[15-05-27 02:35:30 44 ] RAW INCOMING: resolve:a2c1
+[15-05-27 02:35:30 44 ] resolve Name:a2c1 @ lab28:44636
+[15-05-27 02:35:30 44 ] RAW INCOMING: close
+[15-05-27 02:35:30 44 ] Close...
+[15-05-27 02:35:30 44 ] connection closed
+[15-05-27 02:36:43 45 ] connetion opened
+[15-05-27 02:36:43 46 ] connetion opened
+[15-05-27 02:36:43 47 ] connetion opened
+[15-05-27 02:36:43 45 ] RAW INCOMING: rebind:lab28:40887:a1c1
+[15-05-27 02:36:43 46 ] RAW INCOMING: rebind:lab28:40887:a1c2
+[15-05-27 02:36:43 47 ] RAW INCOMING: rebind:lab28:40887:a2c1
+[15-05-27 02:36:43 45 ] rebind Name:a1c1 @ lab28:40887
+[15-05-27 02:36:43 46 ] rebind Name:a1c2 @ lab28:40887
+[15-05-27 02:36:43 47 ] rebind Name:a2c1 @ lab28:40887
+[15-05-27 02:36:43 45 ] RAW INCOMING: close
+[15-05-27 02:36:43 46 ] RAW INCOMING: close
+[15-05-27 02:36:43 47 ] RAW INCOMING: close
+[15-05-27 02:36:43 46 ] Close...
+[15-05-27 02:36:43 45 ] Close...
+[15-05-27 02:36:43 47 ] Close...
+[15-05-27 02:36:43 46 ] connection closed
+[15-05-27 02:36:43 45 ] connection closed
+[15-05-27 02:36:43 47 ] connection closed
+[15-05-27 02:36:48 48 ] connetion opened
+[15-05-27 02:36:48 48 ] RAW INCOMING: resolve:a1c1
+[15-05-27 02:36:48 48 ] resolve Name:a1c1 @ lab28:40887
+[15-05-27 02:36:48 48 ] RAW INCOMING: close
+[15-05-27 02:36:48 48 ] Close...
+[15-05-27 02:36:48 48 ] connection closed
+[15-05-27 02:36:48 49 ] connetion opened
+[15-05-27 02:36:48 49 ] RAW INCOMING: resolve:a1c2
+[15-05-27 02:36:48 49 ] resolve Name:a1c2 @ lab28:40887
+[15-05-27 02:36:48 49 ] RAW INCOMING: close
+[15-05-27 02:36:48 49 ] Close...
+[15-05-27 02:36:48 49 ] connection closed
+[15-05-27 02:36:48 50 ] connetion opened
+[15-05-27 02:36:48 50 ] RAW INCOMING: resolve:a2c1
+[15-05-27 02:36:48 50 ] resolve Name:a2c1 @ lab28:40887
+[15-05-27 02:36:48 50 ] RAW INCOMING: close
+[15-05-27 02:36:48 50 ] Close...
+[15-05-27 02:36:48 50 ] connection closed
+[15-05-27 03:00:38 51 ] connetion opened
+[15-05-27 03:00:38 53 ] connetion opened
+[15-05-27 03:00:38 52 ] connetion opened
+[15-05-27 03:00:38 51 ] RAW INCOMING: rebind:lab28:60473:a1c1
+[15-05-27 03:00:38 51 ] rebind Name:a1c1 @ lab28:60473
+[15-05-27 03:00:38 53 ] RAW INCOMING: rebind:lab28:60473:a2c1
+[15-05-27 03:00:38 52 ] RAW INCOMING: rebind:lab28:60473:a1c2
+[15-05-27 03:00:38 51 ] RAW INCOMING: close
+[15-05-27 03:00:38 52 ] rebind Name:a1c2 @ lab28:60473
+[15-05-27 03:00:38 51 ] Close...
+[15-05-27 03:00:38 53 ] rebind Name:a2c1 @ lab28:60473
+[15-05-27 03:00:38 52 ] RAW INCOMING: close
+[15-05-27 03:00:38 51 ] connection closed
+[15-05-27 03:00:38 52 ] Close...
+[15-05-27 03:00:38 53 ] RAW INCOMING: close
+[15-05-27 03:00:38 53 ] Close...
+[15-05-27 03:00:38 52 ] connection closed
+[15-05-27 03:00:38 53 ] connection closed
+[15-05-27 03:00:48 54 ] connetion opened
+[15-05-27 03:00:48 54 ] RAW INCOMING: resolve:a1c1
+[15-05-27 03:00:48 54 ] resolve Name:a1c1 @ lab28:60473
+[15-05-27 03:00:48 54 ] RAW INCOMING: close
+[15-05-27 03:00:48 54 ] Close...
+[15-05-27 03:00:48 54 ] connection closed
+[15-05-27 03:00:48 55 ] connetion opened
+[15-05-27 03:00:48 55 ] RAW INCOMING: resolve:a1c2
+[15-05-27 03:00:48 55 ] resolve Name:a1c2 @ lab28:60473
+[15-05-27 03:00:48 55 ] RAW INCOMING: close
+[15-05-27 03:00:48 55 ] Close...
+[15-05-27 03:00:48 55 ] connection closed
+[15-05-27 03:00:48 56 ] connetion opened
+[15-05-27 03:00:48 56 ] RAW INCOMING: resolve:a2c1
+[15-05-27 03:00:48 56 ] resolve Name:a2c1 @ lab28:60473
+[15-05-27 03:00:48 56 ] RAW INCOMING: close
+[15-05-27 03:00:48 56 ] Close...
+[15-05-27 03:00:48 56 ] connection closed
+[15-05-27 03:23:29 57 ] connetion opened
+[15-05-27 03:23:29 57 ] RAW INCOMING: rebind:lab28:53515:zumsel1
+[15-05-27 03:23:29 57 ] rebind Name:zumsel1 @ lab28:53515
+[15-05-27 03:23:29 57 ] RAW INCOMING: close
+[15-05-27 03:23:29 57 ] Close...
+[15-05-27 03:23:29 57 ] connection closed
+[15-05-27 03:23:29 58 ] connetion opened
+[15-05-27 03:23:29 58 ] RAW INCOMING: rebind:lab28:53515:zumsel2
+[15-05-27 03:23:29 58 ] rebind Name:zumsel2 @ lab28:53515
+[15-05-27 03:23:29 58 ] RAW INCOMING: close
+[15-05-27 03:23:29 58 ] Close...
+[15-05-27 03:23:29 58 ] connection closed
+[15-05-27 03:23:29 59 ] connetion opened
+[15-05-27 03:23:29 59 ] RAW INCOMING: rebind:lab28:53515:zumsel3
+[15-05-27 03:23:29 59 ] rebind Name:zumsel3 @ lab28:53515
+[15-05-27 03:23:29 59 ] RAW INCOMING: close
+[15-05-27 03:23:29 59 ] Close...
+[15-05-27 03:23:29 59 ] connection closed
+[15-05-27 03:24:49 60 ] connetion opened
+[15-05-27 03:24:49 60 ] RAW INCOMING: resolve:zumsel1
+[15-05-27 03:24:49 60 ] resolve Name:zumsel1 @ lab28:53515
+[15-05-27 03:24:49 60 ] RAW INCOMING: close
+[15-05-27 03:24:49 60 ] Close...
+[15-05-27 03:24:49 60 ] connection closed
+[15-05-27 03:24:49 61 ] connetion opened
+[15-05-27 03:24:49 61 ] RAW INCOMING: resolve:zumsel2
+[15-05-27 03:24:49 61 ] resolve Name:zumsel2 @ lab28:53515
+[15-05-27 03:24:49 61 ] RAW INCOMING: close
+[15-05-27 03:24:49 61 ] Close...
+[15-05-27 03:24:49 61 ] connection closed
+[15-05-27 03:24:49 62 ] connetion opened
+[15-05-27 03:24:49 62 ] RAW INCOMING: resolve:zumsel3
+[15-05-27 03:24:49 62 ] resolve Name:zumsel3 @ lab28:53515
+[15-05-27 03:24:49 62 ] RAW INCOMING: close
+[15-05-27 03:24:49 62 ] Close...
+[15-05-27 03:24:49 62 ] connection closed

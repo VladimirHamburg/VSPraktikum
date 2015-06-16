@@ -1,0 +1,24 @@
+ 
+(abg627@lab28)~/ErlangPro/Chris>java one.AccessorOneClientExample lab25 5655 lab28 5655 nameOne nameTwo
+one.AccessorOneClientExample started! (but mware_lib doesn't supports setting listening interface and port)
+Connected to NameServiceDB on lab25:5655
+IMC: Waiting for connection - listening on TCP port 62698
+Connected to ClassOneImplBase object with name "nameOne" and ClassTwoImplBase with name "nameTwo"
+--------------------------------------------------------------
+class accessor_one.ClassOneImplBase ('nameOne')
+methodOne
+param1 = "Arthur"
+param2 = 42
+Return value = 'accessor_one.ClassOneImplBase.methodOne'
+--------------------------------------------------------------
+--------------------------------------------------------------
+class accessor_one.ClassTwoImplBase ('nameTwo')
+methodOne
+param1 = 3.14
+Return value = 3
+--------------------------------------------------------------
+--------------------------------------------------------------
+class accessor_one.ClassTwoImplBase ('nameTwo')
+methodTwo
+Return value = 3.14
+--------------------------------------------------------------
