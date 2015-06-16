@@ -16,20 +16,22 @@ public class DataExchange {
 	}
 	
 	public void storePacket(DatagramPacket packet){
+		//System.out.println(timeMan.getFrameNum() + " INSERT!");
+		System.out.println(new Packet(packet.getData()).toString());
 		buffer.add(new Packet(packet.getData()));
 	}
 	
 	public void proceed(int frameN){
 		//if(timeMan.getTimestamp()%1000L == 0) frameN--;
-		if(buffer.size() == 1 && frameN != 1){
-			System.out.println(frameN + " bei " + timeMan.getTimestamp());
+		if(buffer.size() == 1){
+			//System.out.println(frameN + " bei " + timeMan.getTimestamp());
 			Packet workPacket = buffer.get(0);
 			//System.out.println(workPacket.toString());
 			timeMan.setTime(workPacket.getStation(), workPacket.getTimestamp());
-			slotMan.setReceivedSlot(timeMan.getFrameNum(), workPacket.getSlotNum());
+			slotMan.setReceivedSlot(workPacket.getSlotNum());
 			
 		}
-		if(buffer.size() > 2)System.out.println("KOLLISION " + frameN);
+		if(buffer.size() >= 2)System.out.println("KOLLISION " + frameN);
 		buffer = new ArrayList<>();
 	}
 }

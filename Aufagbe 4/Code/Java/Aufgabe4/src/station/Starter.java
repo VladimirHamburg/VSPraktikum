@@ -17,7 +17,7 @@ public class Starter {
 		SlotManager sM = new SlotManager();
 		TimeManager tM = new TimeManager(0L);
 		DataExchange dE = new DataExchange(sM, tM);
-		Ticker t = new Ticker(tM, dE);
+		Ticker t = new Ticker(tM, sM, dE);
 		Receiver r = new Receiver("225.10.1.2", "lo", 15009, dE);
 		try {
 			Sender s = new Sender(p, sM, tM, "225.10.1.2", 15009, "lo");
@@ -30,8 +30,8 @@ public class Starter {
 		
 		Thread pt = new Thread(p);
 		pt.start();
-		Thread tMt = new Thread(tM);
-		tMt.start();
+//		Thread tMt = new Thread(tM);
+//		tMt.start();
 		Thread tt = new Thread(t);
 		tt.start();
 		Thread rT = new Thread(r);

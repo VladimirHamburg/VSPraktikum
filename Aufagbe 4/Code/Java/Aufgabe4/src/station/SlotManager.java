@@ -11,6 +11,7 @@ public class SlotManager{
 	ArrayList<Integer> workSlotsOld = workSlots;
 	private int frameNum = 1;
 	private int slot = 0;
+	private boolean wresr = false;
 	private boolean resr = false;
 	
 	public SlotManager() {
@@ -19,9 +20,11 @@ public class SlotManager{
 	
 	
 	public int getSlot(){
-		Collections.shuffle(workSlots);
 		slot = (int) workSlots.get(0);
-		if(!resr) return -1;
+		if(!resr){
+			return -1;
+		}
+		
 		return slot;
 	}
 	
@@ -31,16 +34,35 @@ public class SlotManager{
 		return (int) workSlotsOld.get(0);
 	}
 	
-	public void setReceivedSlot(int frameNum, int slot){
-		System.out.println(frameNum - this.frameNum);
-		if(this.frameNum+1 == frameNum){
-			this.frameNum = frameNum;
-			resr = false; 
-			workSlotsOld = workSlots;
-			workSlots = new ArrayList<Integer>(Arrays.asList(slots));
-		}
-		if(this.slot == slot) resr = true;		
+	public void setReceivedSlot(int slot){
+		//System.out.println(frameNum + " new<>old " +  this.frameNum);
+//		if(this.frameNum+1 == frameNum){
+//			this.frameNum = frameNum;
+//			resr = wresr;
+//			wresr = false; 
+//			slot = 0;
+//			workSlotsOld = workSlots;
+//			workSlots = new ArrayList<Integer>(Arrays.asList(slots));
+//			Collections.shuffle(workSlots);
+//		}
+//		if(this.slot == slot) wresr = true;		
 		workSlots.remove(new Integer(slot));
+		if(this.frameNum+1 < frameNum){
+//			this.frameNum = frameNum;
+//			resr = false; 
+//			workSlotsOld = workSlots;
+//			workSlots = new ArrayList<Integer>(Arrays.asList(slots));
+			System.out.println("KOMMT VOR");
+		}
+	}
+	
+	public void nextFrame(int frameNum){
+		resr = !workSlots.contains(new Integer(slot));
+		slot = 0;
+		workSlotsOld = workSlots;
+		workSlots = new ArrayList<Integer>(Arrays.asList(slots));
+		Collections.shuffle(workSlots);
+		this.frameNum = frameNum;
 	}
 
 	

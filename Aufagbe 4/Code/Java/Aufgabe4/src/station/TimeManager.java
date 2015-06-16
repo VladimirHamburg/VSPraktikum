@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TimeManager implements Runnable {
+public class TimeManager {
 	
 	public static final long SLOT_TIME = 40L;
 	public static final long SLOT_OFFSET_TIME = 20L;
@@ -26,25 +26,26 @@ public class TimeManager implements Runnable {
 		this.startDeviation = startDeviation;
 		this.deviation = 0L;
 		times = new ArrayList<>();
+		workStart = (new Date().getTime()/1000L)*1000L;
 	}
 	
-	@Override
-	public void run() {
-		workStart = (new Date().getTime()/1000L)*1000L + 5L;
-		while(work_flag){
-			//calcFrameNum(new Date().getTime()+startDeviation + deviation);
-			if(oldFrame == frameNum-1){
-				oldFrame++;
-				calcTime();
-				times = new ArrayList<>();
-			}
-		}
-		
-	}
+//	@Override
+//	public void run() {
+//		workStart = (new Date().getTime()/1000L)*1000L;
+//		while(work_flag){
+//			calcFrameNum(new Date().getTime()+startDeviation + deviation);
+//			if(oldFrame == frameNum-1){
+//				oldFrame++;
+//				calcTime();
+//				times = new ArrayList<>();
+//			}
+//		}
+//		
+//	}
 	
 	public void setTime(char statTyp, Long time){
 		if(statTyp == 'A'){ 
-			Long ntime = (time+SENDING_TIME) - (new Date().getTime()+startDeviation);
+			Long ntime = (time+SENDING_TIME+SLOT_OFFSET_TIME) - (new Date().getTime()+startDeviation);
 			times.add(ntime);
 		}
 	}
@@ -56,7 +57,9 @@ public class TimeManager implements Runnable {
 	}
 	
 	public Long getDelayNextFrame(){
-		return  FRIME_TIME-(((new Date().getTime()+startDeviation + deviation)%FRIME_TIME));
+		Long workTime = (((new Date().getTime()+startDeviation + deviation)%FRIME_TIME));
+		if(workTime == 0L) return 0L;
+		return  FRIME_TIME-workTime;
 	}
 	
 	public int getFrameNum() {
@@ -76,9 +79,9 @@ public class TimeManager implements Runnable {
 	
 
 	private void calcFrameNum(Long time){
-		if((time - (workStart)%1000 == 0)){
-			return;
-		}
+//		if((time - (workStart)%1000 == 0)){
+//			return;
+//		}
 		frameNum = (int) ((time - (workStart))/1000L);
 	}
 	
@@ -92,5 +95,11 @@ public class TimeManager implements Runnable {
 		if(times.size() == 0) return;
 		deviation = 0L;//workDev/times.size();
 	}
+	
+	public void nextFrame(){
+		calcTime();
+		times = new ArrayList<>();
+	}
+	
 	
 }

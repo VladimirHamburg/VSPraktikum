@@ -4,11 +4,15 @@ public class Ticker implements Runnable {
 	private boolean work_flag = true;
 	private TimeManager timeMan;
 	private DataExchange dataEx;
+	private Long nextFrame;
+	private SlotManager slotMan;
 
 	
-	public Ticker(TimeManager timeMan,DataExchange dataEx) {
+	public Ticker(TimeManager timeMan,SlotManager slotMan,DataExchange dataEx) {
 		this.timeMan = timeMan;
 		this.dataEx = dataEx;
+		this.slotMan = slotMan;
+		nextFrame = timeMan.getDelayNextFrame()-10L;
 	}
 	
 	@Override	
@@ -16,7 +20,14 @@ public class Ticker implements Runnable {
 		while(work_flag){
 			try {
 				Thread.sleep(timeMan.getDelayNextSlot());
-				dataEx.proceed(timeMan.getFrameNum());
+				if(nextFrame < timeMan.getDelayNextFrame()){
+					nextFrame = timeMan.getDelayNextFrame()-10L;
+					slotMan.nextFrame(timeMan.getFrameNum());
+					timeMan.nextFrame();
+					dataEx.proceed(timeMan.getFrameNum()-1);
+				}else{
+					dataEx.proceed(timeMan.getFrameNum());
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

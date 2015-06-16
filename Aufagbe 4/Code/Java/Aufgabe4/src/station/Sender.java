@@ -57,16 +57,18 @@ public class Sender implements Runnable {
 		            if(currentSlot == -1) 
 		            {
 		            	noCollision = false;
+		            	System.out.println("RESTART!");
 		            	continue;
 		            }
 		            p.setSlotNum((byte)currentSlot); // This is the slot for the next frame
 		            p.setTimestamp(timeMan.getTimestamp()); // Current time stamp
 		            socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port));
-		            
+		            //System.out.println("GESENDET! um " + timeMan.getTimestamp());
 		            // Sleep till next frame
-		            Thread.sleep(timeMan.getDelayNextFrame());
+		            //Thread.sleep(timeMan.getDelayNextFrame());
 		            // Sleep till slot, do shit again
-		            Thread.sleep(TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+		            //System.out.println(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+		            Thread.sleep(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
 				}
 			}
 		} catch (InterruptedException | IOException ex) {
