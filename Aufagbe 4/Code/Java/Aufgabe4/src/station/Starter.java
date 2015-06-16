@@ -9,7 +9,6 @@ public class Starter {
 
 
 	public static void main(String[] args) {
-	System.out.println("Nigga!");
 		PacketBuffer p = new PacketBuffer('A');
 		p.run();
 //		Thread t = new Thread(p);

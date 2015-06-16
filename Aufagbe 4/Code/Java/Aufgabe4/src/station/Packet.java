@@ -6,6 +6,7 @@ import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.Semaphore;
 
 public class Packet {
 
@@ -24,10 +25,10 @@ public class Packet {
 		this.raw = new byte[CLASS_SIZE + PAYLOAD_SIZE + SLOTNUM_SIZE + TIMESTAMP_SIZE]; 
 	}
 	
-	public Packet(char stationClass, byte[] payload) {
+	public Packet(char stationType, byte[] payload) {
 		this.raw = new byte[CLASS_SIZE + PAYLOAD_SIZE + SLOTNUM_SIZE + TIMESTAMP_SIZE];
-		SetClass(stationClass);
-		SetPayload(payload);
+		setStation(stationType);
+		setPayload(payload);
 	}
 	
 	public Packet(byte[] raw) {
@@ -52,11 +53,11 @@ public class Packet {
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");	
 		try {
-			return "Class:" + GetClass() + 
-					" Payload:" + new String(GetPayload(), "UTF-8") + 
-					" Plen:" + new String(GetPayload(), "UTF-8").length() +
-					" Slot:" + GetSlotNum() + 
-					" Time:" + sdf.format(new Date(GetTimestamp()));
+			return "Class:" + getClass() + 
+					" Payload:" + new String(getPayload(), "UTF-8") + 
+					" Plen:" + new String(getPayload(), "UTF-8").length() +
+					" Slot:" + getSlotNum() + 
+					" Time:" + sdf.format(new Date(getTimestamp()));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,35 +66,35 @@ public class Packet {
 	}	
 
 	// ** GETTER / SETTER ** //
-	public char GetClass()
+	public char getStation()
 	{
 		return (char)raw[CLASS_START];
 	}
 	
-	public byte[] GetPayload()
+	public byte[] getPayload()
 	{
 		return Arrays.copyOfRange(raw, PAYLOAD_START, PAYLOAD_START + PAYLOAD_SIZE);		
 	}
 	
-	public byte GetSlotNum()
+	public byte getSlotNum()
 	{
 		return raw[SLOTNUM_START];	
 	}
 	
-	public long GetTimestamp()
+	public long getTimestamp()
 	{
 		return bytesToLong(Arrays.copyOfRange(raw, TIMESTAMP_START, TIMESTAMP_START + TIMESTAMP_SIZE));	
 	}
 	
-	public byte[] GetRaw() {
+	public byte[] getRaw() {
 		return raw.clone();
 	}
 
-	public void SetClass(char stationClass) {
-		this.raw[CLASS_START] = (byte)stationClass;
+	public void setStation(char stationStation) {
+		this.raw[CLASS_START] = (byte)stationStation;
 	}
 	
-	public void SetPayload(byte[] data)
+	public void setPayload(byte[] data)
 	{
 		if (data.length != PAYLOAD_SIZE) {
 			throw new InvalidParameterException("Parameter does not have the size of " + PAYLOAD_SIZE);
@@ -104,11 +105,11 @@ public class Packet {
 		}
 	}
 	
-	public void SetSlotNum(byte slotNum) {
+	public void setSlotNum(byte slotNum) {
 		this.raw[SLOTNUM_START] = slotNum;
 	}
 	
-	public void SetTimestamp(long millis) {
+	public void setTimestamp(long millis) {
 		byte[] t = longToBytes(millis);
 		for (int i = 0; i < TIMESTAMP_SIZE; i++) {
 			raw[TIMESTAMP_START + i] = t[i];
