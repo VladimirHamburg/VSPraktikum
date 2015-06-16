@@ -12,6 +12,7 @@ public class DataExchange {
 	public DataExchange(SlotManager slotMan, TimeManager timeMan) {
 		this.slotMan = slotMan;
 		this.timeMan = timeMan;
+		this.buffer = new ArrayList<Packet>();
 	}
 	
 	public void storePacket(DatagramPacket packet){
@@ -19,13 +20,16 @@ public class DataExchange {
 	}
 	
 	public void proceed(int frameN){
-		if(buffer.size() == 1&& frameN != 1){
+		//if(timeMan.getTimestamp()%1000L == 0) frameN--;
+		if(buffer.size() == 1 && frameN != 1){
+			System.out.println(frameN + " bei " + timeMan.getTimestamp());
 			Packet workPacket = buffer.get(0);
-			System.out.println(workPacket.getPayload());
+			//System.out.println(workPacket.toString());
 			timeMan.setTime(workPacket.getStation(), workPacket.getTimestamp());
 			slotMan.setReceivedSlot(timeMan.getFrameNum(), workPacket.getSlotNum());
-		}else{
-			buffer = new ArrayList<>();
+			
 		}
+		if(buffer.size() > 2)System.out.println("KOLLISION " + frameN);
+		buffer = new ArrayList<>();
 	}
 }

@@ -20,7 +20,7 @@ public class Starter {
 		Ticker t = new Ticker(tM, dE);
 		Receiver r = new Receiver("225.10.1.2", "lo", 15009, dE);
 		try {
-			Sender s = new Sender(p, sM, tM, "225.10.1.2", 150009, "lo");
+			Sender s = new Sender(p, sM, tM, "225.10.1.2", 15009, "lo");
 			Thread sT = new Thread(s);
 			sT.start();
 		} catch (IOException e) {

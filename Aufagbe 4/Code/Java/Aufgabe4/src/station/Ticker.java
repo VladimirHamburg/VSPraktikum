@@ -1,7 +1,7 @@
 package station;
 
 public class Ticker implements Runnable {
-	private boolean work_flag;
+	private boolean work_flag = true;
 	private TimeManager timeMan;
 	private DataExchange dataEx;
 
@@ -20,11 +20,21 @@ public class Ticker implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+//			if(timeMan.getDelayNextSlot() == 20L){
+//				System.out.println("MIDDLE!!! " + timeMan.getTimestamp());
+//				try {
+//					Thread.sleep(2L);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+			
 		}
 		
 	}
 	
-	public void stop(){
+	public void shutdown(){
 		work_flag = false;
 	}
 	

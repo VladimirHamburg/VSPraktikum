@@ -9,9 +9,9 @@ import java.net.UnknownHostException;
 import java.sql.Time;
 
 public class Receiver implements Runnable {
-	private String ipAddress = "225.10.1.2";
-	private String adapter = "lo";
-	private int port = 15009;
+	private String ipAddress;
+	private String adapter;
+	private int port;
 	private byte[] buffer;
 	private InetAddress real_address;
 	private Boolean work_flag = true;

@@ -1,6 +1,7 @@
 package station;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
@@ -15,48 +16,61 @@ public class Sender implements Runnable {
 	private TimeManager timeMan;
 	
 	private MulticastSocket socket;
+    private InetAddress group;
+    private int port;
+
 	
 	private boolean keepRunning;
+	private boolean noCollision;
 	
 	public Sender(PacketBuffer pBuf, SlotManager slotMan, TimeManager timeMan, String netAddress, int port, String netInterfaceName) throws IOException {
 		this.pBuf = pBuf;
 		this.slotMan = slotMan;
 		this.timeMan = timeMan;
-		this.socket = new MulticastSocket();
+        this.socket = new MulticastSocket(port);
+        this.port = port;
 		socket.setNetworkInterface(NetworkInterface.getByName(netInterfaceName));
 		socket.setTimeToLive(TTL);
-		InetAddress group = InetAddress.getByName(netAddress);
+        group = InetAddress.getByName(netAddress);
 		socket.joinGroup(group);
 	}
 	
 	@Override
 	public void run() {
-		keepRunning = true;
-		
-		// --- Init Phase ---
-		// Skip the first broken frame
 		try {
-			Thread.sleep(timeMan.getDelayNextFrame());
-
-		// Skip the first full frame to check out for free slots
-		Thread.sleep(timeMan.getDelayNextFrame());
-		// We need the slot number for the CURRENT frame
-		int currentSlot = slotMan.getOldSlot();
-		// We sleep until we reach our current slot + offset
-		Thread.sleep(timeMan.SLOT_TIME * currentSlot + timeMan.SLOT_OFFSET_TIME);
-		// Now we can send our first packet!
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		while (keepRunning) {
-			Packet p = pBuf.pop();
-			
-			
-			p.setSlotNum(ByteBuffer.allocate(1).putInt(slotMan.getSlot()).get());
-			p.setTimestamp(timeMan.getTimestamp());
-			
-			
+			keepRunning = true;
+			while(keepRunning) {
+				// --- Init Phase ---
+				// Skip the first broken frame
+				Thread.sleep(timeMan.getDelayNextFrame());
+				// Skip the first full frame to check out for free slots
+				Thread.sleep(timeMan.getDelayNextFrame());
+				// We need the slot number for the CURRENT frame
+				int currentSlot = slotMan.getOldSlot();
+				// We sleep until we reach our current slot + offset
+				Thread.sleep(TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+				noCollision = true;
+				// Now we can send our first packet!
+				while (noCollision) {
+		            Packet p = pBuf.pop();
+		            currentSlot = slotMan.getSlot();
+		            if(currentSlot == -1) 
+		            {
+		            	noCollision = false;
+		            	continue;
+		            }
+		            p.setSlotNum((byte)currentSlot); // This is the slot for the next frame
+		            p.setTimestamp(timeMan.getTimestamp()); // Current time stamp
+		            socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port));
+		            
+		            // Sleep till next frame
+		            Thread.sleep(timeMan.getDelayNextFrame());
+		            // Sleep till slot, do shit again
+		            Thread.sleep(TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+				}
+			}
+		} catch (InterruptedException | IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 	

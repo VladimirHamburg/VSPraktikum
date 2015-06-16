@@ -30,9 +30,9 @@ public class TimeManager implements Runnable {
 	
 	@Override
 	public void run() {
-		workStart = new Date().getTime();
+		workStart = (new Date().getTime()/1000L)*1000L + 5L;
 		while(work_flag){
-			calcFrameNum(new Date().getTime());
+			//calcFrameNum(new Date().getTime()+startDeviation + deviation);
 			if(oldFrame == frameNum-1){
 				oldFrame++;
 				calcTime();
@@ -43,14 +43,16 @@ public class TimeManager implements Runnable {
 	}
 	
 	public void setTime(char statTyp, Long time){
-		if(statTyp == "A".charAt(0)){ 
+		if(statTyp == 'A'){ 
 			Long ntime = (time+SENDING_TIME) - (new Date().getTime()+startDeviation);
 			times.add(ntime);
 		}
 	}
 	
 	public Long getDelayNextSlot(){
-		return  SLOT_TIME-(((new Date().getTime()+startDeviation + deviation)%FRIME_TIME)%SLOT_TIME);
+		Long workTime = (((new Date().getTime()+startDeviation + deviation)%FRIME_TIME)%SLOT_TIME);
+		if(workTime == 0L) return 0L;
+		return  SLOT_TIME-workTime;
 	}
 	
 	public Long getDelayNextFrame(){
@@ -58,6 +60,7 @@ public class TimeManager implements Runnable {
 	}
 	
 	public int getFrameNum() {
+		calcFrameNum(new Date().getTime()+startDeviation + deviation);
 		return frameNum;
 	}
 	
@@ -66,12 +69,17 @@ public class TimeManager implements Runnable {
 	}
 	
 	public Long getTimestamp() {
+		//System.out.println(startDeviation + " : " + deviation);
+		//System.out.println(new Date().getTime());
 		return new Date().getTime() + startDeviation + deviation;
 	}
 	
 
 	private void calcFrameNum(Long time){
-		frameNum = (int) ((time - workStart)/1000L);
+		if((time - (workStart)%1000 == 0)){
+			return;
+		}
+		frameNum = (int) ((time - (workStart))/1000L);
 	}
 	
 	
@@ -82,7 +90,7 @@ public class TimeManager implements Runnable {
 			workDev += timeUnit;
 		}
 		if(times.size() == 0) return;
-		deviation = workDev/times.size();
+		deviation = 0L;//workDev/times.size();
 	}
 	
 }
