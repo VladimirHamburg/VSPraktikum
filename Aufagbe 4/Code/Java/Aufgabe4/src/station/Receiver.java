@@ -11,20 +11,18 @@ import java.sql.Time;
 public class Receiver implements Runnable {
 	private String ipAddress = "225.10.1.2";
 	private String adapter = "lo";
-	private int port = 15011;
+	private int port = 15009;
 	private byte[] buffer;
 	private InetAddress real_address;
 	private Boolean work_flag = true;
-	private SlotManager slotMan;
-	private TimeManager timeMan;
+	private DataExchange dataEx;
 	
 
-	public Receiver(String ipAddress, String adapter, int port, SlotManager slotMan, TimeManager timeMan) {
+	public Receiver(String ipAddress, String adapter, int port, DataExchange dataEx) {
 		this.ipAddress = ipAddress;
 		this.adapter = adapter;
 		this.port = port;
-		this.slotMan = slotMan;
-		this.timeMan = timeMan;
+		this.dataEx = dataEx;
 		buffer = new byte[34];
 		try {
 			real_address = InetAddress.getByName(this.ipAddress);
@@ -46,8 +44,8 @@ public class Receiver implements Runnable {
 			while (work_flag) {
 				DatagramPacket msgPacket = new DatagramPacket(buffer, buffer.length);
 				mSocket.receive(msgPacket);
+				dataEx.storePacket(msgPacket);
 				
-				// TODO Daten weiterleitung
 			}
 			
 		} catch (IOException ex) {
