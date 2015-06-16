@@ -15,16 +15,14 @@ public class Receiver implements Runnable {
 	private byte[] buffer;
 	private InetAddress real_address;
 	private Boolean work_flag = true;
-	private SlotManager slotMan;
-	private TimeManager timeMan;
+	private DataExchange dataEx;
 	
 
-	public Receiver(String ipAddress, String adapter, int port, SlotManager slotMan, TimeManager timeMan) {
+	public Receiver(String ipAddress, String adapter, int port, DataExchange dataEx) {
 		this.ipAddress = ipAddress;
 		this.adapter = adapter;
 		this.port = port;
-		this.slotMan = slotMan;
-		this.timeMan = timeMan;
+		this.dataEx = dataEx;
 		buffer = new byte[34];
 		try {
 			real_address = InetAddress.getByName(this.ipAddress);
