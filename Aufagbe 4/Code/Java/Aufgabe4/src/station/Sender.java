@@ -1,6 +1,7 @@
 package station;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
@@ -14,6 +15,8 @@ public class Sender implements Runnable {
 	private TimeManager timeMan;
 	
 	private MulticastSocket socket;
+	private InetAddress group;
+	private int port;
 	
 	private boolean keepRunning;
 	
@@ -21,10 +24,11 @@ public class Sender implements Runnable {
 		this.pBuf = pBuf;
 		this.slotMan = slotMan;
 		this.timeMan = timeMan;
-		this.socket = new MulticastSocket();
+		this.socket = new MulticastSocket(port);
+		this.port = port;
 		socket.setNetworkInterface(NetworkInterface.getByName(netInterfaceName));
 		socket.setTimeToLive(TTL);
-		InetAddress group = InetAddress.getByName(netAddress);
+		group = InetAddress.getByName(netAddress);
 		socket.joinGroup(group);
 	}
 	
@@ -41,25 +45,23 @@ public class Sender implements Runnable {
 		// We sleep until we reach our current slot + offset
 		Sleep(timeMan.SLOT_TIME * currentSlot + timeMan.SLOT_OFFSET_TIME);
 		// Now we can send our first packet!
-		
-		
 		while (keepRunning) {
 			Packet p = pBuf.pop();
-			
-			
-			p.setSlotNum(slotMan.getSlot());
-			p.setTimestamp(timeMan.getTime());
-			
-			
-		}
+			p.setSlotNum(slotMan.getSlot()); // This is the slot for the next frame
+			p.setTimestamp(timeMan.getTime()); // Current timestamp
+			socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port));
+			// Sleep till next frame
+			timeMan.waitForFrame();
+			// Sleep till slot, do shit again
+			Sleep(timeMan.SLOT_TIME * currentSlot + timeMan.SLOT_OFFSET_TIME);
+		}	
 	}
 	
 	public void shutDown() {
-		
+		keepRunning = false;
 	}
 	
 	public void wakeOnNextFrame() {
-		Thread.currentThread()
+		Thread.currentThread();
 	}
-
 }
