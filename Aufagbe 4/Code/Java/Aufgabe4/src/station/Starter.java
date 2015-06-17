@@ -15,7 +15,7 @@ public class Starter {
 	public static void main(String[] args) {
 		PacketBuffer p = new PacketBuffer('A');
 		SlotManager sM = new SlotManager();
-		TimeManager tM = new TimeManager(0L);
+		TimeManager tM = new TimeManager(10L);
 		DataExchange dE = new DataExchange(sM, tM);
 		Ticker t = new Ticker(tM, sM, dE);
 		Receiver r = new Receiver("225.10.1.2", "lo", 15009, dE);

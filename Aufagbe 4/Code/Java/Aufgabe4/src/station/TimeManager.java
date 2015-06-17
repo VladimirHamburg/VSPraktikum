@@ -18,7 +18,7 @@ public class TimeManager {
 	private Long startDeviation;
 	private Long deviation;
 	
-	private final Long SENDING_TIME = 1L;
+	private final Long SENDING_TIME = 0L;
 	
 	
 
@@ -45,7 +45,7 @@ public class TimeManager {
 	
 	public void setTime(char statTyp, Long time){
 		if(statTyp == 'A'){ 
-			Long ntime = (time+SENDING_TIME+SLOT_OFFSET_TIME) - (new Date().getTime()+startDeviation);
+			Long ntime = (new Date().getTime()+startDeviation) - (time+SENDING_TIME+SLOT_OFFSET_TIME);
 			times.add(ntime);
 		}
 	}
@@ -93,7 +93,9 @@ public class TimeManager {
 			workDev += timeUnit;
 		}
 		if(times.size() == 0) return;
-		deviation = 0L;//workDev/times.size();
+		deviation = (workDev/times.size());
+		//deviation = 0L;
+		//System.out.println(deviation);
 	}
 	
 	public void nextFrame(){

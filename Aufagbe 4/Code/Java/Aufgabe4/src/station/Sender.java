@@ -18,6 +18,9 @@ public class Sender implements Runnable {
 	private MulticastSocket socket;
     private InetAddress group;
     private int port;
+    
+    private int sended = 0;
+    private int notSended = 0;
 
 	
 	private boolean keepRunning;
@@ -46,6 +49,7 @@ public class Sender implements Runnable {
 				// Skip the first full frame to check out for free slots
 				Thread.sleep(timeMan.getDelayNextFrame());
 				// We need the slot number for the CURRENT frame
+				notSended += 2;
 				int currentSlot = slotMan.getOldSlot();
 				// We sleep until we reach our current slot + offset
 				Thread.sleep(TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
@@ -57,17 +61,19 @@ public class Sender implements Runnable {
 		            if(currentSlot == -1) 
 		            {
 		            	noCollision = false;
-		            	System.out.println("RESTART!");
+		            	//System.out.println("RESTART!");
 		            	continue;
 		            }
 		            p.setSlotNum((byte)currentSlot); // This is the slot for the next frame
 		            p.setTimestamp(timeMan.getTimestamp()); // Current time stamp
 		            socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port));
+		            sended++;
 		            //System.out.println("GESENDET! um " + timeMan.getTimestamp());
 		            // Sleep till next frame
 		            //Thread.sleep(timeMan.getDelayNextFrame());
 		            // Sleep till slot, do shit again
 		            //System.out.println(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+		            System.out.println("GESENDET: "+sended + " NICHT GESENDET " + notSended);
 		            Thread.sleep(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
 				}
 			}
