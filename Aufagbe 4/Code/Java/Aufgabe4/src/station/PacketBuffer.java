@@ -26,13 +26,13 @@ public class PacketBuffer implements Runnable {
 		byte[] data = new byte[24];
 		while (keepRunning) {
 		    try {
+		    	//Sequenzdiagramm 1
 				data[numBytes++] = (byte)System.in.read();
 				if (numBytes == Packet.PAYLOAD_SIZE) {
 					packetQ.add(new Packet(classType, data));				
 					numBytes = 0;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}		

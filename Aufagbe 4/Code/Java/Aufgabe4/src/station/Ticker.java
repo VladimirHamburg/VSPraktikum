@@ -6,40 +6,36 @@ public class Ticker implements Runnable {
 	private DataExchange dataEx;
 	private Long nextFrame;
 	private SlotManager slotMan;
-
+	private int prevSlot = 1;
+	private int nextSlot = 0;
 	
 	public Ticker(TimeManager timeMan,SlotManager slotMan,DataExchange dataEx) {
 		this.timeMan = timeMan;
 		this.dataEx = dataEx;
 		this.slotMan = slotMan;
-		nextFrame = timeMan.getDelayNextFrame()-10L;
+		nextFrame = timeMan.getDelayNextFrame();
 	}
 	
 	@Override	
 	public void run() {
+		nextSlot = timeMan.getSlotNum(timeMan.getTimestamp())-1;
 		while(work_flag){
 			try {
 				Thread.sleep(timeMan.getDelayNextSlot());
-				if(nextFrame < timeMan.getDelayNextFrame()){
-					nextFrame = timeMan.getDelayNextFrame()-10L;
+				nextSlot++;
+				if(nextSlot == 25){
+					nextSlot = 0;
+					Thread.sleep(1);
 					slotMan.nextFrame(timeMan.getFrameNum());
 					timeMan.nextFrame();
-					dataEx.proceed(timeMan.getFrameNum()-1);
+					dataEx.proceed(timeMan.getFrameNum());
 				}else{
 					dataEx.proceed(timeMan.getFrameNum());
 				}
+				if(timeMan.getDelayNextSlot() < 38) Thread.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			if(timeMan.getDelayNextSlot() == 20L){
-//				System.out.println("MIDDLE!!! " + timeMan.getTimestamp());
-//				try {
-//					Thread.sleep(2L);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
 			
 		}
 		

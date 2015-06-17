@@ -56,25 +56,36 @@ public class Sender implements Runnable {
 				noCollision = true;
 				// Now we can send our first packet!
 				while (noCollision) {
-		            Packet p = pBuf.pop();
-		            currentSlot = slotMan.getSlot();
+					//Long start = java.lang.System.nanoTime();
+					if(currentSlot != timeMan.getSlotNum(timeMan.getTimestamp())){
+						if(currentSlot < timeMan.getSlotNum(timeMan.getTimestamp())){
+						noCollision = false;
+						System.out.println("RESTART!(SENDESLOT NICHT KORREKT) :" + currentSlot + "<-sei | ist->" + timeMan.getTimestamp());
+		            	continue;
+						}else{
+							System.out.println("WARTEN");
+							int wSloti = (currentSlot - timeMan.getSlotNum(timeMan.getTimestamp()))-1;
+							Thread.sleep(timeMan.getDelayNextSlot());
+							if((wSloti*timeMan.SLOT_TIME)-20L > 0)Thread.sleep((wSloti*timeMan.SLOT_TIME)-20L);
+						}
+					}
+		            Packet p = pBuf.pop();//Sequenzdiagramm 2
+		            currentSlot = slotMan.getSlot(); //Sequenzdiagramm 3
 		            if(currentSlot == -1) 
 		            {
 		            	noCollision = false;
-		            	//System.out.println("RESTART!");
+		            	System.out.println("RESTART!");
 		            	continue;
 		            }
 		            p.setSlotNum((byte)currentSlot); // This is the slot for the next frame
-		            p.setTimestamp(timeMan.getTimestamp()); // Current time stamp
-		            socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port));
+		            p.setTimestamp(timeMan.getTimestamp()); // Current time stamp0 //Sequenzdiagramm 4
+		            socket.send(new DatagramPacket(p.getRaw(), p.getRaw().length, group, port)); //Sequenzdiagramm 5
+		            slotMan.transferSenden = true;
 		            sended++;
-		            //System.out.println("GESENDET! um " + timeMan.getTimestamp());
-		            // Sleep till next frame
-		            //Thread.sleep(timeMan.getDelayNextFrame());
-		            // Sleep till slot, do shit again
-		            //System.out.println(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
-		            System.out.println("GESENDET: "+sended + " NICHT GESENDET " + notSended);
-		            Thread.sleep(timeMan.getDelayNextFrame()+TimeManager.SLOT_TIME * currentSlot - TimeManager.SLOT_OFFSET_TIME);
+		            System.out.println("SEND: " + sended + " NOT SEND" + notSended);
+		            Thread.sleep(timeMan.getDelayNextFrame());
+		            slotMan.transferSenden = false;
+		            Thread.sleep((TimeManager.SLOT_TIME * currentSlot) - TimeManager.SLOT_OFFSET_TIME);
 				}
 			}
 		} catch (InterruptedException | IOException ex) {

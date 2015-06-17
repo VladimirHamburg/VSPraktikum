@@ -9,6 +9,7 @@ public class DataExchange {
 	private TimeManager timeMan;
 	private List<Packet> buffer;
 	private Long timeIn;
+	private int slot = 0;
 	
 	public DataExchange(SlotManager slotMan, TimeManager timeMan) {
 		this.slotMan = slotMan;
@@ -17,28 +18,34 @@ public class DataExchange {
 	}
 	
 	public void storePacket(DatagramPacket packet){
-		//System.out.println(timeMan.getFrameNum() + " INSERT!");
-		//System.out.println(new Packet(packet.getData()).toString());
 		buffer.add(new Packet(packet.getData()));
 		timeIn = timeMan.getTimestamp();
 	}
 	
 	public void proceed(int frameN){
-		//if(timeMan.getTimestamp()%1000L == 0) frameN--;
 		if(buffer.size() == 1){
-			//System.out.println(frameN + " bei " + timeMan.getTimestamp());
 			Packet workPacket = buffer.get(0);
-			//System.out.println(workPacket.toString());
+			//Sequenzdiagramm 9
 			timeMan.setTime(workPacket.getStation(), workPacket.getTimestamp()+(timeMan.getTimestamp()-timeIn));
+			//Sequenzdiagramm 8
 			slotMan.setReceivedSlot(workPacket.getSlotNum());
-			
+			buffer = new ArrayList<>();
 		}
-		if(buffer.size() >= 2){
+		if(buffer.size() >= 2){//Sequenzdiagramm 13
 			System.out.println("KOLLISION " + frameN);
+			if(slotMan.transferSenden){
+				System.out.println("STATION SENDED TOO");
+				slot = 0;
+			}
+			slotMan.setKol();
 			for (int i = 0; i < buffer.size(); i++) {
 				System.out.println(buffer.get(i));
 			}
+			buffer = new ArrayList<>();
 			}
 		buffer = new ArrayList<>();
 	}
+	
+	
+	
 }

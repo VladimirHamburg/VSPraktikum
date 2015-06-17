@@ -53,7 +53,7 @@ public class Packet {
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");	
 		try {
-			return "Class:" + getClass() + 
+			return "Class:" + getStation() + 
 					" Payload:" + new String(getPayload(), "UTF-8") + 
 					" Plen:" + new String(getPayload(), "UTF-8").length() +
 					" Slot:" + getSlotNum() + 

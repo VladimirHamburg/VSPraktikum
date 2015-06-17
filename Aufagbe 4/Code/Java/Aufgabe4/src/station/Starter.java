@@ -13,25 +13,31 @@ public class Starter {
 
 
 	public static void main(String[] args) {
-		PacketBuffer p = new PacketBuffer('A');
+		String netInterface = args[0];
+		String netAddress = args[1];
+		int netPort = Integer.parseInt(args[2]);
+		char stationType = args[3].toUpperCase().charAt(0);
+		long startDerivation = 0L;
+		if (args.length == 5) {
+			startDerivation = Long.parseLong(args[4]);
+		}
+		
+		PacketBuffer p = new PacketBuffer(stationType);
 		SlotManager sM = new SlotManager();
-		TimeManager tM = new TimeManager(10L);
+		TimeManager tM = new TimeManager(startDerivation, stationType);
 		DataExchange dE = new DataExchange(sM, tM);
 		Ticker t = new Ticker(tM, sM, dE);
-		Receiver r = new Receiver("225.10.1.2", "lo", 15009, dE);
+		Receiver r = new Receiver(netAddress, netInterface, netPort, dE);
 		try {
-			Sender s = new Sender(p, sM, tM, "225.10.1.2", 15009, "lo");
+			Sender s = new Sender(p, sM, tM, netAddress, netPort, netInterface);
 			Thread sT = new Thread(s);
 			sT.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		Thread pt = new Thread(p);
 		pt.start();
-//		Thread tMt = new Thread(tM);
-//		tMt.start();
 		Thread tt = new Thread(t);
 		tt.start();
 		Thread rT = new Thread(r);

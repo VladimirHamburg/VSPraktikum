@@ -11,8 +11,12 @@ public class SlotManager{
 	ArrayList<Integer> workSlotsOld = workSlots;
 	private int frameNum = 1;
 	private int slot = 0;
-	private boolean wresr = false;
+	private boolean wsend = false;
 	private boolean resr = false;
+	
+	public boolean transferSenden;
+	
+	private boolean send = false;
 	
 	public SlotManager() {
 		// TODO Auto-generated constructor stub
@@ -21,11 +25,11 @@ public class SlotManager{
 	
 	public int getSlot(){
 		slot = (int) workSlots.get(0);
-		if(!resr){
+		if(!resr && send){
 			return -1;
+		}else{
+			return slot;
 		}
-		
-		return slot;
 	}
 	
 	public int getOldSlot(){
@@ -34,36 +38,25 @@ public class SlotManager{
 		return (int) workSlotsOld.get(0);
 	}
 	
-	public void setReceivedSlot(int slot){
-		//System.out.println(frameNum + " new<>old " +  this.frameNum);
-//		if(this.frameNum+1 == frameNum){
-//			this.frameNum = frameNum;
-//			resr = wresr;
-//			wresr = false; 
-//			slot = 0;
-//			workSlotsOld = workSlots;
-//			workSlots = new ArrayList<Integer>(Arrays.asList(slots));
-//			Collections.shuffle(workSlots);
-//		}
-//		if(this.slot == slot) wresr = true;		
+	public synchronized void setReceivedSlot(int slot){	//Sequenzdiagramm 8
 		workSlots.remove(new Integer(slot));
-		if(this.frameNum+1 < frameNum){
-//			this.frameNum = frameNum;
-//			resr = false; 
-//			workSlotsOld = workSlots;
-//			workSlots = new ArrayList<Integer>(Arrays.asList(slots));
-			System.out.println("KOMMT VOR");
-		}
 	}
 	
 	public void nextFrame(int frameNum){
 		resr = !workSlots.contains(new Integer(slot));
 		slot = 0;
+		send = wsend;
+		wsend = false;
 		workSlotsOld = workSlots;
 		workSlots = new ArrayList<Integer>(Arrays.asList(slots));
 		Collections.shuffle(workSlots);
 		this.frameNum = frameNum;
 	}
+
+	public void setKol(){
+		wsend = true;
+	}
+	
 
 	
 }

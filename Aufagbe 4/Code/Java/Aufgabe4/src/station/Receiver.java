@@ -27,7 +27,6 @@ public class Receiver implements Runnable {
 		try {
 			real_address = InetAddress.getByName(this.ipAddress);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -43,7 +42,7 @@ public class Receiver implements Runnable {
 			
 			while (work_flag) {
 				DatagramPacket msgPacket = new DatagramPacket(buffer, buffer.length);
-				mSocket.receive(msgPacket);
+				mSocket.receive(msgPacket);//Sequenzdiagramm 6
 				dataEx.storePacket(msgPacket);
 				
 			}
