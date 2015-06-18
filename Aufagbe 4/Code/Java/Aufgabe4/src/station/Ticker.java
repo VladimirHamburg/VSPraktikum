@@ -7,7 +7,7 @@ public class Ticker implements Runnable {
 	private Long nextFrame;
 	private SlotManager slotMan;
 	private int prevSlot = 1;
-	private int nextSlot = 0;
+	private Long nextSlot = 0L;
 	
 	public Ticker(TimeManager timeMan,SlotManager slotMan,DataExchange dataEx) {
 		this.timeMan = timeMan;
@@ -18,17 +18,17 @@ public class Ticker implements Runnable {
 	
 	@Override	
 	public void run() {
-		nextSlot = timeMan.getSlotNum(timeMan.getTimestamp())-1;
+		nextSlot = timeMan.getTimestamp()/1000L+1L;
 		while(work_flag){
 			try {
 				Thread.sleep(timeMan.getDelayNextSlot());
-				nextSlot++;
-				if(nextSlot == 25){
-					nextSlot = 0;
-					Thread.sleep(1);
+				//System.out.println(timeMan.getTimestamp()/1000L + " next->" + nextSlot);
+				if(timeMan.getTimestamp()/1000L == nextSlot){
+					nextSlot = timeMan.getTimestamp()/1000L+1L;
+					//Thread.sleep(1);
+					dataEx.proceed(timeMan.getFrameNum());
 					slotMan.nextFrame(timeMan.getFrameNum());
 					timeMan.nextFrame();
-					dataEx.proceed(timeMan.getFrameNum());
 				}else{
 					dataEx.proceed(timeMan.getFrameNum());
 				}

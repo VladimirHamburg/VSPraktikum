@@ -28,7 +28,10 @@ public class DataExchange {
 			//Sequenzdiagramm 9
 			timeMan.setTime(workPacket.getStation(), workPacket.getTimestamp()+(timeMan.getTimestamp()-timeIn));
 			//Sequenzdiagramm 8
+			//System.out.println(workPacket.getSlotNum() + " in frame " + timeMan.getFrameNumUTC() + " in slot " + timeMan.getSlotNum(timeMan.getTimestamp()));
 			slotMan.setReceivedSlot(workPacket.getSlotNum());
+			slotMan.workSlotsA.add(new Integer(workPacket.getSlotNum()));
+			slotMan.transferSenden = false;
 			buffer = new ArrayList<>();
 		}
 		if(buffer.size() >= 2){//Sequenzdiagramm 13
@@ -37,6 +40,7 @@ public class DataExchange {
 				System.out.println("STATION SENDED TOO");
 				slot = 0;
 			}
+			slotMan.transferSenden = false;
 			slotMan.setKol();
 			for (int i = 0; i < buffer.size(); i++) {
 				System.out.println(buffer.get(i));

@@ -71,7 +71,7 @@ public class TimeManager {
 	}
 	
 	public int getSlotNum(Long time){
-		return ((int) (((time - (workStart))%1000L)/40L))+1;
+		return ((int) (((time - (workStart))%1000L)/40L));
 		
 	}
 	
@@ -83,6 +83,7 @@ public class TimeManager {
 	private void calcTime(){
 		Long workDev = 0L;
 		if(times.size() == 1 && typ == 'A'){
+			deviation = deviation/2;
 			return; 
 		}else if (times.size() == 0) {
 			return;
@@ -97,6 +98,14 @@ public class TimeManager {
 	public void nextFrame(){
 		calcTime();
 		times.clear();
+	}
+
+
+
+
+
+	public Long getFrameNumUTC() {
+		return getTimestamp()/1000L;
 	}
 	
 	

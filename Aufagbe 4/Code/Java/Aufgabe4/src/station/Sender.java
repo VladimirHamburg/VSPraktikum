@@ -45,9 +45,10 @@ public class Sender implements Runnable {
 			while(keepRunning) {
 				// --- Init Phase ---
 				// Skip the first broken frame
-				Thread.sleep(timeMan.getDelayNextFrame());
+				Thread.sleep(timeMan.getDelayNextFrame()+5L);
 				// Skip the first full frame to check out for free slots
-				Thread.sleep(timeMan.getDelayNextFrame());
+				
+				Thread.sleep(timeMan.getDelayNextFrame()+5L);
 				// We need the slot number for the CURRENT frame
 				notSended += 2;
 				int currentSlot = slotMan.getOldSlot();
@@ -56,19 +57,6 @@ public class Sender implements Runnable {
 				noCollision = true;
 				// Now we can send our first packet!
 				while (noCollision) {
-					//Long start = java.lang.System.nanoTime();
-					if(currentSlot != timeMan.getSlotNum(timeMan.getTimestamp())){
-						if(currentSlot < timeMan.getSlotNum(timeMan.getTimestamp())){
-						noCollision = false;
-						System.out.println("RESTART!(SENDESLOT NICHT KORREKT) :" + currentSlot + "<-sei | ist->" + timeMan.getTimestamp());
-		            	continue;
-						}else{
-							System.out.println("WARTEN");
-							int wSloti = (currentSlot - timeMan.getSlotNum(timeMan.getTimestamp()))-1;
-							Thread.sleep(timeMan.getDelayNextSlot());
-							if((wSloti*timeMan.SLOT_TIME)-20L > 0)Thread.sleep((wSloti*timeMan.SLOT_TIME)-20L);
-						}
-					}
 		            Packet p = pBuf.pop();//Sequenzdiagramm 2
 		            currentSlot = slotMan.getSlot(); //Sequenzdiagramm 3
 		            if(currentSlot == -1) 
